@@ -1,8 +1,4 @@
-import {
-  useParams,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import qs from "qs";
 import { useMemo } from "react";
 
