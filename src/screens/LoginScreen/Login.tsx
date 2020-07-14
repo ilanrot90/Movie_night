@@ -3,6 +3,7 @@ import { useSetRecoilState } from "recoil";
 import { authRecoilState } from "state/atoms/auth";
 import { MOVIES_PATH } from "routes/routesPaths";
 import { useRouter } from "hooks/useRouter";
+import { Container } from "./style";
 
 const LoginPage: FC = () => {
   const setAuth = useSetRecoilState(authRecoilState);
@@ -14,9 +15,9 @@ const LoginPage: FC = () => {
   }, [setAuth, replace]);
 
   return (
-    <div>
+    <Container>
       <button onClick={handleAuth}>log in</button>
-    </div>
+    </Container>
   );
 };
 

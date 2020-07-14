@@ -3,6 +3,7 @@ import React, { ReactElement } from "react";
 import { RecoilRoot } from "recoil";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
+import 'normalize.css';
 
 interface IProps {
   children: ReactElement;

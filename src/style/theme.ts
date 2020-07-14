@@ -1,20 +1,36 @@
-import { DefaultTheme } from "styled-components";
+import { DefaultTheme, FlattenSimpleInterpolation } from "styled-components";
+import { centerFlex } from './sharedStyle';
 
 declare module "styled-components" {
   export interface DefaultTheme {
-    primaryColor: string;
-    secondaryColor: string;
+    light: string,
+    main: string,
+    dark: string,
+    contrastText: string,
+    utils: {
+      centerFlex: FlattenSimpleInterpolation,
+    }
   }
 }
 
 const theme = {
   light: {
-    primaryColor: "#333",
-    secondaryColor: "#666",
+    light: '#e7cbeb',
+    main: '#e1bee7',
+    dark: '#9d85a1',
+    contrastText: '#000',
+    utils: {
+      centerFlex
+    }
   },
   dark: {
-    primaryColor: "#333",
-    secondaryColor: "#666",
+    light: '#757ce8',
+    main: '#3f50b5',
+    dark: '#002884',
+    contrastText: '#fff',
+    utils: {
+      centerFlex
+    }
   },
 };
 
