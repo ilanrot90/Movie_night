@@ -2,15 +2,16 @@ import { atom, selector } from "recoil";
 
 type themeValue = "dark" | "light";
 
-export const themeKey = atom<themeValue>({
-  key: "themeKey",
+export const themeAtom = atom<themeValue>({
+  key: "themeAtom",
   default: "dark",
 });
 
-export const themeSelector = selector<string>({
+export const themeSelector = selector<themeValue>({
   key: "themeSelector",
-  get: ({ get }) => {
-    const val = get(themeKey);
-    return `value is: ${val}`;
-  },
+  get: ({ get }) => get<themeValue>(themeAtom),
+  set: ({ set }, selectedTheme) => {
+    // TODO: update localStorage
+    return set<themeValue>(themeAtom, selectedTheme);
+  }
 });

@@ -4,7 +4,7 @@ interface IAuth {
   isLoggedIn: boolean;
 }
 
-export const authRecoilState = atom<IAuth>({
+export const authAtom = atom<IAuth>({
   key: "auth",
   default: {
     isLoggedIn: false,

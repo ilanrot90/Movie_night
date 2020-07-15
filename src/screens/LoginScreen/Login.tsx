@@ -1,12 +1,12 @@
 import React, { FC, useCallback } from "react";
 import { useSetRecoilState } from "recoil";
-import { authRecoilState } from "state/atoms/auth";
+import { authAtom } from "state/atoms/authAtom";
 import { MOVIES_PATH } from "routes/routesPaths";
 import { useRouter } from "hooks/useRouter";
 import { Container } from "./style";
 
 const LoginPage: FC = () => {
-  const setAuth = useSetRecoilState(authRecoilState);
+  const setAuth = useSetRecoilState(authAtom);
   const { replace } = useRouter();
 
   const handleAuth = useCallback(() => {
