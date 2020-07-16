@@ -4,6 +4,7 @@ import { authAtom } from "state/atoms/authAtom";
 import { MOVIES_PATH } from "routes/routesPaths";
 import { useRouter } from "hooks/useRouter";
 import { Container } from "./style";
+import Button from "components/common-ui/Button";
 
 const LoginPage: FC = () => {
   const setAuth = useSetRecoilState(authAtom);
@@ -16,7 +17,7 @@ const LoginPage: FC = () => {
 
   return (
     <Container>
-      <button onClick={handleAuth}>log in</button>
+      <Button onClick={handleAuth}>log in</Button>
     </Container>
   );
 };

@@ -3,22 +3,23 @@ import MaterialButton, { ButtonProps } from "@material-ui/core/Button";
 import styled from "styled-components";
 
 interface Interface extends ButtonProps {
-  as?: "span" | "div" | "button" | "undefined";
+  onClick: () => void;
 }
 
-const StyledBtn = styled(({ as, ...other }) => <MaterialButton {...other} />)``;
+const StyledBtn = styled(MaterialButton)``;
 
 
 const Button: FC<Interface> = ({
   children,
   variant = "contained",
   color = "primary",
-  as = "button",
   className,
   disabled,
   fullWidth,
+    onClick,
   ...rest
 }) => {
+  console.log(color)
   return (
     <StyledBtn
       variant={variant}
@@ -26,7 +27,7 @@ const Button: FC<Interface> = ({
       className={className}
       disabled={disabled}
       fullWidth={fullWidth}
-      // as={as}
+      onClick={onClick}
       {...rest}
     >
       {children}
