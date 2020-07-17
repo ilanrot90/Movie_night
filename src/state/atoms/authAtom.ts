@@ -1,12 +1,8 @@
 import { atom } from "recoil";
 
-interface IAuth {
-  isLoggedIn: boolean;
-}
+type Auth = { name: string } | undefined;
 
-export const authAtom = atom<IAuth>({
+export const authAtom = atom<Auth>({
   key: "auth",
-  default: {
-    isLoggedIn: false,
-  },
+  default: undefined,
 });

@@ -1,15 +1,16 @@
 // firebase imports
-import app from 'firebase/app';
+import app from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
-import { firebaseDevConfig, firebaseProdConfig } from 'config';
-import {isProduction} from "utils/common";
+import { firebaseDevConfig, firebaseProdConfig } from "config";
+import { isProduction } from "utils/common";
+// config
+const config = isProduction ? firebaseProdConfig : firebaseDevConfig;
+// providers
+export const googleProvider = new app.auth.GoogleAuthProvider();
 
-const config = isProduction? firebaseProdConfig : firebaseDevConfig;
+export const firebase = app.initializeApp(config);
+export const auth = firebase.auth();
 
-export default class Firebase {
-    constructor() {
-        app.initializeApp(config)
-    }
-}
+export const firestore = firebase.firestore();

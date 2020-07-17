@@ -13,5 +13,5 @@ export const themeSelector = selector<themeValue>({
   set: ({ set }, selectedTheme) => {
     // TODO: update localStorage
     return set<themeValue>(themeAtom, selectedTheme);
-  }
+  },
 });

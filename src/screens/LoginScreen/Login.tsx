@@ -11,7 +11,8 @@ const LoginPage: FC = () => {
   const { replace } = useRouter();
 
   const handleAuth = useCallback(() => {
-    setAuth({ isLoggedIn: true });
+    // TODO: handle login
+    setAuth(v => undefined);
     replace(`../${MOVIES_PATH}`);
   }, [setAuth, replace]);
 

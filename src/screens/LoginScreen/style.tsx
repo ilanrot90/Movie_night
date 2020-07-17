@@ -6,5 +6,5 @@ export const Container = styled.div`
   height: 100vh;
   flex-direction: column;
   ${({ theme }) => theme.utils.centerFlex};
-  background-color: ${({ theme }) => theme.background };
+  background-color: ${({ theme }) => theme.background};
 `;

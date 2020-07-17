@@ -8,7 +8,6 @@ interface Interface extends ButtonProps {
 
 const StyledBtn = styled(MaterialButton)``;
 
-
 const Button: FC<Interface> = ({
   children,
   variant = "contained",
@@ -16,10 +15,10 @@ const Button: FC<Interface> = ({
   className,
   disabled,
   fullWidth,
-    onClick,
+  onClick,
   ...rest
 }) => {
-  console.log(color)
+  console.log(color);
   return (
     <StyledBtn
       variant={variant}
