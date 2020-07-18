@@ -1,2 +1,2 @@
-export { authAtom } from "./authAtom";
-export { themeAtom } from "./styleAtom";
+export { authAtom } from './authAtom';
+export { themeAtom } from './styleAtom';

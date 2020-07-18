@@ -1,31 +1,31 @@
-import { useParams, useLocation, useNavigate } from "react-router-dom";
-import qs from "qs";
-import { useMemo } from "react";
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import qs from 'qs';
+import { useMemo } from 'react';
 
 export function useRouter() {
-  const params = useParams();
-  const location = useLocation();
-  const history = useNavigate();
+	const params = useParams();
+	const location = useLocation();
+	const history = useNavigate();
 
-  // Return our custom router object
-  // Memoize so that a new object is only returned if something changes
-  return useMemo(() => {
-    return {
-      // For convenience add push(), replace(), pathname at top level
-      push: history,
-      replace: (path: string) => history(path, { replace: true }),
-      pathname: location.pathname,
-      // Merge params and parsed query string into single "query" object
-      // so that they can be used interchangeably.
-      // Example: /:topic?sort=popular -> { topic: "react", sort: "popular" }
-      query: {
-        ...qs.parse(location.search), // Convert string to object
-        ...params,
-      },
-      // Include match, location, history objects so we have
-      // access to extra React Router functionality if needed.
-      location,
-      history,
-    };
-  }, [params, location, history]);
+	// Return our custom router object
+	// Memoize so that a new object is only returned if something changes
+	return useMemo(() => {
+		return {
+			// For convenience add push(), replace(), pathname at top level
+			push: history,
+			replace: (path: string) => history(path, { replace: true }),
+			pathname: location.pathname,
+			// Merge params and parsed query string into single "query" object
+			// so that they can be used interchangeably.
+			// Example: /:topic?sort=popular -> { topic: "react", sort: "popular" }
+			query: {
+				...qs.parse(location.search), // Convert string to object
+				...params,
+			},
+			// Include match, location, history objects so we have
+			// access to extra React Router functionality if needed.
+			location,
+			history,
+		};
+	}, [params, location, history]);
 }
