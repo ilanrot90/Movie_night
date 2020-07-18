@@ -11,8 +11,9 @@ interface IProps {
 
 const PrivateRoute: React.FC<IProps> = ({ redirectTo = LOGIN_PATH, component: Component, ...props }) => {
 	const user = useRecoilValue(authAtom);
+
 	if (!user) {
-		return <Navigate to={redirectTo} replace={true} />;
+		return <Navigate to={`/${redirectTo}`} replace={true} />;
 	}
 
 	return <Component {...props} />;

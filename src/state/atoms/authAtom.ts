@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { auth } from 'firebase-methods/Firebase';
 
 type Auth =
 	| {
@@ -10,5 +11,7 @@ type Auth =
 
 export const authAtom = atom<Auth>({
 	key: 'auth',
-	default: undefined,
+	default: auth.currentUser
+		? { email: auth.currentUser.email, displayName: auth.currentUser.refreshToken, refreshToken: auth.currentUser.refreshToken }
+		: undefined,
 });

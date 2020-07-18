@@ -1,6 +1,7 @@
 import React from 'react';
 import { auth } from 'firebase-methods/Firebase';
 import Button from 'components/common-ui/Button';
+import { Container } from './style';
 
 const Movies = () => {
 	const onClick = async () => {
@@ -8,9 +9,9 @@ const Movies = () => {
 	};
 
 	return (
-		<div>
+		<Container>
 			<Button onClick={onClick}>log out</Button>
-		</div>
+		</Container>
 	);
 };
 

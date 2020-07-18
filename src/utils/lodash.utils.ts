@@ -3,6 +3,7 @@ import mapValues from 'lodash/mapValues';
 import map from 'lodash/map';
 import orderBy from 'lodash/orderBy';
 import groupBy from 'lodash/groupBy';
+import isEmpty from 'lodash/isEmpty';
 
 const chainableFunctions = {
 	map,
@@ -24,4 +25,4 @@ const chain = (input: any) => {
 	return wrapper;
 };
 
-export { chain, map, orderBy, groupBy, keyBy };
+export { chain, map, orderBy, groupBy, keyBy, isEmpty };

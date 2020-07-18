@@ -1,9 +1,10 @@
 import React, { ReactElement, FC, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { ThemeProvider as StyledComponentsProvider, DefaultTheme } from 'styled-components';
-import { themeSelector } from 'state/atoms/styleAtom';
+import { themeAtom } from 'state/atoms/styleAtom';
 import theme from './theme';
 import { StylesProvider, ThemeProvider as MaterialProvider, createMuiTheme } from '@material-ui/core/styles';
+import { TopContainer } from './sharedStyle';
 
 interface IProps {
 	children: ReactElement;
@@ -16,13 +17,15 @@ const createTheme = (theme: DefaultTheme) =>
 	});
 
 const ThemeProvider: FC<IProps> = ({ children }) => {
-	const themeValue = useRecoilValue(themeSelector);
+	const themeValue = useRecoilValue(themeAtom);
 	const muiTheme = useMemo(() => createTheme(theme[themeValue]), [themeValue]);
 
 	return (
 		<MaterialProvider theme={muiTheme}>
 			<StylesProvider injectFirst>
-				<StyledComponentsProvider theme={theme[themeValue]}>{children}</StyledComponentsProvider>
+				<StyledComponentsProvider theme={theme[themeValue]}>
+					<TopContainer>{children}</TopContainer>
+				</StyledComponentsProvider>
 			</StylesProvider>
 		</MaterialProvider>
 	);

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { PageContainer } from 'style/sharedStyle';
 
-export const Container = styled.div`
+export const Container = styled(PageContainer)`
 	display: flex;
 	width: 100%;
 	height: 100vh;

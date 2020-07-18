@@ -1,33 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
+import { AnimatePresence } from 'framer-motion';
 import { authAtom } from 'state/atoms/authAtom';
-import { LOGIN_PATH } from 'routes/routesPaths';
-import { useRouter } from 'hooks/useRouter';
 import { useMount } from 'hooks/useMount';
 import { auth } from 'firebase-methods/Firebase';
 import ProjectRoutes from 'routes/ProjectRoutes';
 
 const App = () => {
-	const { replace } = useRouter();
+	const [isReady, setMount] = useState(false);
 	const setUser = useSetRecoilState(authAtom);
 	const reset = useResetRecoilState(authAtom);
 
 	useMount(() => {
 		auth.onAuthStateChanged(user => {
+			setMount(true);
 			if (user) {
 				const { email, displayName, refreshToken } = user;
-				console.log({ user });
 				// User is signed in.
 				setUser({ email, displayName, refreshToken });
 			} else {
 				// No user is signed in.
 				reset();
-				replace(LOGIN_PATH);
 			}
 		});
 	});
 
-	return <ProjectRoutes />;
+	if (!isReady) {
+		return null;
+	}
+	return (
+		<AnimatePresence>
+			<ProjectRoutes />
+		</AnimatePresence>
+	);
 };
 
 export default App;
