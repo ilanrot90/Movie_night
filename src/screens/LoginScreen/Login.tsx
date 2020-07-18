@@ -16,7 +16,15 @@ const LoginPage: FC = () => {
 
 	return (
 		<Container>
-			<Button onClick={handleAuth}>log in</Button>
+			<Button fullWidth socialType="google" onClick={handleAuth}>
+				log in with google
+			</Button>
+			<Button fullWidth socialType="facebook" onClick={handleAuth}>
+				log in with facebook
+			</Button>
+			<Button fullWidth socialType="github" onClick={handleAuth}>
+				log in with github
+			</Button>
 		</Container>
 	);
 };
