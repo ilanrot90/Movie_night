@@ -4,6 +4,7 @@ import { useRouter } from 'hooks/useRouter';
 import { Container } from './style';
 import Button from 'components/common-ui/Button';
 import { auth, googleProvider } from 'firebase-methods/Firebase';
+import Icon from 'components/common-ui/icon';
 
 const LoginPage: FC = () => {
 	const { replace } = useRouter();
@@ -16,13 +17,13 @@ const LoginPage: FC = () => {
 
 	return (
 		<Container>
-			<Button fullWidth socialType="google" onClick={handleAuth}>
+			<Button endIcon={<Icon name="google" size={22} />} fullWidth socialType="google" onClick={handleAuth}>
 				log in with google
 			</Button>
-			<Button fullWidth socialType="facebook" onClick={handleAuth}>
+			<Button endIcon={<Icon name="facebook" size={22} />} fullWidth socialType="facebook" onClick={handleAuth}>
 				log in with facebook
 			</Button>
-			<Button fullWidth socialType="github" onClick={handleAuth}>
+			<Button endIcon={<Icon name="github" size={22} />} fullWidth socialType="github" onClick={handleAuth}>
 				log in with github
 			</Button>
 		</Container>

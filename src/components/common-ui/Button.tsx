@@ -22,7 +22,7 @@ const StyledBtn = styled(({ socialType, ...props }: Interface) => <MaterialButto
 			{
 				facebook: '#2b56b1',
 				google: '#e23824',
-				github: '#262626',
+				github: '#2d2c2c',
 			}[socialType]};
 		box-shadow: 0 14px 26px -12px rgba(51, 51, 51, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12),
 			0 8px 10px -5px rgba(51, 51, 51, 0.2);
