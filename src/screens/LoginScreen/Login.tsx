@@ -1,31 +1,40 @@
 import React, { FC, useCallback } from 'react';
 import { MOVIES_PATH } from 'routes/routesPaths';
 import { useRouter } from 'hooks/useRouter';
-import { Container } from './style';
-import Button from 'components/common-ui/Button';
-import { auth, googleProvider } from 'firebase-methods/Firebase';
+import { Container, LoginButton, FormContainer } from './style';
+import { auth, getProvider, Provider } from 'firebase-methods/Firebase';
 import Icon from 'components/common-ui/icon';
 
-const LoginPage: FC = () => {
-	const { replace } = useRouter();
+const providers: Array<Provider> = ['google', 'facebook', 'github'];
 
-	const handleAuth = useCallback(async () => {
-		// TODO: handle login
-		await auth.signInWithPopup(googleProvider);
-		replace(`../${MOVIES_PATH}`);
-	}, [replace]);
+const LoginPage: FC = () => {
+	const { push } = useRouter();
+
+	const handleAuth = useCallback(
+		provider => async () => {
+			// TODO: handle login
+			const providerConfig = getProvider(provider);
+			await auth.signInWithPopup(providerConfig);
+			push(`/${MOVIES_PATH}`);
+		},
+		[push]
+	);
 
 	return (
 		<Container>
-			<Button endIcon={<Icon name="google" size={22} />} fullWidth socialType="google" onClick={handleAuth}>
-				log in with google
-			</Button>
-			<Button endIcon={<Icon name="facebook" size={22} />} fullWidth socialType="facebook" onClick={handleAuth}>
-				log in with facebook
-			</Button>
-			<Button endIcon={<Icon name="github" size={22} />} fullWidth socialType="github" onClick={handleAuth}>
-				log in with github
-			</Button>
+			<FormContainer>
+				{providers.map(provider => (
+					<LoginButton
+						key={provider}
+						endIcon={<Icon name={provider} size={22} />}
+						fullWidth
+						socialType={provider}
+						onClick={handleAuth(provider)}
+					>
+						log in with {provider}
+					</LoginButton>
+				))}
+			</FormContainer>
 		</Container>
 	);
 };

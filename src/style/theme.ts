@@ -21,8 +21,26 @@ declare module 'styled-components' {
 		utils: {
 			centerFlex: FlattenSimpleInterpolation;
 		};
+		spacing: {
+			s: number;
+			m: number;
+			l: number;
+			xl: number;
+		};
 	}
 }
+
+const sharedTheme = {
+	utils: {
+		centerFlex,
+	},
+	spacing: {
+		s: 4,
+		m: 8,
+		l: 16,
+		xl: 24,
+	},
+};
 
 const theme = {
 	light: {
@@ -31,9 +49,7 @@ const theme = {
 		main: '#3f50b5',
 		dark: '#002884',
 		contrastText: '#222831',
-		utils: {
-			centerFlex,
-		},
+		...sharedTheme,
 	},
 	dark: {
 		background: '#222831',
@@ -41,9 +57,7 @@ const theme = {
 		main: '#e1bee7',
 		dark: '#9d85a1',
 		contrastText: '#f9fafa',
-		utils: {
-			centerFlex,
-		},
+		...sharedTheme,
 	},
 };
 
