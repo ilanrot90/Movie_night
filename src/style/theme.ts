@@ -1,17 +1,18 @@
 import { DefaultTheme, FlattenSimpleInterpolation } from 'styled-components';
 import { centerFlex } from './sharedStyle';
+export interface Theme {
+	light: string;
+	background: string;
+	main: string;
+	dark: string;
+	contrastText: string;
+	utils: {
+		centerFlex: FlattenSimpleInterpolation;
+	};
+}
 
 declare module 'styled-components' {
-	export interface DefaultTheme {
-		light: string;
-		background: string;
-		main: string;
-		dark: string;
-		contrastText: string;
-		utils: {
-			centerFlex: FlattenSimpleInterpolation;
-		};
-	}
+	export interface DefaultTheme extends Theme {}
 }
 
 const theme = {

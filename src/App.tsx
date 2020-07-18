@@ -1,8 +1,5 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import theme from 'style/theme';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
-import { themeSelector } from 'state/atoms/styleAtom';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { authAtom } from 'state/atoms/authAtom';
 import { LOGIN_PATH } from 'routes/routesPaths';
 import { useRouter } from 'hooks/useRouter';
@@ -12,7 +9,6 @@ import ProjectRoutes from 'routes/ProjectRoutes';
 
 const App = () => {
 	const { replace } = useRouter();
-	const themeValue = useRecoilValue(themeSelector);
 	const setUser = useSetRecoilState(authAtom);
 	const reset = useResetRecoilState(authAtom);
 
@@ -31,11 +27,7 @@ const App = () => {
 		});
 	});
 
-	return (
-		<ThemeProvider theme={theme[themeValue]}>
-			<ProjectRoutes />
-		</ThemeProvider>
-	);
+	return <ProjectRoutes />;
 };
 
 export default App;
