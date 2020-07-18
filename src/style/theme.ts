@@ -12,7 +12,16 @@ export interface Theme {
 }
 
 declare module 'styled-components' {
-	export interface DefaultTheme extends Theme {}
+	export interface DefaultTheme {
+		light: string;
+		background: string;
+		main: string;
+		dark: string;
+		contrastText: string;
+		utils: {
+			centerFlex: FlattenSimpleInterpolation;
+		};
+	}
 }
 
 const theme = {
