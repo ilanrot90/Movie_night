@@ -1,10 +1,12 @@
 import React, { FC, useCallback } from 'react';
 import { MOVIES_PATH } from 'routes/routesPaths';
 import { useRouter } from 'hooks/useRouter';
-import { Container, LoginButton, FormContainer } from './style';
+import { Container, LoginButton, FormContainer, Header } from './style';
 import { auth, getProvider, Provider } from 'firebase-methods/Firebase';
 import Icon from 'components/common-ui/icon';
 import { asyncHandler } from 'utils/common.utils';
+import { get } from 'utils/lodash.utils';
+import Logo from './SvgLogo';
 
 const providers: Array<Provider> = ['facebook', 'google', 'github'];
 
@@ -17,10 +19,14 @@ const LoginPage: FC = () => {
 			const providerConfig = getProvider(provider);
 			const { response, error } = await asyncHandler(auth.signInWithPopup(providerConfig));
 			if (error) {
-				const c = await auth.fetchSignInMethodsForEmail(error.email);
 				console.log(error);
-				console.log(c[0].replace(/.com/gi, ''));
 			}
+			const isNewUser = response?.additionalUserInfo?.isNewUser;
+			if (isNewUser) {
+				const linkedAccounts = await auth.fetchSignInMethodsForEmail(get('response', 'user.providerData[0].email'));
+				console.log({ linkedAccounts });
+			}
+
 			push(`/${MOVIES_PATH}`);
 		},
 		[push]
@@ -29,6 +35,9 @@ const LoginPage: FC = () => {
 	return (
 		<Container>
 			<FormContainer>
+				<Header>
+					<Logo />
+				</Header>
 				{providers.map(provider => (
 					<LoginButton
 						key={provider}

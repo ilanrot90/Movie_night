@@ -14,8 +14,11 @@ const App = () => {
 	useMount(() => {
 		auth.onAuthStateChanged(user => {
 			setMount(true);
+			console.log({ user });
 			if (user) {
-				const { email, displayName, refreshToken } = user;
+				const { refreshToken } = user;
+				const email = user?.providerData[0]?.email;
+				const displayName = user?.providerData[0]?.displayName;
 				// User is signed in.
 				setUser({ email, displayName, refreshToken });
 			} else {
@@ -29,7 +32,7 @@ const App = () => {
 		return null;
 	}
 	return (
-		<AnimatePresence>
+		<AnimatePresence exitBeforeEnter>
 			<ProjectRoutes />
 		</AnimatePresence>
 	);

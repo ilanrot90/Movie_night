@@ -3,9 +3,9 @@ import { auth } from 'firebase-methods/Firebase';
 
 type Auth =
 	| {
-			email: string | null;
-			displayName: string | null;
-			refreshToken: string | null;
+			email: string | null | undefined;
+			displayName: string | null | undefined;
+			refreshToken: string | null | undefined;
 	  }
 	| undefined;
 
