@@ -4,8 +4,9 @@ import { useRouter } from 'hooks/useRouter';
 import { Container, LoginButton, FormContainer } from './style';
 import { auth, getProvider, Provider } from 'firebase-methods/Firebase';
 import Icon from 'components/common-ui/icon';
+import { asyncHandler } from 'utils/common.utils';
 
-const providers: Array<Provider> = ['google', 'facebook', 'github'];
+const providers: Array<Provider> = ['facebook', 'google', 'github'];
 
 const LoginPage: FC = () => {
 	const { push } = useRouter();
@@ -14,7 +15,12 @@ const LoginPage: FC = () => {
 		provider => async () => {
 			// TODO: handle login
 			const providerConfig = getProvider(provider);
-			await auth.signInWithPopup(providerConfig);
+			const { response, error } = await asyncHandler(auth.signInWithPopup(providerConfig));
+			if (error) {
+				const c = await auth.fetchSignInMethodsForEmail(error.email);
+				console.log(error);
+				console.log(c[0].replace(/.com/gi, ''));
+			}
 			push(`/${MOVIES_PATH}`);
 		},
 		[push]

@@ -4,7 +4,7 @@ import { ThemeProvider as StyledComponentsProvider, DefaultTheme } from 'styled-
 import { themeAtom } from 'state/atoms/styleAtom';
 import theme from './theme';
 import { StylesProvider, ThemeProvider as MaterialProvider, createMuiTheme } from '@material-ui/core/styles';
-import { TopContainer } from './sharedStyle';
+import { BaseContainer } from './sharedStyle';
 
 interface IProps {
 	children: ReactElement;
@@ -24,7 +24,7 @@ const ThemeProvider: FC<IProps> = ({ children }) => {
 		<MaterialProvider theme={muiTheme}>
 			<StylesProvider injectFirst>
 				<StyledComponentsProvider theme={theme[themeValue]}>
-					<TopContainer>{children}</TopContainer>
+					<BaseContainer>{children}</BaseContainer>
 				</StyledComponentsProvider>
 			</StylesProvider>
 		</MaterialProvider>

@@ -4,7 +4,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 import { firebaseDevConfig, firebaseProdConfig } from 'config';
-import { isProduction } from 'utils/common';
+import { isProduction } from 'utils/common.utils';
 // config
 const config = isProduction ? firebaseProdConfig : firebaseDevConfig;
 // providers

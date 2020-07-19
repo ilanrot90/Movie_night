@@ -14,8 +14,7 @@ const chainableFunctions = {
 const chain = (input: any) => {
 	let value = input;
 	const wrapper = {
-		...mapValues(chainableFunctions, f => (...args: any) => {
-			// @ts-ignore
+		...mapValues(chainableFunctions, (f: typeof Function) => (...args: any) => {
 			value = f(...args);
 			return wrapper;
 		}),

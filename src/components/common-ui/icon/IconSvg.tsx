@@ -1,7 +1,7 @@
 import React from 'react';
 import { keyBy } from 'utils/lodash.utils';
 import styled from 'styled-components';
-import { isTest } from 'utils/common';
+import { isTest } from 'utils/common.utils';
 import iconPaths from './selection.json'; // the file exported from IcoMoon
 
 const Svg = styled.svg<{ hoverColor?: string }>`

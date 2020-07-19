@@ -35,7 +35,7 @@ export const PageContainer = styled(motion.div).attrs({
 	exit: 'out',
 })``;
 
-export const TopContainer = styled.div`
+export const BaseContainer = styled.div`
 	display: flex;
 	width: 100%;
 	height: 100vh;
