@@ -49,7 +49,7 @@ interface ITextProps {
 	weight?: number;
 	color?: string;
 }
-export const Text = styled.p.attrs(({ as }: { as: 'p' | 'div' | 'span' | undefined }) => ({
+export const Text = styled.p.attrs(({ as }: { as?: 'p' | 'div' | 'span' }) => ({
 	as,
 }))<ITextProps>`
 	${({ theme, color, size, weight }) => css`
@@ -62,9 +62,15 @@ export const Text = styled.p.attrs(({ as }: { as: 'p' | 'div' | 'span' | undefin
 interface ILinkProps {
 	color?: string;
 	hoverColor?: string;
+	underLine?: boolean;
 }
 export const StyledLink = styled(Link)<ILinkProps>`
 	color: ${({ theme, color }) => color || theme.main};
+	${({ underLine }) =>
+		underLine &&
+		css`
+			text-decoration: underline;
+		`};
 	transition: color 0.125s ease-in-out, font-weight 0.125s ease-in-out;
 	&:hover {
 		font-weight: 500;

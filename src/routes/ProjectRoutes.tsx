@@ -5,7 +5,7 @@ import { LOGIN_PATH, MOVIES_PATH, APP_PATH, SIGN_UP_PATH } from './routesPaths';
 import Movies from 'screens/MoviesScreen/MoviesLibrary';
 import Login from 'screens/LoginScreen/Login';
 import SignUpForm from 'screens/LoginScreen/SignUpForm';
-import LoginForm from 'screens/LoginScreen/LoginForm';
+import LoginForm from 'screens/LoginScreen/loginPage/LoginForm';
 import PrivateRoute from './ProtectedRoute';
 import AppLayout from 'components/Applayout';
 

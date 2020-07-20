@@ -5,9 +5,9 @@ import { asyncHandler } from 'utils/common.utils';
 import { get } from 'utils/lodash.utils';
 import { APP_PATH } from 'routes/routesPaths';
 import { SIGN_UP_PATH } from 'routes/routesPaths';
-import { LoginButton } from './style';
+import { LoginButton, Content } from '../style';
 import Icon from 'components/common-ui/icon';
-import AnimatedForm from './AnimatedForm';
+import AnimatedForm from '../AnimatedForm';
 
 const providers: Array<Provider> = ['facebook', 'google', 'github'];
 
@@ -36,6 +36,7 @@ const LoginForm = () => {
 	return (
 		<AnimatedForm title={'login'} link={{ to: SIGN_UP_PATH, text: 'Sign Up' }}>
 			<>
+				<Content size={12}>Login with your social account</Content>
 				{providers.map(provider => (
 					<LoginButton
 						key={provider}

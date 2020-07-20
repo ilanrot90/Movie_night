@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Footer, Header, HeaderText, StyledLink, Form } from './style';
+import { Footer, Header, Content, StyledLink, Form } from './style';
 import Logo from './SvgLogo';
 
 interface IProps {
@@ -16,7 +16,7 @@ const AnimatedForm: FC<IProps> = ({ title, link, children }) => {
 		<Form>
 			<Header>
 				<Logo />
-				<HeaderText>Please {title} to continue</HeaderText>
+				<Content>Please {title} to continue</Content>
 			</Header>
 			{children}
 			<Footer as="span">

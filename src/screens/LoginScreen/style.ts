@@ -57,7 +57,7 @@ export const Header = styled.div`
 	align-items: center;
 `;
 
-export const HeaderText = styled(Text)`
+export const Content = styled(Text)`
 	margin: ${({ theme }) => theme.spacing.m}px auto;
 	max-width: fit-content;
 `;
@@ -70,7 +70,6 @@ export const LoginButton = styled(Button)`
 		left: 24px;
 	}
 `;
-
 export const Footer = styled(Text)`
 	margin-top: auto;
 	align-self: center;
