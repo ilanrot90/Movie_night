@@ -3,11 +3,11 @@ import { motion } from 'framer-motion';
 
 const svgProps = {
 	variants: {
-		hidden: { scale: 0, opacity: 0 },
+		hidden: { scale: 0.8, rotateY: 360 },
 		visible: {
 			scale: 1,
-			opacity: 1,
-			transition: { duration: 0.5, delay: 0.5 },
+			rotateY: 0,
+			transition: { ease: 'easeInOut', duration: 2, flip: Infinity, repeatDelay: 5 },
 		},
 	},
 	whileHover: {

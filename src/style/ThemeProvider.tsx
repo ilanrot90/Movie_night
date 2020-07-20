@@ -5,6 +5,7 @@ import { themeAtom } from 'state/atoms/styleAtom';
 import theme from './theme';
 import { StylesProvider, ThemeProvider as MaterialProvider, createMuiTheme } from '@material-ui/core/styles';
 import { BaseContainer } from './sharedStyle';
+import './App.css';
 
 interface IProps {
 	children: ReactElement;

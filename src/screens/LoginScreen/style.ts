@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { PageContainer } from 'style/sharedStyle';
+import { PageContainer, Text } from 'style/sharedStyle';
 import Button from 'components/common-ui/Button';
+import { ReactElement } from 'react';
 
 export const Container = styled(PageContainer)`
 	width: 100%;
@@ -20,7 +21,13 @@ export const FormContainer = styled.div`
 export const Header = styled.div`
 	width: 100%;
 	height: 110px;
-	${({ theme }) => theme.utils.centerFlex}
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+
+export const HeaderText = styled(Text)`
+	margin-top: ${({ theme }) => theme.spacing.m}px;
 `;
 
 export const LoginButton = styled(Button)`

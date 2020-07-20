@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import { MOVIES_PATH } from 'routes/routesPaths';
 import { useRouter } from 'hooks/useRouter';
-import { Container, LoginButton, FormContainer, Header } from './style';
+import { Container, LoginButton, FormContainer, Header, HeaderText } from './style';
 import { auth, getProvider, Provider } from 'firebase-methods/Firebase';
 import Icon from 'components/common-ui/icon';
 import { asyncHandler } from 'utils/common.utils';
@@ -37,6 +37,7 @@ const LoginPage: FC = () => {
 			<FormContainer>
 				<Header>
 					<Logo />
+					<HeaderText>Please login to continue</HeaderText>
 				</Header>
 				{providers.map(provider => (
 					<LoginButton

@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
+import { ReactElement } from 'react';
 
 export const centerFlex = css`
 	display: flex;
@@ -44,11 +45,11 @@ export const BaseContainer = styled.div`
 `;
 
 interface ITextProps {
-	size: number;
-	weight: number;
-	color: string;
+	size?: number;
+	weight?: number;
+	color?: string;
 }
-export const Text = styled.p.attrs(({ as }: { as: 'p' | 'div' | 'span' }) => ({
+export const Text = styled.p.attrs(({ as }: { as: 'p' | 'div' | 'span' | undefined }) => ({
 	as,
 }))<ITextProps>`
 	${({ theme, color, size, weight }) => css`
