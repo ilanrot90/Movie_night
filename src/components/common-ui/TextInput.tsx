@@ -26,7 +26,7 @@ const TextInput = React.forwardRef(({ variant, required, label, fullWidth, name,
 });
 
 const Input = styled(TextInput)`
-	margin: ${({ theme }) => theme.spacing.m}px 0;
+	height: 80px;
 `;
 
 export default React.memo(Input);
