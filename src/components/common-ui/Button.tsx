@@ -9,6 +9,7 @@ interface Interface extends ButtonProps {
 }
 
 const StyledBtn = styled(({ socialType, ...props }: Interface) => <MaterialButton {...props} />)<{ socialType: social }>`
+	height: 40px;
 	background-color: ${({ socialType }) =>
 		socialType &&
 		{
@@ -17,13 +18,14 @@ const StyledBtn = styled(({ socialType, ...props }: Interface) => <MaterialButto
 			github: '#333333',
 		}[socialType]};
 	&:hover {
-		background-color: ${({ socialType }) =>
-			socialType &&
-			{
-				facebook: '#2b56b1',
-				google: '#e23824',
-				github: '#2d2c2c',
-			}[socialType]};
+		background-color: ${({ socialType, theme }) =>
+			socialType
+				? {
+						facebook: '#2b56b1',
+						google: '#e23824',
+						github: '#2d2c2c',
+				  }[socialType]
+				: theme.light};
 		box-shadow: 0 14px 26px -12px rgba(51, 51, 51, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12),
 			0 8px 10px -5px rgba(51, 51, 51, 0.2);
 	}
@@ -38,6 +40,7 @@ const Button: FC<Interface> = ({
 	fullWidth,
 	onClick,
 	socialType,
+	type,
 	...rest
 }) => {
 	return (

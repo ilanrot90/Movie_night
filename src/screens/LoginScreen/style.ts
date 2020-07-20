@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { PageContainer, Text } from 'style/sharedStyle';
 import Button from 'components/common-ui/Button';
 import { motion } from 'framer-motion';
-export { StyledLink } from 'style/sharedStyle';
+export { StyledLink, Hr } from 'style/sharedStyle';
 export const Container = styled(PageContainer)`
 	width: 100%;
 	height: 100vh;
@@ -57,6 +57,11 @@ export const Header = styled.div`
 	align-items: center;
 `;
 
+// login form
+export const FormBlock = styled.form`
+	margin-bottom: ${({ theme }) => theme.spacing.m}px;
+`;
+
 export const Content = styled(Text)`
 	margin: ${({ theme }) => theme.spacing.m}px auto;
 	max-width: fit-content;
@@ -66,7 +71,7 @@ export const LoginButton = styled(Button)`
 	margin: ${({ theme }) => theme.spacing.m}px 0;
 	& .icon {
 		position: absolute;
-		top: 8px;
+		top: 10px;
 		left: 24px;
 	}
 `;

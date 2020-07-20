@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { Footer, Header, Content, StyledLink, Form } from './style';
 import Logo from './SvgLogo';
 
@@ -8,7 +8,7 @@ interface IProps {
 		to: string;
 		text: string;
 	};
-	children: React.ReactElement;
+	children: ReactElement;
 }
 
 const AnimatedForm: FC<IProps> = ({ title, link, children }) => {

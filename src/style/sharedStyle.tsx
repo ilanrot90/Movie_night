@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import Divider from '@material-ui/core/Divider';
 
 export const centerFlex = css`
 	display: flex;
@@ -76,4 +77,9 @@ export const StyledLink = styled(Link)<ILinkProps>`
 		font-weight: 500;
 		color: ${({ theme, hoverColor }) => hoverColor || theme.light};
 	}
+`;
+
+export const Hr = styled(Divider)<{ size?: 's' | 'm' | 'xl' | 'l' }>`
+	margin: ${({ theme, size = 'm' }) => theme.spacing[size]}px 0;
+	background-color: ${({ theme }) => theme.contrastText};
 `;

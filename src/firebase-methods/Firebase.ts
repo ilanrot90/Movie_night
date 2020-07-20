@@ -8,17 +8,9 @@ import { isProduction } from 'utils/common.utils';
 // config
 const config = isProduction ? firebaseProdConfig : firebaseDevConfig;
 // providers
-const googleProvider = new app.auth.GoogleAuthProvider().addScope('https://www.googleapis.com/auth/userinfo.email');
-const facebookProvider = new app.auth.FacebookAuthProvider().addScope('email');
-const githubProvider = new app.auth.GithubAuthProvider().addScope('user:email');
-
-export type Provider = 'google' | 'facebook' | 'github';
-export const getProvider = (provider: Provider) =>
-	({
-		google: googleProvider,
-		facebook: facebookProvider,
-		github: githubProvider,
-	}[provider]);
+export const googleProvider = new app.auth.GoogleAuthProvider().addScope('https://www.googleapis.com/auth/userinfo.email');
+export const facebookProvider = new app.auth.FacebookAuthProvider().addScope('email');
+export const githubProvider = new app.auth.GithubAuthProvider().addScope('user:email');
 
 export const firebase = app.initializeApp(config);
 export const auth = firebase.auth();
