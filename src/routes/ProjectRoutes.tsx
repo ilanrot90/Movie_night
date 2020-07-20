@@ -1,10 +1,13 @@
 import React, { ElementType } from 'react';
 import { useRoutes, Navigate } from 'react-router-dom';
 import { PartialRouteObject } from 'react-router';
-import { LOGIN_PATH, MOVIES_PATH } from './routesPaths';
+import { LOGIN_PATH, MOVIES_PATH, APP_PATH, SIGN_UP_PATH } from './routesPaths';
 import Movies from 'screens/MoviesScreen/MoviesLibrary';
 import Login from 'screens/LoginScreen/Login';
+import SignUpForm from 'screens/LoginScreen/SignUpForm';
+import LoginForm from 'screens/LoginScreen/LoginForm';
 import PrivateRoute from './ProtectedRoute';
+import AppLayout from 'components/Applayout';
 
 interface IRoute {
 	path: string;
@@ -14,11 +17,25 @@ interface IRoute {
 }
 
 const routes: Array<IRoute> = [
-	{ path: LOGIN_PATH, component: Login },
-	{ path: MOVIES_PATH, component: Movies, isProtected: true },
-	{ path: '/', component: () => <Navigate to={MOVIES_PATH} /> },
+	{
+		path: LOGIN_PATH,
+		component: Login,
+		children: [
+			{ path: '/', component: LoginForm },
+			{ path: SIGN_UP_PATH, component: SignUpForm },
+		],
+	},
+	{
+		path: `${APP_PATH}/*`,
+		component: AppLayout,
+		isProtected: true,
+		children: [
+			{ path: '/', component: Movies },
+			{ path: MOVIES_PATH, component: Movies },
+		],
+	},
 	// TODO: fix 404 page
-	{ path: '*', component: () => <div>404</div> },
+	{ path: '*', component: () => <Navigate to={APP_PATH} /> },
 ];
 
 declare function MapRoutes(routes: Array<IRoute>): Array<PartialRouteObject>;

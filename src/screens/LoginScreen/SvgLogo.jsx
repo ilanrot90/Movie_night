@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 
 const fillTransition = {
 	variants: {
-		hidden: { scale: 3 },
+		hidden: { scale: 2 },
 		visible: {
-			scale: 3.5,
+			scale: 2.5,
 			transition: { duration: 1 },
 		},
 	},
@@ -16,16 +16,7 @@ const fillTransition = {
 
 const Logo = () => {
 	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			version="1.1"
-			id="Layer_1"
-			x="0px"
-			y="0px"
-			width="128"
-			height="128"
-			viewBox="0 0 128 128"
-		>
+		<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Layer_1" x="0px" y="0px" width="90" height="68" viewBox="0 0 85 90">
 			<g>
 				<motion.path
 					{...fillTransition}

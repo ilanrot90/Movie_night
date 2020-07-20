@@ -1,4 +1,6 @@
-const appPrefix = 'app/';
-
+export const APP_PATH = 'app';
+export const MOVIES_PATH = `movies`;
+// login routes
 export const LOGIN_PATH = 'login';
-export const MOVIES_PATH = `${appPrefix}movies`;
+export const SIGN_UP_PATH = 'new';
+export const RESET_PATH = 'reset';

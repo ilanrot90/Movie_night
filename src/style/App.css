@@ -29,3 +29,7 @@ h1, h2 {
 h3 {
     font-family: 'medium', sans-serif;
 }
+ a {
+     text-decoration: none;
+     font-weight: 400;
+ }

@@ -26,6 +26,7 @@ declare module 'styled-components' {
 			m: number;
 			l: number;
 			xl: number;
+			xxl: number;
 		};
 		shadow: {
 			m: FlattenSimpleInterpolation;
@@ -54,6 +55,7 @@ const sharedTheme = {
 		m: 8,
 		l: 16,
 		xl: 24,
+		xxl: 32,
 	},
 	shadow: {
 		m: css`

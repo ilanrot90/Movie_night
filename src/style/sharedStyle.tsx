@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
-import { ReactElement } from 'react';
+import { Link } from 'react-router-dom';
 
 export const centerFlex = css`
 	display: flex;
@@ -43,7 +43,7 @@ export const BaseContainer = styled.div`
 	flex-direction: column;
 	background-color: ${({ theme }) => theme.background};
 `;
-
+// text component
 interface ITextProps {
 	size?: number;
 	weight?: number;
@@ -57,4 +57,17 @@ export const Text = styled.p.attrs(({ as }: { as: 'p' | 'div' | 'span' | undefin
 		font-weight: ${weight || 300};
 		color: ${color || theme.contrastText};
 	`}
+`;
+// link component
+interface ILinkProps {
+	color?: string;
+	hoverColor?: string;
+}
+export const StyledLink = styled(Link)<ILinkProps>`
+	color: ${({ theme, color }) => color || theme.main};
+	transition: color 0.125s ease-in-out, font-weight 0.125s ease-in-out;
+	&:hover {
+		font-weight: 500;
+		color: ${({ theme, hoverColor }) => hoverColor || theme.light};
+	}
 `;
