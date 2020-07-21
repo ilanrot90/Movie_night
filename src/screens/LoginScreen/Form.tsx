@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormValues, LoginTypes } from 'types';
 import { FormBlock, LoginButton } from './style';
 import TextInput from 'components/common-ui/TextInput';
 import { get, startCase } from 'utils/lodash.utils';
+import { ErrorOption } from 'react-hook-form/dist/types/form';
 
-const SimpleForm = ({ fields, onSubmit }: { onSubmit: (values: FormValues) => void; fields: Array<LoginTypes> }) => {
+type SetError = (name: 'displayName' | 'email' | 'password' | 'passwordConfirm', errorOption: ErrorOption) => void;
+const SimpleForm = ({
+	fields,
+	onSubmit,
+	buttonText,
+}: {
+	onSubmit: (values: FormValues, setError: SetError) => void;
+	fields: Array<LoginTypes>;
+	buttonText: string;
+}) => {
 	const {
 		register,
 		handleSubmit,
 		errors,
 		// formState: { isSubmitting },
-		// setError,
+		setError,
 	} = useForm<FormValues>({});
+
+	const submitFormWithProps = useCallback((data: FormValues) => {
+		onSubmit(data, setError);
+	}, []);
 
 	return (
 		<FormBlock>
@@ -30,8 +44,8 @@ const SimpleForm = ({ fields, onSubmit }: { onSubmit: (values: FormValues) => vo
 				/>
 			))}
 
-			<LoginButton type={'submit'} fullWidth onClick={handleSubmit(onSubmit)}>
-				log in
+			<LoginButton type={'submit'} fullWidth onClick={handleSubmit(submitFormWithProps)}>
+				{buttonText}
 			</LoginButton>
 		</FormBlock>
 	);

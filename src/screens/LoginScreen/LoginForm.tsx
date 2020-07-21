@@ -20,7 +20,7 @@ const LoginForm = () => {
 		push(`/${APP_PATH}`);
 	}, [push]);
 
-	const handlePasswordSignIn: SubmitHandler<FormValues> = async data => {
+	const handlePasswordSignIn = async (data: FormValues) => {
 		const { error, response } = await asyncHandler(handleEmailLogin(data));
 		console.log({ error, response });
 		handleRedirect();
@@ -42,7 +42,7 @@ const LoginForm = () => {
 	return (
 		<AnimatedForm title={'login'} footer={'Don`t have an account?'} link={{ to: SIGN_UP_PATH, text: 'Sign Up' }}>
 			<>
-				<Form fields={loginFields} onSubmit={handlePasswordSignIn} />
+				<Form buttonText={'log in'} fields={loginFields} onSubmit={handlePasswordSignIn} />
 				<Hr size={'m'} />
 				<Content size={12}>Login with your social account</Content>
 				{providers.map(provider => (
