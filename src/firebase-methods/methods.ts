@@ -3,23 +3,49 @@ import { Provider, FormValues } from '../types';
 import { asyncHandler } from 'utils/common.utils';
 import { get } from 'utils/lodash.utils';
 
+export const handleEmailSignUp = async ({ email, password, displayName }: FormValues) => {
+	const { error } = await asyncHandler(auth.createUserWithEmailAndPassword(email, password));
+	if (error) {
+		// TODO: handle error
+		console.log('handleEmailSignIn', { error });
+	}
+	const user = auth.currentUser;
+
+	// send verify email
+	await user?.sendEmailVerification();
+	// add to DB
+	await firestore.collection('users').doc(user?.uid).set({
+		email,
+		displayName,
+	});
+};
+
+// Send recover password
+export const recoverPassword = async () => {
+	const user = auth.currentUser;
+
+	if (user) {
+		const { error } = await asyncHandler(user.sendEmailVerification());
+		if (error) {
+			// TODO: handle error
+			console.log('recoverPassword', { error });
+		}
+	}
+};
+// resend email validation
+export const reSendEmail = async (email: string) => {
+	const { error } = await asyncHandler(auth.sendPasswordResetEmail(email));
+	if (error) {
+		// TODO: handle error
+		console.log('recoverPassword', { error });
+	}
+};
 export const getProvider = (provider: Provider) =>
 	({
 		google: googleProvider,
 		facebook: facebookProvider,
 		github: githubProvider,
 	}[provider]);
-
-// const saveUser = async (user: User | null) => {
-// 	console.log({ user });
-// 	// send verify email
-// 	await user?.sendEmailVerification();
-// 	// add to DB
-// 	await firestore.collection('users').doc(user?.uid).set({
-// 		email: user?.providerData[0]?.email,
-// 		name: user?.providerData[0]?.displayName,
-// 	});
-// };
 
 export const loginWithProvider = async (provider: Provider) => {
 	let isNewUser = false;

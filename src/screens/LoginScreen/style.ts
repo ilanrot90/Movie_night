@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { PageContainer, Text } from 'style/sharedStyle';
 import Button from 'components/common-ui/Button';
 import { motion } from 'framer-motion';
-export { StyledLink, Hr } from 'style/sharedStyle';
+export { StyledLink, Hr, Text } from 'style/sharedStyle';
 export const Container = styled(PageContainer)`
 	width: 100%;
 	height: 100vh;
@@ -78,4 +78,18 @@ export const LoginButton = styled(Button)`
 export const Footer = styled(Text)`
 	margin-top: auto;
 	align-self: center;
+`;
+
+// verify email text
+export const VerifyContainer = styled(Content)`
+	min-height: 350px;
+	border-radius: 4px;
+	${({ theme }) => theme.shadow.m};
+	padding: ${({ theme }) => theme.spacing.l}px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+`;
+export const VerifyText = styled(Text)`
+	text-align: center;
 `;
