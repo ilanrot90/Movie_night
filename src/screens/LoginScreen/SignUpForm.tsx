@@ -3,7 +3,6 @@ import AnimatedForm from './AnimatedForm';
 import Form from './Form';
 import { FormValues } from 'types';
 import { signUpFields } from './authScreens.utils';
-import { LoginButton } from './style';
 
 const SignUpForm = () => {
 	const onSubmit = useCallback((data: FormValues) => {

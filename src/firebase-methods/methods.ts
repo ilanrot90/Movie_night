@@ -51,7 +51,7 @@ export const loginWithProvider = async (provider: Provider) => {
 		return { isNewUser, user: get(response, 'user') };
 	}
 
-	throw 'Internal error';
+	throw new Error('Internal error');
 };
 
 export const handleEmailLogin = async ({ email, password }: FormValues) => {

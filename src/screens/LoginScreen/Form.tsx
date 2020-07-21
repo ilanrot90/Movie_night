@@ -24,9 +24,12 @@ const SimpleForm = ({
 		setError,
 	} = useForm<FormValues>({});
 
-	const submitFormWithProps = useCallback((data: FormValues) => {
-		onSubmit(data, setError);
-	}, []);
+	const submitFormWithProps = useCallback(
+		(data: FormValues) => {
+			onSubmit(data, setError);
+		},
+		[setError, onSubmit]
+	);
 
 	return (
 		<FormBlock>

@@ -6,7 +6,6 @@ import { APP_PATH, SIGN_UP_PATH } from 'routes/routesPaths';
 import { Content, Hr, LoginButton } from './style';
 import Icon from 'components/common-ui/icon';
 import AnimatedForm from './AnimatedForm';
-import { SubmitHandler } from 'react-hook-form';
 import Form from './Form';
 import { loginFields } from './authScreens.utils';
 import { FormValues, Provider } from 'types';
