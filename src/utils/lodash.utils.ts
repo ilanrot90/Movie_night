@@ -5,6 +5,7 @@ import get from 'lodash/get';
 import orderBy from 'lodash/orderBy';
 import groupBy from 'lodash/groupBy';
 import isEmpty from 'lodash/isEmpty';
+import startCase from 'lodash/startCase';
 
 const chainableFunctions = {
 	map,
@@ -25,4 +26,4 @@ const chain = (input: any) => {
 	return wrapper;
 };
 
-export { chain, map, orderBy, groupBy, keyBy, isEmpty, get };
+export { chain, startCase, map, orderBy, groupBy, keyBy, isEmpty, get };

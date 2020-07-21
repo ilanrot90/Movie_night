@@ -7,7 +7,7 @@ import Login from 'screens/LoginScreen/Login';
 import SignUpForm from 'screens/LoginScreen/SignUpForm';
 import VerifyEmail from 'screens/LoginScreen/VerifyEmail';
 import ResetAccount from 'screens/LoginScreen/ResetAccount';
-import LoginForm from 'screens/LoginScreen/loginPage/LoginForm';
+import LoginForm from 'screens/LoginScreen/LoginForm';
 import PrivateRoute from './ProtectedRoute';
 import AppLayout from 'components/Applayout';
 

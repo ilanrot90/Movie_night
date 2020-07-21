@@ -2,7 +2,6 @@ import { facebookProvider, githubProvider, googleProvider, auth, firestore } fro
 import { Provider, FormValues } from '../types';
 import { asyncHandler } from 'utils/common.utils';
 import { get } from 'utils/lodash.utils';
-import { User } from 'firebase';
 
 export const getProvider = (provider: Provider) =>
 	({
@@ -11,16 +10,16 @@ export const getProvider = (provider: Provider) =>
 		github: githubProvider,
 	}[provider]);
 
-const saveUser = async (user: User | null) => {
-	console.log({ user });
-	// send verify email
-	await user?.sendEmailVerification();
-	// add to DB
-	await firestore.collection('users').doc(user?.uid).set({
-		email: user?.providerData[0]?.email,
-		name: user?.providerData[0]?.displayName,
-	});
-};
+// const saveUser = async (user: User | null) => {
+// 	console.log({ user });
+// 	// send verify email
+// 	await user?.sendEmailVerification();
+// 	// add to DB
+// 	await firestore.collection('users').doc(user?.uid).set({
+// 		email: user?.providerData[0]?.email,
+// 		name: user?.providerData[0]?.displayName,
+// 	});
+// };
 
 export const loginWithProvider = async (provider: Provider) => {
 	let isNewUser = false;
