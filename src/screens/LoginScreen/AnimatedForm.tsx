@@ -4,6 +4,7 @@ import Logo from './SvgLogo';
 
 interface IProps {
 	title: string;
+	footer: string;
 	link: {
 		to: string;
 		text: string;
@@ -11,7 +12,7 @@ interface IProps {
 	children: ReactElement;
 }
 
-const AnimatedForm: FC<IProps> = ({ title, link, children }) => {
+const AnimatedForm: FC<IProps> = ({ title, footer, link, children }) => {
 	return (
 		<Form>
 			<Header>
@@ -20,7 +21,7 @@ const AnimatedForm: FC<IProps> = ({ title, link, children }) => {
 			</Header>
 			{children}
 			<Footer as="span">
-				Don`t have an account? <StyledLink to={link.to}> {link.text}</StyledLink>
+				{footer} <StyledLink to={link.to}> {link.text}</StyledLink>
 			</Footer>
 		</Form>
 	);

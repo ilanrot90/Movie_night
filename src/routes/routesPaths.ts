@@ -4,3 +4,4 @@ export const MOVIES_PATH = `movies`;
 export const LOGIN_PATH = 'login';
 export const SIGN_UP_PATH = 'new';
 export const RESET_PATH = 'reset';
+export const VERIFY_EMAIL = 'verify-email';

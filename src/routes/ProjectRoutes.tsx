@@ -1,10 +1,12 @@
 import React, { ElementType } from 'react';
 import { useRoutes, Navigate } from 'react-router-dom';
 import { PartialRouteObject } from 'react-router';
-import { LOGIN_PATH, MOVIES_PATH, APP_PATH, SIGN_UP_PATH } from './routesPaths';
+import { LOGIN_PATH, MOVIES_PATH, VERIFY_EMAIL, APP_PATH, SIGN_UP_PATH, RESET_PATH } from './routesPaths';
 import Movies from 'screens/MoviesScreen/MoviesLibrary';
 import Login from 'screens/LoginScreen/Login';
 import SignUpForm from 'screens/LoginScreen/SignUpForm';
+import VerifyEmail from 'screens/LoginScreen/VerifyEmail';
+import ResetAccount from 'screens/LoginScreen/ResetAccount';
 import LoginForm from 'screens/LoginScreen/loginPage/LoginForm';
 import PrivateRoute from './ProtectedRoute';
 import AppLayout from 'components/Applayout';
@@ -23,6 +25,8 @@ const routes: Array<IRoute> = [
 		children: [
 			{ path: '/', component: LoginForm },
 			{ path: SIGN_UP_PATH, component: SignUpForm },
+			{ path: VERIFY_EMAIL, component: VerifyEmail },
+			{ path: RESET_PATH, component: ResetAccount },
 		],
 	},
 	{

@@ -94,7 +94,7 @@ const LoginForm = () => {
 	);
 
 	return (
-		<AnimatedForm title={'login'} link={{ to: SIGN_UP_PATH, text: 'Sign Up' }}>
+		<AnimatedForm title={'login'} footer={'Don`t have an account?'} link={{ to: SIGN_UP_PATH, text: 'Sign Up' }}>
 			<>
 				<Form />
 				<Hr size={'m'} />

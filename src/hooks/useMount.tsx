@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const useMount = (fn: () => void, cleanUpFn = () => {}) => {
+export const useMount = (fn: () => void, cleanUpFn = () => undefined) => {
 	const [mounted, setMount] = useState(false);
 	useEffect(() => {
 		if (!mounted) {
