@@ -36,12 +36,19 @@ export const loginWithProvider = async (provider: Provider) => {
 		const { email, displayName } = get(response, 'user.providerData[0]');
 
 		if (response?.additionalUserInfo?.isNewUser) {
-			await firestore.collection('users').doc(uid).set({
-				email,
-				displayName,
-			});
+			await Promise.all([
+				auth.currentUser?.updateProfile({
+					displayName,
+				}),
+				firestore.collection('users').doc(uid).set({
+					email,
+					displayName,
+				}),
+			]);
+
 			isNewUser = true;
 		}
+
 		return { isNewUser, user: get(response, 'user') };
 	}
 
@@ -50,8 +57,8 @@ export const loginWithProvider = async (provider: Provider) => {
 
 export const handleEmailLogin = async ({ email, password }: FormValues) => {
 	const { response, error } = await asyncHandler(auth.signInWithEmailAndPassword(email, password));
-	if(error) {
-		console.log({error})
+	if (error) {
+		console.log({ error });
 	}
 
 	return response?.user;

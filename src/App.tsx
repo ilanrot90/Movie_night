@@ -22,7 +22,7 @@ const App = () => {
 				const verifyEmail = !emailVerified && providerId === 'password';
 
 				// User is signed in.
-				setUser({ email, displayName, uid, verifyEmail });
+				setUser({ email, displayName: displayName || email, uid, verifyEmail });
 			} else {
 				// No user is signed in.
 				reset();
