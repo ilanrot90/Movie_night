@@ -1,21 +1,22 @@
 import React, { useCallback } from 'react';
 import { useRouter } from 'hooks/useRouter';
 import { auth } from 'firebase-methods/Firebase';
+import { loginWithProvider } from 'firebase-methods/methods';
 import { asyncHandler } from 'utils/common.utils';
 import { get } from 'utils/lodash.utils';
-import { APP_PATH } from 'routes/routesPaths';
-import { SIGN_UP_PATH } from 'routes/routesPaths';
-import { LoginButton, Content, FormBlock, Hr } from '../style';
+import { APP_PATH, SIGN_UP_PATH, VERIFY_EMAIL } from 'routes/routesPaths';
+import { Content, FormBlock, Hr, LoginButton } from '../style';
 import Icon from 'components/common-ui/icon';
 import AnimatedForm from '../AnimatedForm';
-import { getProvider, Provider } from 'firebase-methods/methods';
-import { useForm } from 'react-hook-form';
+import { getProvider } from 'firebase-methods/methods';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import TextInput from 'components/common-ui/TextInput';
 import { emailRegex } from 'utils/strings.utils';
+import { FormValues, LoginTypes, Provider } from 'types';
 
 const providers: Array<Provider> = ['facebook', 'google', 'github'];
 
-const fields = [
+const fields: Array<LoginTypes> = [
 	{
 		name: 'email',
 		placeholder: 'your_email@mail.com',
@@ -45,8 +46,20 @@ const fields = [
 		},
 	},
 ];
+
 const Form = React.memo(() => {
-	const { register, handleSubmit, errors } = useForm({});
+	const {
+		register,
+		handleSubmit,
+		errors,
+		// formState: { isSubmitting },
+		// setError,
+	} = useForm<FormValues>({});
+
+	const onSubmit: SubmitHandler<FormValues> = async data => {
+		const { error, response } = await asyncHandler(auth.signInWithEmailAndPassword(data.email, data.password));
+		console.log({ error, response });
+	};
 
 	return (
 		<FormBlock>
@@ -64,7 +77,7 @@ const Form = React.memo(() => {
 				/>
 			))}
 
-			<LoginButton type={'submit'} fullWidth onClick={handleSubmit(d => console.log(d))}>
+			<LoginButton type={'submit'} fullWidth onClick={handleSubmit(onSubmit)}>
 				log in
 			</LoginButton>
 		</FormBlock>
@@ -76,19 +89,13 @@ const LoginForm = () => {
 
 	const handleAuth = useCallback(
 		provider => async () => {
-			// TODO: handle login
-			const providerConfig = getProvider(provider);
-			const { response, error } = await asyncHandler(auth.signInWithPopup(providerConfig));
+			const { response, error } = await asyncHandler(loginWithProvider(provider));
 			if (error) {
-				console.log(error);
-			}
-			const isNewUser = response?.additionalUserInfo?.isNewUser;
-			if (isNewUser) {
-				const linkedAccounts = await auth.fetchSignInMethodsForEmail(get('response', 'user.providerData[0].email'));
-				console.log({ linkedAccounts });
+				// TODO: handle errors
+				console.log({ error });
 			}
 
-			push(`/${APP_PATH}`);
+			push(response?.isNewUser ? VERIFY_EMAIL : `/${APP_PATH}`);
 		},
 		[push]
 	);

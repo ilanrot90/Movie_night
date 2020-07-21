@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, unstable_useTransition, useCallback } from 'react';
 import MaterialButton, { ButtonProps } from '@material-ui/core/Button';
 import styled from 'styled-components';
 type social = 'facebook' | 'google' | 'github' | undefined;
@@ -43,6 +43,15 @@ const Button: FC<Interface> = ({
 	type,
 	...rest
 }) => {
+	const [startTransition, isPending] = unstable_useTransition({
+		timeoutMs: 5000,
+	});
+
+	const handleClick = useCallback(() => {
+		startTransition(() => {
+			onClick();
+		});
+	}, [onClick, startTransition]);
 	return (
 		<StyledBtn
 			variant={variant}
@@ -50,11 +59,11 @@ const Button: FC<Interface> = ({
 			className={className}
 			disabled={disabled}
 			fullWidth={fullWidth}
-			onClick={onClick}
+			onClick={handleClick}
 			socialType={socialType}
 			{...rest}
 		>
-			{children}
+			{isPending ? 'loading...' : children}
 		</StyledBtn>
 	);
 };

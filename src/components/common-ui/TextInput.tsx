@@ -27,6 +27,16 @@ const TextInput = React.forwardRef(({ variant, required, label, fullWidth, name,
 
 const Input = styled(TextInput)`
 	height: 80px;
+	& .MuiOutlinedInput-input {
+		color: ${({ theme }) => theme.contrastText};
+	}
+	& .MuiFormLabel-root {
+		color: ${({ theme }) => theme.contrastText};
+		opacity: 0.3;
+	}
+	& .MuiFormLabel-root.Mui-focused {
+		opacity: 0.8;
+	}
 `;
 
 export default React.memo(Input);
