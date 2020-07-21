@@ -1,18 +1,19 @@
-import React, { ElementType } from 'react';
+import React, { ElementType, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Navigate } from 'react-router-dom';
 import { authAtom } from '../state/atoms';
-import { LOGIN_PATH } from './routesPaths';
+import { LOGIN_PATH, VERIFY_EMAIL } from './routesPaths';
 
 interface IProps {
 	component: ElementType;
-	redirectTo?: string;
 }
 
-const PrivateRoute: React.FC<IProps> = ({ redirectTo = LOGIN_PATH, component: Component, ...props }) => {
+const PrivateRoute: React.FC<IProps> = ({ component: Component, ...props }) => {
 	const user = useRecoilValue(authAtom);
-
-	if (!user) {
+	console.log({ user });
+	const redirectTo = useMemo(() => (user?.verifyEmail ? `${LOGIN_PATH}/${VERIFY_EMAIL}` : !user && LOGIN_PATH), [user]);
+	if (redirectTo) {
+		console.log({ redirectTo });
 		return <Navigate to={`/${redirectTo}`} replace={true} />;
 	}
 

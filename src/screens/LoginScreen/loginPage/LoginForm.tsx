@@ -1,14 +1,12 @@
 import React, { useCallback } from 'react';
 import { useRouter } from 'hooks/useRouter';
-import { auth } from 'firebase-methods/Firebase';
-import { loginWithProvider } from 'firebase-methods/methods';
+import { loginWithProvider, handleEmailLogin } from 'firebase-methods/methods';
 import { asyncHandler } from 'utils/common.utils';
 import { get } from 'utils/lodash.utils';
 import { APP_PATH, SIGN_UP_PATH, VERIFY_EMAIL } from 'routes/routesPaths';
 import { Content, FormBlock, Hr, LoginButton } from '../style';
 import Icon from 'components/common-ui/icon';
 import AnimatedForm from '../AnimatedForm';
-import { getProvider } from 'firebase-methods/methods';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import TextInput from 'components/common-ui/TextInput';
 import { emailRegex } from 'utils/strings.utils';
@@ -47,7 +45,7 @@ const fields: Array<LoginTypes> = [
 	},
 ];
 
-const Form = React.memo(() => {
+const Form = React.memo<{ handleRedirect: () => void }>(({ handleRedirect }) => {
 	const {
 		register,
 		handleSubmit,
@@ -57,8 +55,9 @@ const Form = React.memo(() => {
 	} = useForm<FormValues>({});
 
 	const onSubmit: SubmitHandler<FormValues> = async data => {
-		const { error, response } = await asyncHandler(auth.signInWithEmailAndPassword(data.email, data.password));
+		const { error, response } = await asyncHandler(handleEmailLogin(data));
 		console.log({ error, response });
+		handleRedirect();
 	};
 
 	return (
@@ -87,23 +86,27 @@ const Form = React.memo(() => {
 const LoginForm = () => {
 	const { push } = useRouter();
 
+	const handleRedirect = useCallback(() => {
+		push(`/${APP_PATH}`);
+	}, [push]);
+
 	const handleAuth = useCallback(
 		provider => async () => {
-			const { response, error } = await asyncHandler(loginWithProvider(provider));
+			const { error } = await asyncHandler(loginWithProvider(provider));
 			if (error) {
 				// TODO: handle errors
 				console.log({ error });
 			}
 
-			push(response?.isNewUser ? VERIFY_EMAIL : `/${APP_PATH}`);
+			handleRedirect();
 		},
-		[push]
+		[handleRedirect]
 	);
 
 	return (
 		<AnimatedForm title={'login'} footer={'Don`t have an account?'} link={{ to: SIGN_UP_PATH, text: 'Sign Up' }}>
 			<>
-				<Form />
+				<Form handleRedirect={handleRedirect} />
 				<Hr size={'m'} />
 				<Content size={12}>Login with your social account</Content>
 				{providers.map(provider => (
