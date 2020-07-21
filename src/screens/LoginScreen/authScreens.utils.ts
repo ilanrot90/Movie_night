@@ -59,7 +59,7 @@ export const signUpFields: Array<LoginTypes> = [
 			},
 			pattern: {
 				value: nameRegex,
-				message: 'Please enter your password',
+				message: 'Please enter your full name',
 			},
 			maxLength: {
 				value: 28,
@@ -83,7 +83,7 @@ export const signUpFields: Array<LoginTypes> = [
 	},
 	{
 		name: 'passwordConfirm',
-		type: 'passwordConfirm',
+		type: 'password',
 		registerProps: {
 			required: {
 				value: true,

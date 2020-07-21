@@ -5,8 +5,11 @@ import { FormValues } from 'types';
 import { signUpFields } from './authScreens.utils';
 
 const SignUpForm = () => {
-	const onSubmit = useCallback((data: FormValues) => {
+	const onSubmit = useCallback((data: FormValues, setError) => {
 		console.log(data);
+		if (data.password !== data.passwordConfirm) {
+			setError('passwordConfirm', { message: 'password is not the same' });
+		}
 	}, []);
 
 	return (
