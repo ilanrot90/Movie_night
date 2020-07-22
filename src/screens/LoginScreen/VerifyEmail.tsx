@@ -3,6 +3,9 @@ import AnimatedForm from './AnimatedForm';
 import { LoginButton, VerifyContainer, VerifyText } from './style';
 import { recoverPassword } from 'firebase-methods/methods';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
+import { Navigate } from 'react-router';
+import { useRecoilValue } from 'recoil';
+import { authAtom } from 'state/atoms';
 
 interface Props {
 	startAnimation: boolean;
@@ -80,6 +83,7 @@ const EmailSvg = ({ startAnimation }: Props) => {
 };
 
 const VerifyEmail = () => {
+	const user = useRecoilValue(authAtom);
 	const [startAnimation, setAnimation] = useState<boolean>(false);
 
 	const resendEmail = useCallback(async () => {
@@ -87,7 +91,7 @@ const VerifyEmail = () => {
 		setAnimation(true);
 	}, []);
 
-	return (
+	return user ? (
 		<AnimatedForm title={'verify email'} footer={'Have a different account?'} link={{ to: '../', text: 'Sign In' }}>
 			<VerifyContainer as={'div'}>
 				<VerifyText size={11}>Go to your email inbox, and please verify your email.</VerifyText>
@@ -97,6 +101,8 @@ const VerifyEmail = () => {
 				</LoginButton>
 			</VerifyContainer>
 		</AnimatedForm>
+	) : (
+		<Navigate to={'../'} />
 	);
 };
 
