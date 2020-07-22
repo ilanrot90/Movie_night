@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { Footer, Header, Content, StyledLink, Form } from './style';
+import { Footer, Header, Content, StyledLink, Form } from '../style';
 import Logo from './SvgLogo';
 
 interface IProps {

@@ -13,7 +13,7 @@ export const loginFields: Array<LoginTypes> = [
 			},
 			pattern: {
 				value: emailRegex,
-				message: 'Please enter your password',
+				message: 'Please enter your email',
 			},
 		},
 	},
@@ -92,6 +92,23 @@ export const signUpFields: Array<LoginTypes> = [
 			minLength: {
 				value: 6,
 				message: 'password too short',
+			},
+		},
+	},
+];
+// login fields
+export const recoverField: Array<LoginTypes> = [
+	{
+		name: 'email',
+		placeholder: 'your_email@mail.com',
+		registerProps: {
+			required: {
+				value: true,
+				message: 'Please enter your email',
+			},
+			pattern: {
+				value: emailRegex,
+				message: 'Please enter your email',
 			},
 		},
 	},

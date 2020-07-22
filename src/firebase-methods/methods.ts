@@ -1,5 +1,5 @@
 import { facebookProvider, githubProvider, googleProvider, auth, firestore } from './Firebase';
-import { Provider, FormValues } from '../types';
+import { Provider, FormValues } from 'types';
 import { asyncHandler } from 'utils/common.utils';
 import { get } from 'utils/lodash.utils';
 
@@ -21,23 +21,23 @@ export const handleEmailSignUp = async ({ email, password, displayName }: FormVa
 };
 
 // Send recover password
-export const recoverPassword = async () => {
+export const recoverPassword = async (email: string) => {
+	const { error } = await asyncHandler(auth.sendPasswordResetEmail(email));
+	if (error) {
+		// TODO: handle error
+		console.log('recoverPassword', { error });
+	}
+};
+// resend email validation
+export const resendVerifyEmail = async () => {
 	const user = auth.currentUser;
 
 	if (user) {
 		const { error } = await asyncHandler(user.sendEmailVerification());
 		if (error) {
 			// TODO: handle error
-			console.log('recoverPassword', { error });
+			console.log('resendVerifyEmail', { error });
 		}
-	}
-};
-// resend email validation
-export const reSendEmail = async (email: string) => {
-	const { error } = await asyncHandler(auth.sendPasswordResetEmail(email));
-	if (error) {
-		// TODO: handle error
-		console.log('recoverPassword', { error });
 	}
 };
 export const getProvider = (provider: Provider) =>
@@ -52,7 +52,7 @@ export const loginWithProvider = async (provider: Provider) => {
 	const providerConfig = getProvider(provider);
 	const { response, error } = await asyncHandler(auth.signInWithPopup(providerConfig));
 	if (error) {
-		console.log(error);
+		console.log('loginWithProvider', { error });
 		throw error;
 	}
 

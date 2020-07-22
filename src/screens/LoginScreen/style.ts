@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { PageContainer, Text } from 'style/sharedStyle';
+import { PageContainer, Text, StyledLink } from 'style/sharedStyle';
 import Button from 'components/common-ui/Button';
 import { motion } from 'framer-motion';
-export { StyledLink, Hr, Text } from 'style/sharedStyle';
+export { StyledLink, Hr, Text, MarginContainer } from 'style/sharedStyle';
 export const Container = styled(PageContainer)`
 	width: 100%;
 	height: 100vh;
@@ -65,6 +65,14 @@ export const FormBlock = styled.form`
 export const Content = styled(Text)`
 	margin: ${({ theme }) => theme.spacing.m}px auto;
 	max-width: fit-content;
+`;
+// forgot password link
+export const ForgotPasswordLink = styled(StyledLink)`
+	opacity: 0.8;
+	color: ${({ theme }) => theme.light};
+	&:hover {
+		opacity: 1;
+	}
 `;
 
 export const LoginButton = styled(Button)`

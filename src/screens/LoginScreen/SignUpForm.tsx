@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import AnimatedForm from './AnimatedForm';
+import AnimatedForm from './animations-blocks/AnimatedForm';
 import Form from './Form';
 import { FormValues } from 'types';
 import { signUpFields } from './authScreens.utils';

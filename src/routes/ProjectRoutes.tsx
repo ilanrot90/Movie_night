@@ -6,7 +6,7 @@ import Movies from 'screens/MoviesScreen/MoviesLibrary';
 import Login from 'screens/LoginScreen/Login';
 import SignUpForm from 'screens/LoginScreen/SignUpForm';
 import VerifyEmail from 'screens/LoginScreen/VerifyEmail';
-import ResetAccount from 'screens/LoginScreen/ResetAccount';
+import RecoverForm from 'screens/LoginScreen/RecoverForm';
 import LoginForm from 'screens/LoginScreen/LoginForm';
 import PrivateRoute from './ProtectedRoute';
 import AppLayout from 'components/Applayout';
@@ -26,7 +26,7 @@ const routes: Array<IRoute> = [
 			{ path: '/', component: LoginForm },
 			{ path: SIGN_UP_PATH, component: SignUpForm },
 			{ path: VERIFY_EMAIL, component: VerifyEmail },
-			{ path: RESET_PATH, component: ResetAccount },
+			{ path: RESET_PATH, component: RecoverForm },
 		],
 	},
 	{
