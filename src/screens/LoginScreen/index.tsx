@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { FirebaseContextProvider } from './context/loginContext';
+import { FirebaseContextProvider } from 'state/context/loginContext';
 import { Container, FormContainer } from './style';
 import { Outlet } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
