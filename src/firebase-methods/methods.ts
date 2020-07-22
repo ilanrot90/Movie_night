@@ -8,6 +8,7 @@ export const handleEmailSignUp = async ({ email, password, displayName }: FormVa
 	if (error) {
 		// TODO: handle error
 		console.log('handleEmailSignIn', { error });
+		return error;
 	}
 	const user = auth.currentUser;
 
@@ -18,15 +19,19 @@ export const handleEmailSignUp = async ({ email, password, displayName }: FormVa
 		email,
 		displayName,
 	});
+
+	return user;
 };
 
 // Send recover password
 export const recoverPassword = async (email: string) => {
-	const { error } = await asyncHandler(auth.sendPasswordResetEmail(email));
+	const { error, response } = await asyncHandler(auth.sendPasswordResetEmail(email));
 	if (error) {
 		// TODO: handle error
 		console.log('recoverPassword', { error });
+		return error;
 	}
+	return response;
 };
 // resend email validation
 export const resendVerifyEmail = async () => {
@@ -37,8 +42,11 @@ export const resendVerifyEmail = async () => {
 		if (error) {
 			// TODO: handle error
 			console.log('resendVerifyEmail', { error });
+			return error;
 		}
+		return user;
 	}
+	return;
 };
 export const getProvider = (provider: Provider) =>
 	({
@@ -83,7 +91,8 @@ export const loginWithProvider = async (provider: Provider) => {
 export const handleEmailLogin = async ({ email, password }: FormValues) => {
 	const { response, error } = await asyncHandler(auth.signInWithEmailAndPassword(email, password));
 	if (error) {
-		console.log({ error });
+		console.log('handleEmailLogin', { error });
+		return error;
 	}
 
 	return response?.user;

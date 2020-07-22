@@ -29,6 +29,11 @@ const StyledBtn = styled(({ socialType, ...props }: Interface) => <MaterialButto
 		box-shadow: 0 14px 26px -12px rgba(51, 51, 51, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12),
 			0 8px 10px -5px rgba(51, 51, 51, 0.2);
 	}
+	&.MuiButton-contained.Mui-disabled {
+		color: ${({ theme }) => theme.contrastText};
+		opacity: 0.5;
+		background-color: ${({ theme }) => theme.main};
+	}
 `;
 
 const Button: FC<Interface> = ({

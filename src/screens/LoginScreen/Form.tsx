@@ -11,10 +11,12 @@ const SimpleForm = ({
 	fields,
 	onSubmit,
 	buttonText,
+	buttonProps,
 }: {
 	onSubmit: (values: FormValues, setError: SetError) => void;
 	fields: Array<LoginTypes>;
 	buttonText: string;
+	buttonProps?: { disabled: boolean };
 }) => {
 	const {
 		register,
@@ -47,7 +49,7 @@ const SimpleForm = ({
 				/>
 			))}
 
-			<LoginButton type={'submit'} fullWidth onClick={handleSubmit(submitFormWithProps)}>
+			<LoginButton type={'submit'} fullWidth onClick={handleSubmit(submitFormWithProps)} {...buttonProps}>
 				{buttonText}
 			</LoginButton>
 		</FormBlock>

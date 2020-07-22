@@ -1,28 +1,34 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import AnimatedForm from './animations-blocks/AnimatedForm';
 import { LoginButton, VerifyContainer, VerifyText } from './style';
-import { resendVerifyEmail } from 'firebase-methods/methods';
 import { Navigate } from 'react-router';
+import { resendVerifyEmail } from 'firebase-methods/methods';
 import { useRecoilValue } from 'recoil';
 import { authAtom } from 'state/atoms';
 import { EmailSvg } from './animations-blocks/SvgEmail';
 
-const VerifyEmail = () => {
+const VerifyEmailForm = () => {
 	const user = useRecoilValue(authAtom);
-	const [startAnimation, setAnimation] = useState<boolean>(false);
+	const [isDisabled, setDisabled] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const resendEmail = useCallback(async () => {
+		setLoading(true);
 		await resendVerifyEmail();
-		setAnimation(true);
+		setDisabled(true);
+		setLoading(false);
 	}, []);
 
+	const buttonText = useMemo<string>(() => (isDisabled ? 'email was send successfully' : 'Re - send verification email'), [
+		isDisabled,
+	]);
 	return user ? (
 		<AnimatedForm title={'verify email'} footer={'Have a different account?'} link={{ to: '../', text: 'Sign In' }}>
 			<VerifyContainer as={'div'}>
 				<VerifyText size={11}>Go to your email inbox, and please verify your email.</VerifyText>
-				<EmailSvg startAnimation={startAnimation} />
-				<LoginButton fullWidth onClick={resendEmail}>
-					Re-send verification email
+				<EmailSvg startAnimation={loading} />
+				<LoginButton disabled={isDisabled} fullWidth onClick={resendEmail}>
+					{buttonText}
 				</LoginButton>
 			</VerifyContainer>
 		</AnimatedForm>
@@ -31,4 +37,4 @@ const VerifyEmail = () => {
 	);
 };
 
-export default React.memo(VerifyEmail);
+export default React.memo(VerifyEmailForm);
