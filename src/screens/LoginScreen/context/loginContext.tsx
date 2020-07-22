@@ -63,8 +63,8 @@ const firebaseReducer: FirebaseReducer = (state, { type, ...payload }) => {
 		}
 	}
 };
+// just to mock initial dispatch
 const defaultDispatch: React.Dispatch<Action> = () => initialState;
-
 const FirebaseStateContext = React.createContext<IState>(initialState);
 const FirebaseDispatchContext = React.createContext(defaultDispatch);
 
