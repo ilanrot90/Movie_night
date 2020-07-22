@@ -1,0 +1,100 @@
+import React, { FC } from 'react';
+
+interface IState {
+	loading: boolean;
+	disable: boolean;
+	error: null | string;
+}
+
+const initialState = {
+	loading: false,
+	disable: false,
+	error: null,
+};
+
+type Action =
+	| {
+			type: 'SET_LOADING_TRUE';
+	  }
+	| {
+			type: 'SET_DISABLE_TRUE';
+	  }
+	| {
+			type: 'SET_DISABLE_FALSE';
+	  }
+	| {
+			type: 'SET_LOADING_FALSE';
+	  }
+	| {
+			type: 'SET_ACTION_FAILED';
+			error: string;
+	  }
+	| {
+			type: 'SET_ACTION_SUCCESS';
+	  }
+	| {
+			type: 'RESET_STATE';
+	  };
+
+type FirebaseReducer = (state: IState, action: Action) => IState;
+
+const firebaseReducer: FirebaseReducer = (state, { type, ...payload }) => {
+	switch (type) {
+		case 'SET_DISABLE_TRUE': {
+			return { ...state, disable: true };
+		}
+		case 'SET_DISABLE_FALSE': {
+			return { ...state, disable: false };
+		}
+		case 'SET_LOADING_TRUE': {
+			return { ...state, loading: true };
+		}
+		case 'SET_ACTION_SUCCESS': {
+			return { ...state, loading: false, disable: true };
+		}
+		case 'SET_ACTION_FAILED': {
+			return { ...state, loading: false, disable: false, ...payload };
+		}
+		case 'RESET_STATE': {
+			return { ...initialState };
+		}
+		default: {
+			throw new Error(`Unhandled action type: ${type}`);
+		}
+	}
+};
+const defaultDispatch: React.Dispatch<Action> = () => initialState;
+
+const FirebaseStateContext = React.createContext<IState>(initialState);
+const FirebaseDispatchContext = React.createContext(defaultDispatch);
+
+const FirebaseContextProvider: FC<{ children: React.ReactElement }> = ({ children }) => {
+	const [state, dispatch] = React.useReducer<React.Reducer<IState, Action>>(firebaseReducer, initialState);
+	return (
+		<FirebaseStateContext.Provider value={state}>
+			<FirebaseDispatchContext.Provider value={dispatch}>{children}</FirebaseDispatchContext.Provider>
+		</FirebaseStateContext.Provider>
+	);
+};
+
+function useFirebaseState() {
+	const context = React.useContext(FirebaseStateContext);
+	if (context === undefined) {
+		throw new Error('FirebaseStateContext must be used within a FirebaseContextProvider');
+	}
+	return context;
+}
+
+function useFirebaseDispatch() {
+	const context = React.useContext(FirebaseDispatchContext);
+	if (context === undefined) {
+		throw new Error('FirebaseDispatchContext must be used within a FirebaseContextProvider');
+	}
+	return context;
+}
+
+function useFirebase() {
+	return [useFirebaseState(), useFirebaseDispatch()];
+}
+
+export { FirebaseContextProvider, useFirebaseState, useFirebaseDispatch, useFirebase };
