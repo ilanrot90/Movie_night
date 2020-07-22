@@ -19,11 +19,14 @@ const LoginForm = () => {
 		push(`/${APP_PATH}`);
 	}, [push]);
 
-	const handlePasswordSignIn = async (data: FormValues) => {
-		const { error, response } = await asyncHandler(handleEmailLogin(data));
-		console.log({ error, response });
-		handleRedirect();
-	};
+	const handlePasswordSignIn = useCallback(
+		async (data: FormValues) => {
+			const { error, response } = await asyncHandler(handleEmailLogin(data));
+			console.log({ error, response });
+			handleRedirect();
+		},
+		[handleRedirect]
+	);
 
 	const handleSocialSignIn = useCallback(
 		provider => async () => {
