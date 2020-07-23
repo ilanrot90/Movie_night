@@ -1,7 +1,14 @@
 import { Dispatch } from 'react';
 import { Action } from './loginContext';
-import { asyncHandler } from '../../utils/common.utils';
-import { resendVerifyEmail, recoverPassword } from '../../firebase-methods/methods';
+import { asyncHandler } from 'utils/common.utils';
+import {
+	resendVerifyEmail,
+	recoverPassword,
+	loginWithProvider,
+	handleEmailLogin,
+	handleEmailSignUp,
+} from 'firebase-methods/methods';
+import { FormValues, Provider } from 'types';
 
 type Type =
 	| 'SET_LOADING_TRUE'
@@ -20,22 +27,31 @@ export const resetState = (dispatch: Dispatch<Action>) => dispatch({ type: 'RESE
 export const setActionSuccess = (dispatch: Dispatch<Action>) => dispatch({ type: 'SET_ACTION_SUCCESS' });
 export const setActionFailed = (dispatch: Dispatch<Action>, error: string) => dispatch({ type: 'SET_ACTION_FAILED', error });
 
-// verify email
-export const verifyEmail = async (dispatch: Dispatch<Action>) => {
-	setLoading(dispatch);
-	const { error } = await asyncHandler(resendVerifyEmail());
-
-	if (error) {
-		setActionFailed(dispatch, error.message);
-	} else {
-		setActionSuccess(dispatch);
+type Options =
+	| { key: 'VERIFY_EMAIL' }
+	| { key: 'RECOVER_PASSWORD'; email: string }
+	| { key: 'LOGIN_PROVIDER'; provider: Provider }
+	| { key: 'LOGIN_PASSWORD'; data: FormValues }
+	| { key: 'SIGN_UP'; data: FormValues };
+// methods mapper
+const runMethod = (options: Options) => {
+	switch (options.key) {
+		case 'RECOVER_PASSWORD':
+			return recoverPassword(options.email);
+		case 'VERIFY_EMAIL':
+			return resendVerifyEmail();
+		case 'LOGIN_PROVIDER':
+			return loginWithProvider(options.provider);
+		case 'LOGIN_PASSWORD':
+			return handleEmailLogin(options.data);
+		case 'SIGN_UP':
+			return handleEmailSignUp(options.data);
 	}
-	return;
 };
-// recover password
-export const recoverPasswordWithEmail = async (dispatch: Dispatch<Action>, email: string) => {
+// verify email
+export const runFirebaseAction = async (dispatch: Dispatch<Action>, options: Options) => {
 	setLoading(dispatch);
-	const { error } = await asyncHandler(recoverPassword(email));
+	const { error } = await asyncHandler(runMethod(options));
 
 	if (error) {
 		setActionFailed(dispatch, error.message);

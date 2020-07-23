@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 // state
-import { useFirebase } from 'state/context/loginContext';
-import { recoverPasswordWithEmail } from 'state/context/loginActions';
+import { useFirebase, runFirebaseAction } from 'state/context/loginContext';
 // utils
 import { recoverField } from './authScreens.utils';
 import { FormValues } from 'types';
@@ -17,7 +16,7 @@ const RecoverForm = () => {
 
 	const handleSubmit = useCallback(
 		async ({ email }: FormValues) => {
-			await recoverPasswordWithEmail(dispatch, email);
+			await runFirebaseAction(dispatch, { key: 'RECOVER_PASSWORD', email });
 		},
 		[dispatch]
 	);
@@ -30,7 +29,12 @@ const RecoverForm = () => {
 					<EmailSvg startAnimation={loading} />
 				</MarginContainer>
 				<MarginContainer auto>
-					<Form buttonProps={{ disabled }} buttonText={buttonText} fields={recoverField} onSubmit={handleSubmit} />
+					<Form
+						buttonProps={{ disabled: disabled || loading }}
+						buttonText={buttonText}
+						fields={recoverField}
+						onSubmit={handleSubmit}
+					/>
 				</MarginContainer>
 			</>
 		</AnimatedForm>

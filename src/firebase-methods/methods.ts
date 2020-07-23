@@ -20,7 +20,7 @@ export const handleEmailSignUp = async ({ email, password, displayName }: FormVa
 		displayName,
 	});
 
-	return user;
+	return;
 };
 
 // Send recover password
@@ -46,7 +46,6 @@ export const getProvider = (provider: Provider) =>
 	}[provider]);
 
 export const loginWithProvider = async (provider: Provider) => {
-	let isNewUser = false;
 	const providerConfig = getProvider(provider);
 	const { response, error } = await asyncHandler(auth.signInWithPopup(providerConfig));
 	if (error) {
@@ -59,31 +58,36 @@ export const loginWithProvider = async (provider: Provider) => {
 		const { email, displayName } = get(response, 'user.providerData[0]');
 
 		if (response?.additionalUserInfo?.isNewUser) {
-			await Promise.all([
-				auth.currentUser?.updateProfile({
-					displayName,
-				}),
-				firestore.collection('users').doc(uid).set({
-					email,
-					displayName,
-				}),
-			]);
+			const { error } = await asyncHandler(
+				Promise.all([
+					auth.currentUser?.updateProfile({
+						displayName,
+					}),
+					firestore.collection('users').doc(uid).set({
+						email,
+						displayName,
+					}),
+				])
+			);
 
-			isNewUser = true;
+			if (error) {
+				console.log('save user', { error });
+				throw error;
+			}
 		}
 
-		return { isNewUser, user: get(response, 'user') };
+		return;
 	}
 
 	throw new Error('Internal error');
 };
 
 export const handleEmailLogin = async ({ email, password }: FormValues) => {
-	const { response, error } = await asyncHandler(auth.signInWithEmailAndPassword(email, password));
+	const { error } = await asyncHandler(auth.signInWithEmailAndPassword(email, password));
 	if (error) {
 		console.log('handleEmailLogin', { error });
-		return error;
+		throw error;
 	}
 
-	return response?.user;
+	return;
 };

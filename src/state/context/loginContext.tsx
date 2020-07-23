@@ -98,3 +98,4 @@ function useFirebase(): [IState, React.Dispatch<Action>] {
 }
 
 export { FirebaseContextProvider, useFirebaseState, useFirebaseDispatch, useFirebase };
+export { runFirebaseAction } from './loginActions';

@@ -1,25 +1,27 @@
 import React, { useCallback } from 'react';
+import { useRouter } from 'hooks/useRouter';
+import { useFirebase, runFirebaseAction } from 'state/context/loginContext';
+// utils
+import { signUpFields } from './authScreens.utils';
+import { FormValues } from 'types';
+import { APP_PATH } from 'routes/routesPaths';
+// components
 import AnimatedForm from './animations-blocks/AnimatedForm';
 import Form from './Form';
-import { FormValues } from 'types';
-import { signUpFields } from './authScreens.utils';
-import { asyncHandler } from 'utils/common.utils';
-import { handleEmailSignUp } from 'firebase-methods/methods';
-import { useRouter } from 'hooks/useRouter';
-import { APP_PATH } from 'routes/routesPaths';
 
 const SignUpForm = () => {
+	const [{ loading, disabled }, dispatch] = useFirebase();
 	const { push } = useRouter();
 	const onSubmit = useCallback(
 		async (data: FormValues, setError) => {
 			if (data.password !== data.passwordConfirm) {
 				setError('passwordConfirm', { message: 'password is not the same' });
 			} else {
-				await asyncHandler(handleEmailSignUp(data));
+				await runFirebaseAction(dispatch, { key: 'SIGN_UP', data });
 				push(`/${APP_PATH}`);
 			}
 		},
-		[push]
+		[push, dispatch]
 	);
 
 	return (

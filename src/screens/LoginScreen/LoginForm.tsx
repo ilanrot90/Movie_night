@@ -1,18 +1,21 @@
 import React, { useCallback } from 'react';
 import { useRouter } from 'hooks/useRouter';
-import { loginWithProvider, handleEmailLogin } from 'firebase-methods/methods';
-import { asyncHandler } from 'utils/common.utils';
+import { useFirebase, runFirebaseAction } from 'state/context/loginContext';
+// utils
 import { APP_PATH, SIGN_UP_PATH, RESET_PATH } from 'routes/routesPaths';
-import { Content, Hr, LoginButton, ForgotPasswordLink } from './style';
+import { loginFields } from './authScreens.utils';
+import { FormValues, Provider } from 'types';
+// components
 import Icon from 'components/common-ui/icon';
 import AnimatedForm from './animations-blocks/AnimatedForm';
 import Form from './Form';
-import { loginFields } from './authScreens.utils';
-import { FormValues, Provider } from 'types';
+// style
+import { Content, Hr, LoginButton, ForgotPasswordLink } from './style';
 
 const providers: Array<Provider> = ['facebook', 'google', 'github'];
 
 const LoginForm = () => {
+	const [{ loading, disabled }, dispatch] = useFirebase();
 	const { push } = useRouter();
 
 	const handleRedirect = useCallback(() => {
@@ -21,24 +24,18 @@ const LoginForm = () => {
 
 	const handlePasswordSignIn = useCallback(
 		async (data: FormValues) => {
-			const { error, response } = await asyncHandler(handleEmailLogin(data));
-			console.log({ error, response });
+			await runFirebaseAction(dispatch, { key: 'LOGIN_PASSWORD', data });
 			handleRedirect();
 		},
-		[handleRedirect]
+		[handleRedirect, dispatch]
 	);
 
 	const handleSocialSignIn = useCallback(
 		provider => async () => {
-			const { error } = await asyncHandler(loginWithProvider(provider));
-			if (error) {
-				// TODO: handle errors
-				console.log({ error });
-			}
-
+			await runFirebaseAction(dispatch, { key: 'LOGIN_PROVIDER', provider });
 			handleRedirect();
 		},
-		[handleRedirect]
+		[handleRedirect, dispatch]
 	);
 
 	return (
