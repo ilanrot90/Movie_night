@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback } from 'react';
 import { useRouter } from 'hooks/useRouter';
 import { useFirebase, runFirebaseAction } from 'state/context/loginContext';
 // utils
@@ -16,7 +16,6 @@ const providers: Array<Provider> = ['facebook', 'google', 'github'];
 
 const LoginForm = () => {
 	const [{ loading }, dispatch] = useFirebase();
-	const refProvider = useRef<Provider | 'email' | null>(null);
 	const { push } = useRouter();
 
 	const handleRedirect = useCallback(() => {
@@ -25,7 +24,6 @@ const LoginForm = () => {
 
 	const handlePasswordSignIn = useCallback(
 		async (data: FormValues) => {
-			refProvider.current = 'email';
 			await runFirebaseAction(dispatch, { key: 'LOGIN_PASSWORD', data });
 			handleRedirect();
 		},
@@ -34,7 +32,6 @@ const LoginForm = () => {
 
 	const handleSocialSignIn = useCallback(
 		provider => async () => {
-			refProvider.current = provider;
 			await runFirebaseAction(dispatch, { key: 'LOGIN_PROVIDER', provider });
 			handleRedirect();
 		},

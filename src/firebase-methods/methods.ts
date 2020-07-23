@@ -12,15 +12,15 @@ export const handleEmailSignUp = async ({ email, password, displayName }: FormVa
 	}
 	const user = auth.currentUser;
 
-	// send verify email
-	await user?.sendEmailVerification();
-	// add to DB
-	await firestore.collection('users').doc(user?.uid).set({
-		email,
-		displayName,
-	});
-
-	return;
+	return Promise.all([
+		// send verify email
+		user?.sendEmailVerification(),
+		// add to DB
+		firestore.collection('users').doc(user?.uid).set({
+			email,
+			displayName,
+		}),
+	]);
 };
 
 // Send recover password
@@ -32,7 +32,7 @@ export const resendVerifyEmail = async () => {
 	const user = auth.currentUser;
 
 	if (user) {
-		return await user.sendEmailVerification();
+		return user.sendEmailVerification();
 	}
 
 	throw new Error('user was not found');
@@ -58,7 +58,7 @@ export const loginWithProvider = async (provider: Provider) => {
 		const { email, displayName } = get(response, 'user.providerData[0]');
 
 		if (response?.additionalUserInfo?.isNewUser) {
-			const { error } = await asyncHandler(
+			return asyncHandler(
 				Promise.all([
 					auth.currentUser?.updateProfile({
 						displayName,
@@ -69,11 +69,6 @@ export const loginWithProvider = async (provider: Provider) => {
 					}),
 				])
 			);
-
-			if (error) {
-				console.log('save user', { error });
-				throw error;
-			}
 		}
 
 		return;
@@ -83,11 +78,5 @@ export const loginWithProvider = async (provider: Provider) => {
 };
 
 export const handleEmailLogin = async ({ email, password }: FormValues) => {
-	const { error } = await asyncHandler(auth.signInWithEmailAndPassword(email, password));
-	if (error) {
-		console.log('handleEmailLogin', { error });
-		throw error;
-	}
-
-	return;
+	return asyncHandler(auth.signInWithEmailAndPassword(email, password));
 };

@@ -49,5 +49,4 @@ export const runFirebaseAction = async (dispatch: Dispatch<Action>, options: Opt
 	} else {
 		setActionSuccess(dispatch);
 	}
-	return;
 };

@@ -1,8 +1,15 @@
-import React, { FC, ReactElement, useEffect } from 'react';
-import { useFirebaseDispatch } from 'state/context/loginContext';
-import { resetState } from 'state/context/loginActions';
-import { Footer, Header, Content, StyledLink, Form } from '../style';
+import React, { FC, ReactElement, useCallback, useEffect } from 'react';
+import { useFirebase, resetState } from 'state/context/loginContext';
+// components
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import Logo from './SvgLogo';
+// style
+import { Footer, Header, Content, StyledLink, Form } from '../style';
+
+const Alert = (props: AlertProps) => {
+	return <MuiAlert elevation={6} variant="filled" {...props} />;
+};
 
 interface IProps {
 	title: string;
@@ -15,8 +22,10 @@ interface IProps {
 }
 
 const AnimatedForm: FC<IProps> = ({ title, footer, link, children }) => {
-	const dispatch = useFirebaseDispatch();
-
+	const [{ error }, dispatch] = useFirebase();
+	const handleResetError = useCallback(() => {
+		resetState(dispatch);
+	}, [dispatch]);
 	useEffect(() => {
 		return () => {
 			resetState(dispatch);
@@ -24,16 +33,23 @@ const AnimatedForm: FC<IProps> = ({ title, footer, link, children }) => {
 	}, [dispatch]);
 
 	return (
-		<Form>
-			<Header>
-				<Logo />
-				<Content>Please {title} to continue</Content>
-			</Header>
-			{children}
-			<Footer as="span">
-				{footer} <StyledLink to={link.to}> {link.text}</StyledLink>
-			</Footer>
-		</Form>
+		<>
+			<Form>
+				<Header>
+					<Logo />
+					<Content>Please {title} to continue</Content>
+				</Header>
+				{children}
+				<Footer as="span">
+					{footer} <StyledLink to={link.to}> {link.text}</StyledLink>
+				</Footer>
+			</Form>
+			<Snackbar open={!!error} autoHideDuration={3000} onClose={handleResetError}>
+				<Alert onClose={handleResetError} severity="error">
+					{error}
+				</Alert>
+			</Snackbar>
+		</>
 	);
 };
 
