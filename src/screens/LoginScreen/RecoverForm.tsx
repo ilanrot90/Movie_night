@@ -15,9 +15,12 @@ import { MarginContainer } from './style';
 const RecoverForm = () => {
 	const [{ loading, disabled }, dispatch] = useFirebase();
 
-	const handleSubmit = useCallback(async ({ email }: FormValues) => {
-		await recoverPasswordWithEmail(dispatch, email);
-	}, []);
+	const handleSubmit = useCallback(
+		async ({ email }: FormValues) => {
+			await recoverPasswordWithEmail(dispatch, email);
+		},
+		[dispatch]
+	);
 
 	const buttonText = useMemo<string>(() => (disabled ? 'email was send successfully' : 'send recover e-mail'), [disabled]);
 	return (
