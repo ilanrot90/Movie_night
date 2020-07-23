@@ -2,17 +2,17 @@ import React, { FC } from 'react';
 
 interface IState {
 	loading: boolean;
-	disable: boolean;
+	disabled: boolean;
 	error: null | string;
 }
 
 const initialState = {
 	loading: false,
-	disable: false,
+	disabled: false,
 	error: null,
 };
 
-type Action =
+export type Action =
 	| {
 			type: 'SET_LOADING_TRUE';
 	  }
@@ -41,19 +41,19 @@ type FirebaseReducer = (state: IState, action: Action) => IState;
 const firebaseReducer: FirebaseReducer = (state, { type, ...payload }) => {
 	switch (type) {
 		case 'SET_DISABLE_TRUE': {
-			return { ...state, disable: true };
+			return { ...state, disabled: true };
 		}
 		case 'SET_DISABLE_FALSE': {
-			return { ...state, disable: false };
+			return { ...state, disabled: false };
 		}
 		case 'SET_LOADING_TRUE': {
 			return { ...state, loading: true };
 		}
 		case 'SET_ACTION_SUCCESS': {
-			return { ...state, loading: false, disable: true };
+			return { ...state, loading: false, disabled: true };
 		}
 		case 'SET_ACTION_FAILED': {
-			return { ...state, loading: false, disable: false, ...payload };
+			return { ...state, loading: false, disabled: false, ...payload };
 		}
 		case 'RESET_STATE': {
 			return { ...initialState };
@@ -93,7 +93,7 @@ function useFirebaseDispatch() {
 	return context;
 }
 
-function useFirebase() {
+function useFirebase(): [IState, React.Dispatch<Action>] {
 	return [useFirebaseState(), useFirebaseDispatch()];
 }
 

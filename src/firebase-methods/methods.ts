@@ -25,29 +25,19 @@ export const handleEmailSignUp = async ({ email, password, displayName }: FormVa
 
 // Send recover password
 export const recoverPassword = async (email: string) => {
-	const { error, response } = await asyncHandler(auth.sendPasswordResetEmail(email));
-	if (error) {
-		// TODO: handle error
-		console.log('recoverPassword', { error });
-		return error;
-	}
-	return response;
+	return await auth.sendPasswordResetEmail(email);
 };
 // resend email validation
 export const resendVerifyEmail = async () => {
 	const user = auth.currentUser;
 
 	if (user) {
-		const { error } = await asyncHandler(user.sendEmailVerification());
-		if (error) {
-			// TODO: handle error
-			console.log('resendVerifyEmail', { error });
-			return error;
-		}
-		return user;
+		return await user.sendEmailVerification();
 	}
-	return;
+
+	throw new Error('user was not found');
 };
+
 export const getProvider = (provider: Provider) =>
 	({
 		google: googleProvider,

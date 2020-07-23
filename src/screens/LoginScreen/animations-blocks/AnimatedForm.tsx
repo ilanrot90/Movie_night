@@ -1,4 +1,6 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useEffect } from 'react';
+import { useFirebaseDispatch } from 'state/context/loginContext';
+import { resetState } from 'state/context/loginActions';
 import { Footer, Header, Content, StyledLink, Form } from '../style';
 import Logo from './SvgLogo';
 
@@ -13,6 +15,14 @@ interface IProps {
 }
 
 const AnimatedForm: FC<IProps> = ({ title, footer, link, children }) => {
+	const dispatch = useFirebaseDispatch();
+
+	useEffect(() => {
+		return () => {
+			resetState(dispatch);
+		};
+	}, [dispatch]);
+
 	return (
 		<Form>
 			<Header>

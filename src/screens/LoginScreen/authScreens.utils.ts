@@ -59,7 +59,7 @@ export const signUpFields: Array<LoginTypes> = [
 			},
 			pattern: {
 				value: nameRegex,
-				message: 'Please enter your full name',
+				message: 'Only letters and numbers are allowed',
 			},
 			maxLength: {
 				value: 28,
