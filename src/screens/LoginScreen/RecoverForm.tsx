@@ -30,7 +30,7 @@ const RecoverForm = () => {
 				</MarginContainer>
 				<MarginContainer auto>
 					<Form
-						buttonProps={{ disabled: disabled || loading }}
+						buttonProps={{ disabled: disabled || loading, loading }}
 						buttonText={buttonText}
 						fields={recoverField}
 						onSubmit={handleSubmit}

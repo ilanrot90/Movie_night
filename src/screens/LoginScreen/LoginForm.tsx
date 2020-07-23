@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useRouter } from 'hooks/useRouter';
 import { useFirebase, runFirebaseAction } from 'state/context/loginContext';
 // utils
@@ -15,7 +15,8 @@ import { Content, Hr, LoginButton, ForgotPasswordLink } from './style';
 const providers: Array<Provider> = ['facebook', 'google', 'github'];
 
 const LoginForm = () => {
-	const [{ loading, disabled }, dispatch] = useFirebase();
+	const [{ loading }, dispatch] = useFirebase();
+	const refProvider = useRef<Provider | 'email' | null>(null);
 	const { push } = useRouter();
 
 	const handleRedirect = useCallback(() => {
@@ -24,6 +25,7 @@ const LoginForm = () => {
 
 	const handlePasswordSignIn = useCallback(
 		async (data: FormValues) => {
+			refProvider.current = 'email';
 			await runFirebaseAction(dispatch, { key: 'LOGIN_PASSWORD', data });
 			handleRedirect();
 		},
@@ -32,6 +34,7 @@ const LoginForm = () => {
 
 	const handleSocialSignIn = useCallback(
 		provider => async () => {
+			refProvider.current = provider;
 			await runFirebaseAction(dispatch, { key: 'LOGIN_PROVIDER', provider });
 			handleRedirect();
 		},
@@ -41,7 +44,12 @@ const LoginForm = () => {
 	return (
 		<AnimatedForm title={'login'} footer={'Don`t have an account?'} link={{ to: SIGN_UP_PATH, text: 'Sign Up' }}>
 			<>
-				<Form buttonText={'log in'} fields={loginFields} onSubmit={handlePasswordSignIn} />
+				<Form
+					buttonText={'log in'}
+					fields={loginFields}
+					onSubmit={handlePasswordSignIn}
+					buttonProps={{ disabled: loading, loading }}
+				/>
 				<ForgotPasswordLink underline={'true'} size={10} to={RESET_PATH}>
 					forget password?
 				</ForgotPasswordLink>

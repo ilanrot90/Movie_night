@@ -10,7 +10,7 @@ import AnimatedForm from './animations-blocks/AnimatedForm';
 import Form from './Form';
 
 const SignUpForm = () => {
-	const [{ loading, disabled }, dispatch] = useFirebase();
+	const [{ loading }, dispatch] = useFirebase();
 	const { push } = useRouter();
 	const onSubmit = useCallback(
 		async (data: FormValues, setError) => {
@@ -26,7 +26,7 @@ const SignUpForm = () => {
 
 	return (
 		<AnimatedForm title={'Sign up'} footer={'Already have an account?'} link={{ to: '../', text: 'Sign In' }}>
-			<Form buttonText={'sign up'} fields={signUpFields} onSubmit={onSubmit} />
+			<Form buttonText={'sign up'} fields={signUpFields} onSubmit={onSubmit} buttonProps={{ disabled: loading, loading }} />
 		</AnimatedForm>
 	);
 };

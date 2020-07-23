@@ -10,15 +10,6 @@ import {
 } from 'firebase-methods/methods';
 import { FormValues, Provider } from 'types';
 
-type Type =
-	| 'SET_LOADING_TRUE'
-	| 'SET_DISABLE_TRUE'
-	| 'SET_DISABLE_FALSE'
-	| 'SET_LOADING_FALSE'
-	| 'SET_ACTION_FAILED'
-	| 'SET_ACTION_SUCCESS'
-	| 'RESET_STATE';
-
 export const setLoading = (dispatch: Dispatch<Action>) => dispatch({ type: 'SET_LOADING_TRUE' });
 export const setDisabled = (dispatch: Dispatch<Action>) => dispatch({ type: 'SET_DISABLE_TRUE' });
 export const setLoadingOff = (dispatch: Dispatch<Action>) => dispatch({ type: 'SET_LOADING_FALSE' });

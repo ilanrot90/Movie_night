@@ -1,11 +1,13 @@
 import React, { FC, unstable_useTransition, useCallback } from 'react';
 import MaterialButton, { ButtonProps } from '@material-ui/core/Button';
 import styled from 'styled-components';
+import CircularProgress from '@material-ui/core/CircularProgress';
 type social = 'facebook' | 'google' | 'github' | undefined;
 
 interface Interface extends ButtonProps {
 	onClick: () => void;
 	socialType?: social;
+	loading?: boolean;
 }
 
 const StyledBtn = styled(({ socialType, ...props }: Interface) => <MaterialButton {...props} />)<{ socialType: social }>`
@@ -38,6 +40,7 @@ const StyledBtn = styled(({ socialType, ...props }: Interface) => <MaterialButto
 
 const Button: FC<Interface> = ({
 	children,
+	loading = false,
 	variant = 'contained',
 	color = 'primary',
 	className,
@@ -48,7 +51,7 @@ const Button: FC<Interface> = ({
 	type,
 	...rest
 }) => {
-	const [startTransition, isPending] = unstable_useTransition({
+	const [startTransition] = unstable_useTransition({
 		timeoutMs: 5000,
 	});
 
@@ -68,7 +71,7 @@ const Button: FC<Interface> = ({
 			socialType={socialType}
 			{...rest}
 		>
-			{isPending ? 'loading...' : children}
+			{loading ? <CircularProgress color={'secondary'} /> : children}
 		</StyledBtn>
 	);
 };
