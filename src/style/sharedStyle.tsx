@@ -50,7 +50,7 @@ interface ITextProps {
 	weight?: number;
 	color?: string;
 }
-export const Text = styled.p.attrs(({ as }: { as?: 'p' | 'div' | 'span' }) => ({
+export const Text = styled.p.attrs(({ as }: { as?: 'p' | 'div' | 'span' | 'h2' }) => ({
 	as,
 }))<ITextProps>`
 	${({ theme, color, size, weight }) => css`
