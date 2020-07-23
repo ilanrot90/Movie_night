@@ -13,6 +13,7 @@
     }
   },
   "plugins": [
+    "eslint-plugin-react-hooks",
     "@typescript-eslint"
   ],
   "extends": [

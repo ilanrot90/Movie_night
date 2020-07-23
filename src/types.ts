@@ -15,3 +15,5 @@ export type FormValues = {
 };
 // firebase
 export type Provider = 'google' | 'facebook' | 'github';
+
+export type Method = 'GET' | 'POST';
