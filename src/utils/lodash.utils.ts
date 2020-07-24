@@ -7,6 +7,7 @@ import groupBy from 'lodash/groupBy';
 import isEmpty from 'lodash/isEmpty';
 import startCase from 'lodash/startCase';
 import capitalize from 'lodash/capitalize';
+import fromPairs from 'lodash/fromPairs';
 
 const chainableFunctions = {
 	map,
@@ -27,4 +28,4 @@ const chain = (input: any) => {
 	return wrapper;
 };
 
-export { chain, capitalize, startCase, map, orderBy, groupBy, keyBy, isEmpty, get };
+export { chain, fromPairs, capitalize, startCase, map, orderBy, groupBy, keyBy, isEmpty, get };

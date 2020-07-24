@@ -1,11 +1,44 @@
 import React, { ComponentType, ReactElement } from 'react';
-import userEvent from '@testing-library/user-event';
+import userEvent, { TargetElement } from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import App from 'App';
 import ThemeProvider from 'style/ThemeProvider';
-import { auth } from './constants';
 import { RecoilRoot } from 'recoil';
 import { MemoryRouter } from 'react-router-dom';
+import { fromPairs } from 'utils/lodash.utils';
+
+const GETTERS = ['Text', 'Role', 'TestId', 'LabelText', 'AltText', 'PlaceholderText'] as const;
+const gettersMap = {
+	Text: 'findByText' as 'findByText',
+	Role: 'findByRole' as 'findByRole',
+	TestId: 'findByTestId' as 'findByTestId',
+	LabelText: 'findByLabelText' as 'findByLabelText',
+	AltText: 'findByAltText' as 'findByAltText',
+	PlaceholderText: 'findByPlaceholderText' as 'findByPlaceholderText',
+};
+const gettersKeys = {
+	Text: 'clickByText' as 'findByText',
+	Role: 'clickByRole' as 'findByRole',
+	TestId: 'clickByTestId' as 'findByTestId',
+	LabelText: 'clickByLabelText' as 'findByLabelText',
+	AltText: 'clickByAltText' as 'findByAltText',
+	PlaceholderText: 'clickByPlaceholderText' as 'findByPlaceholderText',
+};
+const clickByFactory = (fn: Function) => async (...args: Array<any>) => {
+	const el: TargetElement = await fn(...args);
+	el && userEvent.click(el);
+	return el;
+};
+const changeByFactory = (fn: Function) => async (value: string, ...args: Array<any>) => {
+	const el: TargetElement = await fn(...args);
+	el && (await userEvent.type(el, value));
+	return el;
+};
+
+const customQueries = {
+	...fromPairs(GETTERS.map(v => [gettersKeys[v], clickByFactory(screen[gettersMap[v]])])),
+	...fromPairs(GETTERS.map(v => [gettersKeys[v], changeByFactory(screen[gettersMap[v]])])),
+};
 
 const renderProviders = (route: string) => ({ children }: { children: ReactElement }): ReactElement => (
 	<RecoilRoot>
@@ -24,4 +57,4 @@ export function renderUi({ route, ...renderOptions }: RenderOptions) {
 
 // re-export everything
 export * from '@testing-library/react';
-export * from '@testing-library/user-event';
+export { userEvent, customQueries };

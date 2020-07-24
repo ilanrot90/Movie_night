@@ -1,23 +1,39 @@
 import EventEmitter from 'eventemitter3';
 
 const authEmitter = new EventEmitter();
+let isSignIn = true;
+const user = {
+	displayName: 'test name',
+	email: 'redirectTest@test.com',
+	emailVerified: true,
+	uid: 'id123',
+	providerData: [
+		{
+			email: 'redirectTest@test.com',
+			displayName: 'redirectResultTestDisplayName',
+			providerId: 'google',
+		},
+	],
+};
 
 const mockFirebase: any = {
 	initializeApp: jest.fn().mockReturnValue({
 		auth: jest.fn().mockReturnValue({
-			currentUser: {
-				displayName: 'redirectResultTestDisplayName',
-				email: 'redirectTest@test.com',
-				emailVerified: true,
-				uid: 'id123',
-				providerData: [
-					{
-						email: 'redirectTest@test.com',
+			currentUser: isSignIn
+				? {
 						displayName: 'redirectResultTestDisplayName',
-						providerId: 'google',
-					},
-				],
-			},
+						email: 'redirectTest@test.com',
+						emailVerified: true,
+						uid: 'id123',
+						providerData: [
+							{
+								email: 'redirectTest@test.com',
+								displayName: 'redirectResultTestDisplayName',
+								providerId: 'google',
+							},
+						],
+				  }
+				: null,
 			signInWithRedirect: jest.fn(),
 			getRedirectResult: jest.fn().mockReturnValue({
 				credential: {
@@ -34,22 +50,14 @@ const mockFirebase: any = {
 				},
 			}),
 			onAuthStateChanged: jest.fn(fn => {
-				setTimeout(() => {
-					fn();
-				}, 0);
-				return fn({
-					displayName: 'redirectResultTestDisplayName',
-					email: 'redirectTest@test.com',
-					emailVerified: true,
-					uid: 'id123',
-					providerData: [
-						{
-							email: 'redirectTest@test.com',
-							displayName: 'redirectResultTestDisplayName',
-							providerId: 'google',
-						},
-					],
-				});
+				// sign user on start
+				fn(user);
+				// sign-out user on start
+				authEmitter.on('sign-out', fn, undefined);
+			}),
+			signOut: jest.fn(() => {
+				isSignIn = false;
+				authEmitter.emit('sign-out');
 			}),
 			sendPasswordResetEmail: jest.fn(() => Promise.resolve(true)),
 		}),
