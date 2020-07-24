@@ -17,3 +17,13 @@ export const firebaseProdConfig = {
 	storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
 	messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
+
+export const firebaseTestConfig = {
+	apiKey: 'TEST',
+	authDomain: 'TEST',
+	databaseURL: 'TEST',
+	projectId: 'TEST',
+	appId: 'TEST',
+	storageBucket: 'TEST',
+	messagingSenderId: 'TEST',
+};

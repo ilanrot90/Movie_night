@@ -30,14 +30,11 @@ const App = () => {
 		});
 	});
 
-	if (!isReady) {
-		return null;
-	}
-	return (
+	return isReady ? (
 		<AnimatePresence exitBeforeEnter>
 			<ProjectRoutes />
 		</AnimatePresence>
-	);
+	) : null;
 };
 
 export default App;
