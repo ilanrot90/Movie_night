@@ -24,4 +24,4 @@ export function renderUi({ route, ...renderOptions }: RenderOptions) {
 
 // re-export everything
 export * from '@testing-library/react';
-export * from '@testing-library/user-event';
+export { userEvent };

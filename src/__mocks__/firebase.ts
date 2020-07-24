@@ -34,10 +34,7 @@ const mockFirebase: any = {
 				},
 			}),
 			onAuthStateChanged: jest.fn(fn => {
-				setTimeout(() => {
-					fn();
-				}, 0);
-				return fn({
+				fn({
 					displayName: 'redirectResultTestDisplayName',
 					email: 'redirectTest@test.com',
 					emailVerified: true,
@@ -50,6 +47,11 @@ const mockFirebase: any = {
 						},
 					],
 				});
+
+				authEmitter.on('changeState', fn, undefined);
+			}),
+			signOut: jest.fn(() => {
+				authEmitter.emit('changeState', undefined);
 			}),
 			sendPasswordResetEmail: jest.fn(() => Promise.resolve(true)),
 		}),
