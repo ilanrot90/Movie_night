@@ -10,13 +10,14 @@ import AnimatedForm from './animations-blocks/AnimatedForm';
 import { EmailSvg } from './animations-blocks/SvgEmail';
 // style
 import { MarginContainer } from './style';
+import { asyncHandler } from 'utils/common.utils';
 
 const RecoverForm = () => {
 	const [{ loading, disabled }, dispatch] = useFirebase();
 
 	const handleSubmit = useCallback(
 		async ({ email }: FormValues) => {
-			await runFirebaseAction(dispatch, { key: 'RECOVER_PASSWORD', email });
+			await asyncHandler(runFirebaseAction(dispatch, { key: 'RECOVER_PASSWORD', email }));
 		},
 		[dispatch]
 	);

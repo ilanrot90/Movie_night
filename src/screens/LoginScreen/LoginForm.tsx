@@ -11,6 +11,7 @@ import AnimatedForm from './animations-blocks/AnimatedForm';
 import Form from './Form';
 // style
 import { Content, Hr, LoginButton, ForgotPasswordLink } from './style';
+import { asyncHandler } from 'utils/common.utils';
 
 const providers: Array<Provider> = ['facebook', 'google', 'github'];
 
@@ -24,7 +25,7 @@ const LoginForm = () => {
 
 	const handlePasswordSignIn = useCallback(
 		async (data: FormValues) => {
-			await runFirebaseAction(dispatch, { key: 'LOGIN_PASSWORD', data });
+			await asyncHandler(runFirebaseAction(dispatch, { key: 'LOGIN_PASSWORD', data }));
 			handleRedirect();
 		},
 		[handleRedirect, dispatch]
@@ -32,7 +33,7 @@ const LoginForm = () => {
 
 	const handleSocialSignIn = useCallback(
 		provider => async () => {
-			await runFirebaseAction(dispatch, { key: 'LOGIN_PROVIDER', provider });
+			await asyncHandler(runFirebaseAction(dispatch, { key: 'LOGIN_PROVIDER', provider }));
 			handleRedirect();
 		},
 		[handleRedirect, dispatch]
