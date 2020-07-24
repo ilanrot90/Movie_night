@@ -1,9 +1,9 @@
 import React, { ComponentType, ReactElement } from 'react';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import history from './history';
+import { render } from '@testing-library/react';
 import App from 'App';
 import ThemeProvider from 'style/ThemeProvider';
-import { auth } from './constants';
 import { RecoilRoot } from 'recoil';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -24,4 +24,4 @@ export function renderUi({ route, ...renderOptions }: RenderOptions) {
 
 // re-export everything
 export * from '@testing-library/react';
-export { userEvent };
+export { userEvent, history };
