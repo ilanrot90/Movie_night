@@ -8,7 +8,7 @@ export const handleEmailSignUp = async ({ email, password, displayName }: FormVa
 	if (error) {
 		// TODO: handle error
 		console.log('handleEmailSignIn', { error });
-		return error;
+		return Promise.reject<any>(error);
 	}
 	const user = auth.currentUser;
 

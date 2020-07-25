@@ -32,6 +32,7 @@ const mockFirebase: any = {
 								providerId: 'google',
 							},
 						],
+						sendEmailVerification: jest.fn(),
 				  }
 				: null,
 			signInWithRedirect: jest.fn(),
@@ -67,12 +68,21 @@ const mockFirebase: any = {
 			}),
 			sendPasswordResetEmail: jest.fn(() => Promise.resolve(true)),
 			sendEmailVerification: jest.fn(() => Promise.resolve(true)),
-			signInWithPopup: jest.fn(() => Promise.resolve(true)),
+			signInWithPopup: jest.fn(() => {
+				isSignIn = true;
+				authEmitter.emit('sign-in', user);
+				return Promise.resolve(true);
+			}),
 		}),
 		firestore: jest.fn().mockReturnValue({
 			collection: jest.fn().mockReturnValue({
-				add: jest.fn().mockResolvedValue({
-					id: 'abc123',
+				doc: jest.fn().mockReturnValue({
+					add: jest.fn().mockResolvedValue({
+						id: 'abc123',
+					}),
+					set: jest.fn().mockResolvedValue({
+						uid: 'abc123',
+					}),
 				}),
 			}),
 		}),

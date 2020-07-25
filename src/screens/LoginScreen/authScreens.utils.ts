@@ -1,6 +1,11 @@
 import { LoginTypes } from 'types';
 import { emailRegex, nameRegex } from 'utils/strings.utils';
 
+export const emailEmptyMessage = 'Please enter your email';
+export const emailNotValidMessage = 'Please enter a valid email address';
+export const passwordValidation = 'Password is too short';
+export const passwordEmptyMessage = 'Please enter your password';
+
 // login fields
 export const loginFields: Array<LoginTypes> = [
 	{
@@ -9,11 +14,11 @@ export const loginFields: Array<LoginTypes> = [
 		registerProps: {
 			required: {
 				value: true,
-				message: 'Please enter your email',
+				message: emailEmptyMessage,
 			},
 			pattern: {
 				value: emailRegex,
-				message: 'Please enter your email',
+				message: emailNotValidMessage,
 			},
 		},
 	},
@@ -23,11 +28,11 @@ export const loginFields: Array<LoginTypes> = [
 		registerProps: {
 			required: {
 				value: true,
-				message: 'Please complete the form',
+				message: passwordEmptyMessage,
 			},
 			minLength: {
 				value: 6,
-				message: 'password too short',
+				message: passwordValidation,
 			},
 		},
 	},
@@ -40,11 +45,11 @@ export const signUpFields: Array<LoginTypes> = [
 		registerProps: {
 			required: {
 				value: true,
-				message: 'Please enter your email',
+				message: emailEmptyMessage,
 			},
 			pattern: {
 				value: emailRegex,
-				message: 'Please enter your email',
+				message: emailNotValidMessage,
 			},
 		},
 	},
@@ -73,25 +78,26 @@ export const signUpFields: Array<LoginTypes> = [
 		registerProps: {
 			required: {
 				value: true,
-				message: 'Please complete the form',
+				message: passwordEmptyMessage,
 			},
 			minLength: {
 				value: 6,
-				message: 'password too short',
+				message: passwordValidation,
 			},
 		},
 	},
 	{
 		name: 'passwordConfirm',
+		placeholder: 'Password Confirm',
 		type: 'password',
 		registerProps: {
 			required: {
 				value: true,
-				message: 'Please complete the form',
+				message: passwordEmptyMessage,
 			},
 			minLength: {
 				value: 6,
-				message: 'password too short',
+				message: passwordValidation,
 			},
 		},
 	},
@@ -104,11 +110,11 @@ export const recoverField: Array<LoginTypes> = [
 		registerProps: {
 			required: {
 				value: true,
-				message: 'Please enter your email',
+				message: emailEmptyMessage,
 			},
 			pattern: {
 				value: emailRegex,
-				message: 'Please enter your email',
+				message: emailNotValidMessage,
 			},
 		},
 	},
