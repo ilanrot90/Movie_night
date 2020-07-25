@@ -67,7 +67,11 @@ const mockFirebase: any = {
 			}),
 			sendPasswordResetEmail: jest.fn(() => Promise.resolve(true)),
 			sendEmailVerification: jest.fn(() => Promise.resolve(true)),
-			signInWithPopup: jest.fn(() => Promise.resolve(true)),
+			signInWithPopup: jest.fn(() => {
+				isSignIn = true;
+				authEmitter.emit('sign-in', user);
+				return Promise.resolve(true);
+			}),
 		}),
 		firestore: jest.fn().mockReturnValue({
 			collection: jest.fn().mockReturnValue({

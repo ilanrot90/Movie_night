@@ -1,0 +1,159 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login actions Sign in with provider 1`] = `
+Array [
+  .c0 {
+  height: 40px;
+  background-color: #3b5998;
+}
+
+.c0:hover {
+  background-color: #2b56b1;
+  box-shadow: 0 14px 26px -12px rgba(51,51,51,0.42),0 4px 23px 0px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(51,51,51,0.2);
+}
+
+.c0.MuiButton-contained.Mui-disabled {
+  color: #f9fafa;
+  opacity: 0.5;
+  background-color: #3f50b5;
+}
+
+.c1 {
+  margin: 8px 0;
+}
+
+.c1 .icon {
+  position: absolute;
+  top: 10px;
+  left: 24px;
+}
+
+<button
+    class="MuiButtonBase-root MuiButton-root MuiButton-contained c0 c1 MuiButton-containedPrimary MuiButton-fullWidth"
+    data-testid="btn"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="MuiButton-label"
+    >
+      log in with 
+      facebook
+      <span
+        class="MuiButton-endIcon MuiButton-iconSizeMedium"
+      >
+        <i
+          id="facebook"
+        >
+           
+        </i>
+      </span>
+    </span>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>,
+  .c0 {
+  height: 40px;
+  background-color: #dd4b39;
+}
+
+.c0:hover {
+  background-color: #e23824;
+  box-shadow: 0 14px 26px -12px rgba(51,51,51,0.42),0 4px 23px 0px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(51,51,51,0.2);
+}
+
+.c0.MuiButton-contained.Mui-disabled {
+  color: #f9fafa;
+  opacity: 0.5;
+  background-color: #3f50b5;
+}
+
+.c1 {
+  margin: 8px 0;
+}
+
+.c1 .icon {
+  position: absolute;
+  top: 10px;
+  left: 24px;
+}
+
+<button
+    class="MuiButtonBase-root MuiButton-root MuiButton-contained c0 c1 MuiButton-containedPrimary MuiButton-fullWidth"
+    data-testid="btn"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="MuiButton-label"
+    >
+      log in with 
+      google
+      <span
+        class="MuiButton-endIcon MuiButton-iconSizeMedium"
+      >
+        <i
+          id="google"
+        >
+           
+        </i>
+      </span>
+    </span>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>,
+  .c0 {
+  height: 40px;
+  background-color: #333333;
+}
+
+.c0:hover {
+  background-color: #2d2c2c;
+  box-shadow: 0 14px 26px -12px rgba(51,51,51,0.42),0 4px 23px 0px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(51,51,51,0.2);
+}
+
+.c0.MuiButton-contained.Mui-disabled {
+  color: #f9fafa;
+  opacity: 0.5;
+  background-color: #3f50b5;
+}
+
+.c1 {
+  margin: 8px 0;
+}
+
+.c1 .icon {
+  position: absolute;
+  top: 10px;
+  left: 24px;
+}
+
+<button
+    class="MuiButtonBase-root MuiButton-root MuiButton-contained c0 c1 MuiButton-containedPrimary MuiButton-fullWidth"
+    data-testid="btn"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="MuiButton-label"
+    >
+      log in with 
+      github
+      <span
+        class="MuiButton-endIcon MuiButton-iconSizeMedium"
+      >
+        <i
+          id="github"
+        >
+           
+        </i>
+      </span>
+    </span>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>,
+]
+`;
