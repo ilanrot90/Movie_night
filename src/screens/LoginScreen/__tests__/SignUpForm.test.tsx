@@ -5,7 +5,7 @@ import * as firebaseMethods from 'firebase-methods/methods';
 
 const mockedHandleEmailSignUp = jest.spyOn(firebaseMethods, 'handleEmailSignUp');
 
-describe('Login actions', () => {
+describe('Sign up with email actions', () => {
 	let emailInput: TargetElement;
 	let usernameInput: TargetElement;
 	let passwordInput: TargetElement;
@@ -24,9 +24,6 @@ describe('Login actions', () => {
 		signUpBtn = screen.getByRole('button', { name: /sign up/i });
 	});
 
-	afterEach(() => {
-		// mockedHandleEmailSignUp.mockReset();
-	});
 	afterAll(() => {
 		mockedHandleEmailSignUp.mockRestore();
 	});
