@@ -4,7 +4,6 @@ import { emailNotValidMessage, passwordValidation } from '../authScreens.utils';
 import * as firebaseMethods from 'firebase-methods/methods';
 
 const mockedLoginWithProvider = jest.spyOn(firebaseMethods, 'loginWithProvider');
-
 const [validEmail, unValidEmail] = ['test@test.com', 'test-test.com'];
 const [validPassword, unValidPassword] = ['min_6_length', '12345'];
 
@@ -20,6 +19,10 @@ describe('Login actions', () => {
 		});
 		passwordInput = screen.getByPlaceholderText(/password/i);
 		loginButton = screen.getByTestId(/password-login/i);
+	});
+
+	afterAll(() => {
+		mockedLoginWithProvider.mockRestore();
 	});
 
 	test('Successful Login with Password', async () => {

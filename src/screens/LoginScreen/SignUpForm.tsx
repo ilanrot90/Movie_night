@@ -8,7 +8,6 @@ import { APP_PATH } from 'routes/routesPaths';
 // components
 import AnimatedForm from './animations-blocks/AnimatedForm';
 import Form from './Form';
-import { asyncHandler } from 'utils/common.utils';
 
 const SignUpForm = () => {
 	const [{ loading, disabled }, dispatch] = useFirebase();
@@ -18,13 +17,12 @@ const SignUpForm = () => {
 			if (data.password !== data.passwordConfirm) {
 				setError('passwordConfirm', { message: 'password is not the same' });
 			} else {
-				await asyncHandler(runFirebaseAction(dispatch, { key: 'SIGN_UP', data }));
-				push(`/${APP_PATH}`);
+				const error = await runFirebaseAction(dispatch, { key: 'SIGN_UP', data });
+				!error && push(`/${APP_PATH}`);
 			}
 		},
 		[push, dispatch]
 	);
-
 	return (
 		<AnimatedForm title={'Sign up'} footer={'Already have an account?'} link={{ to: '../', text: 'Sign In' }}>
 			<Form buttonText={'sign up'} fields={signUpFields} onSubmit={onSubmit} buttonProps={{ loading, disabled }} />
