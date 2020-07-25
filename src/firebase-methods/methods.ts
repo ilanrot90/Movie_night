@@ -24,11 +24,11 @@ export const handleEmailSignUp = async ({ email, password, displayName }: FormVa
 };
 
 // Send recover password
-export const recoverPassword = async (email: string) => {
-	return await auth.sendPasswordResetEmail(email);
+export const recoverPassword = (email: string) => {
+	return auth.sendPasswordResetEmail(email);
 };
 // resend email validation
-export const resendVerifyEmail = async () => {
+export const resendVerifyEmail = () => {
 	const user = auth.currentUser;
 
 	if (user) {
@@ -58,17 +58,15 @@ export const loginWithProvider = async (provider: Provider) => {
 		const { email, displayName } = get(response, 'user.providerData[0]');
 
 		if (response?.additionalUserInfo?.isNewUser) {
-			return asyncHandler(
-				Promise.all([
-					auth.currentUser?.updateProfile({
-						displayName,
-					}),
-					firestore.collection('users').doc(uid).set({
-						email,
-						displayName,
-					}),
-				])
-			);
+			return Promise.all([
+				auth.currentUser?.updateProfile({
+					displayName,
+				}),
+				firestore.collection('users').doc(uid).set({
+					email,
+					displayName,
+				}),
+			]);
 		}
 
 		return;
@@ -77,6 +75,6 @@ export const loginWithProvider = async (provider: Provider) => {
 	throw new Error('Internal error');
 };
 
-export const handleEmailLogin = async ({ email, password }: FormValues) => {
-	return asyncHandler(auth.signInWithEmailAndPassword(email, password));
+export const handleEmailLogin = ({ email, password }: FormValues) => {
+	return auth.signInWithEmailAndPassword(email, password);
 };

@@ -16,19 +16,19 @@ const SimpleForm = ({
 	onSubmit: (values: FormValues, setError: SetError) => void;
 	fields: Array<LoginTypes>;
 	buttonText: string;
-	buttonProps?: { disabled: boolean; loading?: boolean };
+	buttonProps?: { disabled?: boolean; loading?: boolean; testId?: string };
 }) => {
 	const {
 		register,
 		handleSubmit,
 		errors,
-		// formState: { isSubmitting },
+		formState: { isSubmitting },
 		setError,
 	} = useForm<FormValues>({});
 
 	const submitFormWithProps = useCallback(
-		(data: FormValues) => {
-			onSubmit(data, setError);
+		async (data: FormValues) => {
+			await onSubmit(data, setError);
 		},
 		[setError, onSubmit]
 	);
@@ -49,7 +49,7 @@ const SimpleForm = ({
 				/>
 			))}
 
-			<LoginButton type={'submit'} fullWidth onClick={handleSubmit(submitFormWithProps)} {...buttonProps}>
+			<LoginButton disabled={isSubmitting} type={'submit'} fullWidth onClick={handleSubmit(submitFormWithProps)} {...buttonProps}>
 				{buttonText}
 			</LoginButton>
 		</FormBlock>

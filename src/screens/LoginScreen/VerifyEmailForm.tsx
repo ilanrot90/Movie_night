@@ -8,13 +8,14 @@ import AnimatedForm from './animations-blocks/AnimatedForm';
 // components
 import { EmailSvg } from './animations-blocks/SvgEmail';
 import { LoginButton, VerifyContainer, VerifyText } from './style';
+import { asyncHandler } from 'utils/common.utils';
 
 const VerifyEmailForm = () => {
 	const user = useRecoilValue(authAtom);
 	const [{ loading, disabled }, dispatch] = useFirebase();
 
 	const resendEmail = useCallback(async () => {
-		await runFirebaseAction(dispatch, { key: 'VERIFY_EMAIL' });
+		await asyncHandler(runFirebaseAction(dispatch, { key: 'VERIFY_EMAIL' }));
 	}, [dispatch]);
 
 	const buttonText = useMemo<string>(() => (disabled ? 'email was send successfully' : 'Re - send verification email'), [

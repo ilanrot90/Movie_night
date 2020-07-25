@@ -8,6 +8,7 @@ interface Interface extends ButtonProps {
 	onClick: () => void;
 	socialType?: social;
 	loading?: boolean;
+	testId?: string;
 }
 
 const StyledBtn = styled(({ socialType, ...props }: Interface) => <MaterialButton {...props} />)<{ socialType: social }>`
@@ -40,6 +41,7 @@ const StyledBtn = styled(({ socialType, ...props }: Interface) => <MaterialButto
 
 const Button: FC<Interface> = ({
 	children,
+	testId = 'btn',
 	loading = false,
 	variant = 'contained',
 	color = 'primary',
@@ -62,6 +64,7 @@ const Button: FC<Interface> = ({
 	}, [onClick, startTransition]);
 	return (
 		<StyledBtn
+			data-testid={testId}
 			variant={variant}
 			color={color}
 			className={className}

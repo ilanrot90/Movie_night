@@ -54,12 +54,20 @@ const mockFirebase: any = {
 				fn(user);
 				// sign-out user on start
 				authEmitter.on('sign-out', fn, undefined);
+				authEmitter.on('sign-in', fn, user);
 			}),
 			signOut: jest.fn(() => {
 				isSignIn = false;
 				authEmitter.emit('sign-out');
 			}),
+			signInWithEmailAndPassword: jest.fn(() => {
+				isSignIn = true;
+				authEmitter.emit('sign-in', user);
+				return Promise.resolve(true);
+			}),
 			sendPasswordResetEmail: jest.fn(() => Promise.resolve(true)),
+			sendEmailVerification: jest.fn(() => Promise.resolve(true)),
+			signInWithPopup: jest.fn(() => Promise.resolve(true)),
 		}),
 		firestore: jest.fn().mockReturnValue({
 			collection: jest.fn().mockReturnValue({

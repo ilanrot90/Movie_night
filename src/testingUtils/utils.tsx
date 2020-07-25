@@ -1,6 +1,6 @@
 import React, { ComponentType, ReactElement } from 'react';
 import userEvent, { TargetElement } from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import App from 'App';
 import ThemeProvider from 'style/ThemeProvider';
 import { RecoilRoot } from 'recoil';
@@ -39,6 +39,13 @@ const customQueries = {
 	...fromPairs(GETTERS.map(v => [gettersKeys[v], clickByFactory(screen[gettersMap[v]])])),
 	...fromPairs(GETTERS.map(v => [gettersKeys[v], changeByFactory(screen[gettersMap[v]])])),
 };
+// helper to test login screens
+export const signOutRender = async () => {
+	renderUi({ route: '/app' });
+	expect(screen.getByRole('button', { name: /log out/i })).toBeInTheDocument();
+	userEvent.click(screen.getByRole('button', { name: /log out/i }));
+	return await waitFor(() => expect(screen.getAllByRole('button', { name: /log in/i })).toBeArrayOfSize(4));
+};
 
 const renderProviders = (route: string) => ({ children }: { children: ReactElement }): ReactElement => (
 	<RecoilRoot>
@@ -50,7 +57,6 @@ const renderProviders = (route: string) => ({ children }: { children: ReactEleme
 type RenderOptions = {
 	route: string;
 };
-// function renderUi(ui: ReactElement, { initialState = { auth }, store = getStore(initialState), ...renderOptions } = {}) {
 export function renderUi({ route, ...renderOptions }: RenderOptions) {
 	return render(<App />, { wrapper: renderProviders(route) as ComponentType, ...renderOptions });
 }

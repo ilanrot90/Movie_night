@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useRouter } from 'hooks/useRouter';
-import { useFirebase, runFirebaseAction } from 'state/context/loginContext';
+import { useFirebase, runFirebaseAction, Options } from 'state/context/loginContext';
 // utils
 import { APP_PATH, SIGN_UP_PATH, RESET_PATH } from 'routes/routesPaths';
 import { loginFields } from './authScreens.utils';
+import { get } from 'utils/lodash.utils';
 import { FormValues, Provider } from 'types';
 // components
 import Icon from 'components/common-ui/icon';
@@ -11,10 +12,10 @@ import AnimatedForm from './animations-blocks/AnimatedForm';
 import Form from './Form';
 // style
 import { Content, Hr, LoginButton, ForgotPasswordLink } from './style';
-
 const providers: Array<Provider> = ['facebook', 'google', 'github'];
 
 const LoginForm = () => {
+	const [selectedProvider, setProvider] = useState<string | null>(null);
 	const [{ loading }, dispatch] = useFirebase();
 	const { push } = useRouter();
 
@@ -22,20 +23,29 @@ const LoginForm = () => {
 		push(`/${APP_PATH}`);
 	}, [push]);
 
-	const handlePasswordSignIn = useCallback(
-		async (data: FormValues) => {
-			await runFirebaseAction(dispatch, { key: 'LOGIN_PASSWORD', data });
-			handleRedirect();
+	const signInCallback = useCallback(
+		async (action: Options) => {
+			setProvider(get(action, 'provider', null));
+			const hasError = await runFirebaseAction(dispatch, action);
+			if (!hasError) {
+				handleRedirect();
+			}
 		},
 		[handleRedirect, dispatch]
 	);
 
+	const handlePasswordSignIn = useCallback(
+		async (data: FormValues) => {
+			await signInCallback({ key: 'LOGIN_PASSWORD', data });
+		},
+		[signInCallback]
+	);
+
 	const handleSocialSignIn = useCallback(
 		provider => async () => {
-			await runFirebaseAction(dispatch, { key: 'LOGIN_PROVIDER', provider });
-			handleRedirect();
+			await signInCallback({ key: 'LOGIN_PROVIDER', provider });
 		},
-		[handleRedirect, dispatch]
+		[signInCallback]
 	);
 
 	return (
@@ -45,7 +55,7 @@ const LoginForm = () => {
 					buttonText={'log in'}
 					fields={loginFields}
 					onSubmit={handlePasswordSignIn}
-					buttonProps={{ disabled: loading, loading }}
+					buttonProps={{ testId: 'password-login', loading: loading && !selectedProvider }}
 				/>
 				<ForgotPasswordLink underline={'true'} size={10} to={RESET_PATH}>
 					forget password?
@@ -58,6 +68,8 @@ const LoginForm = () => {
 						endIcon={<Icon name={provider} size={22} />}
 						fullWidth
 						socialType={provider}
+						loading={loading && provider === selectedProvider}
+						disabled={loading}
 						onClick={handleSocialSignIn(provider)}
 					>
 						log in with {provider}
