@@ -3,7 +3,7 @@ import { emailRegex, nameRegex } from 'utils/strings.utils';
 
 export const emailEmptyMessage = 'Please enter your email';
 export const emailNotValidMessage = 'Please enter a valid email address';
-export const passwordValidation = 'password too short';
+export const passwordValidation = 'Password is too short';
 export const passwordEmptyMessage = 'Please enter your password';
 
 // login fields
@@ -88,6 +88,7 @@ export const signUpFields: Array<LoginTypes> = [
 	},
 	{
 		name: 'passwordConfirm',
+		placeholder: 'Password Confirm',
 		type: 'password',
 		registerProps: {
 			required: {

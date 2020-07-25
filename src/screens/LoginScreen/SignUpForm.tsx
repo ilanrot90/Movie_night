@@ -14,8 +14,9 @@ const SignUpForm = () => {
 	const { push } = useRouter();
 	const onSubmit = useCallback(
 		async (data: FormValues, setError) => {
+			console.log(data);
 			if (data.password !== data.passwordConfirm) {
-				setError('passwordConfirm', { message: 'password is not the same' });
+				setError('passwordConfirm', { message: 'The password you entered do not match' });
 			} else {
 				const error = await runFirebaseAction(dispatch, { key: 'SIGN_UP', data });
 				!error && push(`/${APP_PATH}`);

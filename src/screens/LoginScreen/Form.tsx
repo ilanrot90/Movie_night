@@ -35,7 +35,7 @@ const SimpleForm = ({
 
 	return (
 		<FormBlock>
-			{fields.map(({ name, placeholder = name, registerProps, type, label }) => (
+			{fields.map(({ name, placeholder = name, registerProps, type = 'text', label }) => (
 				<TextInput
 					key={name}
 					placeholder={placeholder}
@@ -50,11 +50,11 @@ const SimpleForm = ({
 			))}
 
 			<LoginButton
-				disabled={isSubmitting || !isEmpty(errors)}
 				type={'submit'}
 				fullWidth
 				onClick={handleSubmit(submitFormWithProps)}
 				{...buttonProps}
+				disabled={isSubmitting || !isEmpty(errors)}
 			>
 				{buttonText}
 			</LoginButton>

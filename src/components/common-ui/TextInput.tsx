@@ -5,17 +5,19 @@ type variant = 'outlined' | 'filled' | undefined;
 interface IProps {
 	name: string;
 	label: string;
+	type: string;
 	variant?: variant;
 	required?: boolean;
 	fullWidth?: boolean;
 }
 
-const TextInput = React.forwardRef(({ variant, required, label, fullWidth, name, ...props }: IProps, register) => {
+const TextInput = React.forwardRef(({ variant, required, label, fullWidth, name, type = 'text', ...props }: IProps, register) => {
 	return (
 		<TextField
 			id={`${name}_input`}
 			name={name}
 			label={label}
+			type={type}
 			fullWidth={fullWidth}
 			required={required}
 			variant="outlined"

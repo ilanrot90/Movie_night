@@ -37,7 +37,9 @@ const AnimatedForm: FC<IProps> = ({ title, footer, link, children }) => {
 			<Form>
 				<Header>
 					<Logo />
-					<Content>Please {title} to continue</Content>
+					<Content as={'h1'} size={14}>
+						Please {title} to continue
+					</Content>
 				</Header>
 				{children}
 				<Footer as="span">

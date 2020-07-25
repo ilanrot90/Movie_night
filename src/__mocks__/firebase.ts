@@ -32,6 +32,7 @@ const mockFirebase: any = {
 								providerId: 'google',
 							},
 						],
+						sendEmailVerification: jest.fn(),
 				  }
 				: null,
 			signInWithRedirect: jest.fn(),
@@ -75,8 +76,13 @@ const mockFirebase: any = {
 		}),
 		firestore: jest.fn().mockReturnValue({
 			collection: jest.fn().mockReturnValue({
-				add: jest.fn().mockResolvedValue({
-					id: 'abc123',
+				doc: jest.fn().mockReturnValue({
+					add: jest.fn().mockResolvedValue({
+						id: 'abc123',
+					}),
+					set: jest.fn().mockResolvedValue({
+						uid: 'abc123',
+					}),
 				}),
 			}),
 		}),
