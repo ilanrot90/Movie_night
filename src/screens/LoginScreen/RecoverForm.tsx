@@ -30,12 +30,7 @@ const RecoverForm = () => {
 					<EmailSvg startAnimation={loading} />
 				</MarginContainer>
 				<MarginContainer auto>
-					<Form
-						buttonProps={{ disabled: disabled || loading, loading }}
-						buttonText={buttonText}
-						fields={recoverField}
-						onSubmit={handleSubmit}
-					/>
+					<Form buttonProps={{ loading, disabled }} buttonText={buttonText} fields={recoverField} onSubmit={handleSubmit} />
 				</MarginContainer>
 			</>
 		</AnimatedForm>

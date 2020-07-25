@@ -18,7 +18,7 @@ export const resetState = (dispatch: Dispatch<Action>) => dispatch({ type: 'RESE
 export const setActionSuccess = (dispatch: Dispatch<Action>) => dispatch({ type: 'SET_ACTION_SUCCESS' });
 export const setActionFailed = (dispatch: Dispatch<Action>, error: string) => dispatch({ type: 'SET_ACTION_FAILED', error });
 
-type Options =
+export type Options =
 	| { key: 'VERIFY_EMAIL' }
 	| { key: 'RECOVER_PASSWORD'; email: string }
 	| { key: 'LOGIN_PROVIDER'; provider: Provider }
@@ -43,10 +43,11 @@ const runMethod = (options: Options) => {
 export const runFirebaseAction = async (dispatch: Dispatch<Action>, options: Options) => {
 	setLoading(dispatch);
 	const { error } = await asyncHandler(runMethod(options));
-
 	if (error) {
 		setActionFailed(dispatch, error.message);
+		return true;
 	} else {
 		setActionSuccess(dispatch);
+		return false;
 	}
 };

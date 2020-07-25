@@ -11,7 +11,7 @@ import Form from './Form';
 import { asyncHandler } from 'utils/common.utils';
 
 const SignUpForm = () => {
-	const [{ loading }, dispatch] = useFirebase();
+	const [{ loading, disabled }, dispatch] = useFirebase();
 	const { push } = useRouter();
 	const onSubmit = useCallback(
 		async (data: FormValues, setError) => {
@@ -27,7 +27,7 @@ const SignUpForm = () => {
 
 	return (
 		<AnimatedForm title={'Sign up'} footer={'Already have an account?'} link={{ to: '../', text: 'Sign In' }}>
-			<Form buttonText={'sign up'} fields={signUpFields} onSubmit={onSubmit} buttonProps={{ disabled: loading, loading }} />
+			<Form buttonText={'sign up'} fields={signUpFields} onSubmit={onSubmit} buttonProps={{ loading, disabled }} />
 		</AnimatedForm>
 	);
 };
