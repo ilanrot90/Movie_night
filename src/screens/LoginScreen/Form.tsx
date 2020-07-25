@@ -16,7 +16,7 @@ const SimpleForm = ({
 	onSubmit: (values: FormValues, setError: SetError) => void;
 	fields: Array<LoginTypes>;
 	buttonText: string;
-	buttonProps?: { disabled: boolean; loading?: boolean };
+	buttonProps?: { disabled: boolean; loading?: boolean; testId?: string };
 }) => {
 	const {
 		register,

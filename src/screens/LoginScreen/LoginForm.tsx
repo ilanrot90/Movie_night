@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useRouter } from 'hooks/useRouter';
 import { useFirebase, runFirebaseAction } from 'state/context/loginContext';
 // utils
@@ -16,6 +16,7 @@ import { asyncHandler } from 'utils/common.utils';
 const providers: Array<Provider> = ['facebook', 'google', 'github'];
 
 const LoginForm = () => {
+	const [selectedProvider, setProvider] = useState<string | null>(null);
 	const [{ loading }, dispatch] = useFirebase();
 	const { push } = useRouter();
 
@@ -25,6 +26,7 @@ const LoginForm = () => {
 
 	const handlePasswordSignIn = useCallback(
 		async (data: FormValues) => {
+			setProvider(null);
 			await asyncHandler(runFirebaseAction(dispatch, { key: 'LOGIN_PASSWORD', data }));
 			handleRedirect();
 		},
@@ -33,6 +35,7 @@ const LoginForm = () => {
 
 	const handleSocialSignIn = useCallback(
 		provider => async () => {
+			setProvider(provider);
 			await asyncHandler(runFirebaseAction(dispatch, { key: 'LOGIN_PROVIDER', provider }));
 			handleRedirect();
 		},
@@ -46,7 +49,7 @@ const LoginForm = () => {
 					buttonText={'log in'}
 					fields={loginFields}
 					onSubmit={handlePasswordSignIn}
-					buttonProps={{ disabled: loading, loading }}
+					buttonProps={{ testId: 'password-login', disabled: loading, loading: loading && !selectedProvider }}
 				/>
 				<ForgotPasswordLink underline={'true'} size={10} to={RESET_PATH}>
 					forget password?
@@ -59,6 +62,8 @@ const LoginForm = () => {
 						endIcon={<Icon name={provider} size={22} />}
 						fullWidth
 						socialType={provider}
+						loading={loading && provider === selectedProvider}
+						disabled={loading}
 						onClick={handleSocialSignIn(provider)}
 					>
 						log in with {provider}
