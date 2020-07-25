@@ -1,5 +1,6 @@
 import { signOutRender, userEvent, waitFor, screen } from 'testingUtils/utils';
 import { TargetElement } from '@testing-library/user-event';
+import { emailNotValidMessage, passwordValidation } from '../authScreens.utils';
 
 const [validEmail, unValidEmail] = ['test@test.com', 'test-test.com'];
 const [validPassword, unValidPassword] = ['min_6_length', '12345'];
@@ -36,5 +37,17 @@ describe('Login actions', () => {
 		await userEvent.click(loginButton);
 
 		await waitFor(() => expect(loginButton).toBeDisabled());
+	});
+
+	test('Fields not valid format - show errors', async () => {
+		await userEvent.type(emailInput, unValidEmail);
+		await userEvent.type(passwordInput, unValidPassword);
+		await userEvent.click(loginButton);
+
+		const errorPasswordMsg = await screen.findByText(emailNotValidMessage);
+		const errorEmailMsg = await screen.findByText(passwordValidation);
+
+		expect(errorPasswordMsg).toBeInTheDocument();
+		expect(errorEmailMsg).toBeInTheDocument();
 	});
 });

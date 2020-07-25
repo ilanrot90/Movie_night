@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormValues, LoginTypes } from 'types';
 import { FormBlock, LoginButton } from './style';
 import TextInput from 'components/common-ui/TextInput';
-import { get, startCase } from 'utils/lodash.utils';
+import { get, isEmpty, startCase } from 'utils/lodash.utils';
 import { ErrorOption } from 'react-hook-form/dist/types/form';
 
 type SetError = (name: 'displayName' | 'email' | 'password' | 'passwordConfirm', errorOption: ErrorOption) => void;
@@ -49,7 +49,13 @@ const SimpleForm = ({
 				/>
 			))}
 
-			<LoginButton disabled={isSubmitting} type={'submit'} fullWidth onClick={handleSubmit(submitFormWithProps)} {...buttonProps}>
+			<LoginButton
+				disabled={isSubmitting || !isEmpty(errors)}
+				type={'submit'}
+				fullWidth
+				onClick={handleSubmit(submitFormWithProps)}
+				{...buttonProps}
+			>
 				{buttonText}
 			</LoginButton>
 		</FormBlock>
