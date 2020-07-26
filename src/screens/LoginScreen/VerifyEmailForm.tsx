@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import { Navigate } from 'react-router';
 // state
 import { useFirebase, runFirebaseAction } from 'state/context/loginContext';
-import { authAtom } from 'state/atoms';
+import { authAtom } from 'state/atoms/authAtom';
 import AnimatedForm from './animations-blocks/AnimatedForm';
 // components
 import { EmailSvg } from './animations-blocks/SvgEmail';

@@ -1,7 +1,7 @@
 import React, { ElementType, useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Navigate } from 'react-router-dom';
-import { authAtom } from '../state/atoms';
+import { authAtom } from '../state/atoms/authAtom';
 import { LOGIN_PATH, VERIFY_EMAIL } from './routesPaths';
 
 interface IProps {
