@@ -16,9 +16,9 @@ class ErrorBoundary extends React.Component<InterfaceProps> {
 		console.dir(error, errorInfo);
 	}
 
-	tryAgain() {
+	tryAgain = () => {
 		this.setState({ hasError: false });
-	}
+	};
 
 	render() {
 		const { hasError, message } = this.state;
@@ -28,7 +28,7 @@ class ErrorBoundary extends React.Component<InterfaceProps> {
 			return (
 				fallback || (
 					<div>
-						<h1>{message}</h1>
+						<h1 role="alert">{message}</h1>
 						<Button onClick={this.tryAgain}>Try again</Button>
 					</div>
 				)
