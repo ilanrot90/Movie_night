@@ -13,6 +13,7 @@ const ShouldThrow = ({ shouldThrow }: { shouldThrow: boolean }) => {
 describe('render ErrorBoundary component on error', () => {
 	beforeAll(() => {
 		jest.spyOn(console, 'error').mockImplementation(() => {});
+		jest.spyOn(console, 'dir').mockImplementation(() => {});
 	});
 
 	afterAll(() => {
