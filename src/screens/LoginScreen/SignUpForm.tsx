@@ -14,7 +14,6 @@ const SignUpForm = () => {
 	const { push } = useRouter();
 	const onSubmit = useCallback(
 		async (data: FormValues, setError) => {
-			console.log(data);
 			if (data.password !== data.passwordConfirm) {
 				setError('passwordConfirm', { message: 'The password you entered do not match' });
 			} else {

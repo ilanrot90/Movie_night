@@ -40,7 +40,6 @@ export const EmailSvg = ({ startAnimation }: Props) => {
 	const opacity = useTransform(pathLength, [0.05, 0.15], [0, 1]);
 	const animationDone = usePrevious(startAnimation);
 	const finalAnimation = useMemo(() => animationDone && !startAnimation, [animationDone, startAnimation]);
-	console.log({ finalAnimation });
 	return (
 		<SvgContainer auto>
 			<motion.svg

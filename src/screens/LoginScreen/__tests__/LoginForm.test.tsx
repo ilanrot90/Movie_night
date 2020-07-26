@@ -67,4 +67,21 @@ describe('Login actions', () => {
 		expect(mockedLoginWithProvider).toHaveBeenCalledTimes(1);
 		expect(mockedLoginWithProvider).toHaveBeenCalledWith('facebook');
 	});
+
+	test('Show error message when login failed', async () => {
+		mockedLoginWithProvider.mockReset();
+		mockedLoginWithProvider.mockRejectedValue(new Error('Failed login with facebook'));
+		const loginButtons = screen.getAllByRole('button', { name: /log in with/i });
+
+		const facebookLoginBtn = loginButtons[0];
+		await userEvent.click(facebookLoginBtn);
+
+		expect(mockedLoginWithProvider).toHaveBeenCalledTimes(1);
+		expect(mockedLoginWithProvider).toHaveBeenCalledWith('facebook');
+
+		const errorPopup = await screen.findByTestId(/login-screens-error-msg/i);
+		expect(errorPopup).toMatchSnapshot();
+
+		expect(errorPopup).toBeInTheDocument();
+	});
 });

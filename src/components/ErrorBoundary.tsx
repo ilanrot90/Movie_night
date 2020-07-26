@@ -1,26 +1,38 @@
 import React from 'react';
+import Button from './common-ui/Button';
 
 interface InterfaceProps {
-	fallback: React.ReactElement;
+	fallback?: React.ReactElement;
 }
 
 class ErrorBoundary extends React.Component<InterfaceProps> {
-	state = { hasError: false };
+	state: { hasError: boolean; message: null | string } = { hasError: false, message: null };
 
-	static getDerivedStateFromError(error: Error) {
-		return { hasError: true };
+	static getDerivedStateFromError({ message }: Error) {
+		return { hasError: true, message };
 	}
 
 	componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
 		console.dir(error, errorInfo);
 	}
 
+	tryAgain() {
+		this.setState({ hasError: false });
+	}
+
 	render() {
-		const { hasError } = this.state;
+		const { hasError, message } = this.state;
 		const { children, fallback } = this.props;
 
 		if (hasError) {
-			return fallback || <h1>Something went wrong.</h1>;
+			return (
+				fallback || (
+					<div>
+						<h1>{message}</h1>
+						<Button onClick={this.tryAgain}>Try again</Button>
+					</div>
+				)
+			);
 		}
 
 		return children;
