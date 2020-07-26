@@ -6,3 +6,4 @@ import 'jest-styled-components';
 import 'mutationobserver-shim';
 import 'testingUtils/initializer';
 import '__mocks__/firebase';
+import '__mocks__/framer-motion';

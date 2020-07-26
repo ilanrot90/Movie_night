@@ -32,7 +32,7 @@ const mockFirebase: any = {
 								providerId: 'google',
 							},
 						],
-						sendEmailVerification: jest.fn(),
+						sendEmailVerification: jest.fn().mockReturnValue(Promise.resolve()),
 				  }
 				: null,
 			signInWithRedirect: jest.fn(),
