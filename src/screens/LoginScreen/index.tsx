@@ -8,7 +8,7 @@ import ErrorBoundary from 'components/ErrorBoundary';
 const FallBack = () => (
 	<FormContainer>
 		<MarginContainer auto>
-			<Text as={'h2'} weight={600}>
+			<Text role="alert" data-testid={'errorBoundary-msg'} as={'h2'} weight={600}>
 				Something went wrong.
 			</Text>
 		</MarginContainer>

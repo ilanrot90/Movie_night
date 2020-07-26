@@ -74,4 +74,21 @@ describe('Sign up with email actions', () => {
 			passwordConfirm: '123456',
 		});
 	});
+
+	test('Show error message when Sign up failed', async () => {
+		mockedHandleEmailSignUp.mockReset();
+		mockedHandleEmailSignUp.mockRejectedValue(new Error('Sign up failed'));
+		await userEvent.type(usernameInput, 'test name');
+		await userEvent.type(emailInput, 'test@test.com');
+		await userEvent.type(passwordInput, '123456');
+		await userEvent.type(passwordConfirmInput, '123456');
+
+		await userEvent.click(signUpBtn);
+		await waitFor(() => expect(mockedHandleEmailSignUp).toHaveBeenCalledTimes(1));
+
+		const errorPopup = await screen.findByTestId(/login-screens-error-msg/i);
+		expect(errorPopup).toMatchSnapshot();
+
+		expect(errorPopup).toBeInTheDocument();
+	});
 });

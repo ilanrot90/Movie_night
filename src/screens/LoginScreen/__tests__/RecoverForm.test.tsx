@@ -41,4 +41,17 @@ describe('Recover email actions', () => {
 		await waitFor(() => expect(mockedHandleRecoverPassword).toHaveBeenCalledTimes(1));
 		expect(mockedHandleRecoverPassword).toHaveBeenCalledWith('test@test.com');
 	});
+
+	test('Show error message when recover email failed', async () => {
+		mockedHandleRecoverPassword.mockReset();
+		mockedHandleRecoverPassword.mockRejectedValue(new Error('Email do not exist'));
+
+		await userEvent.type(emailInput, 'test@test.com');
+		await userEvent.click(recoverBtn);
+
+		const errorPopup = await screen.findByTestId(/login-screens-error-msg/i);
+		expect(errorPopup).toMatchSnapshot();
+
+		expect(errorPopup).toBeInTheDocument();
+	});
 });

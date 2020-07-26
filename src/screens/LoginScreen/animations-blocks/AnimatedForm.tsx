@@ -8,7 +8,7 @@ import Logo from './SvgLogo';
 import { Footer, Header, Content, StyledLink, Form } from '../style';
 
 const Alert = (props: AlertProps) => {
-	return <MuiAlert elevation={6} variant="filled" {...props} />;
+	return <MuiAlert data-testid={'login-screens-error-msg'} elevation={6} variant="filled" {...props} />;
 };
 
 interface IProps {

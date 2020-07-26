@@ -1,18 +1,19 @@
 import keyBy from 'lodash/keyBy';
-import mapValues from 'lodash/mapValues';
 import map from 'lodash/map';
 import get from 'lodash/get';
-import orderBy from 'lodash/orderBy';
-import groupBy from 'lodash/groupBy';
 import isEmpty from 'lodash/isEmpty';
 import startCase from 'lodash/startCase';
-import capitalize from 'lodash/capitalize';
 import fromPairs from 'lodash/fromPairs';
+/*
+import mapValues from 'lodash/mapValues';
+import orderBy from 'lodash/orderBy';
+import groupBy from 'lodash/groupBy';
+import capitalize from 'lodash/capitalize';
 
 const chainableFunctions = {
 	map,
-	orderBy,
-	groupBy,
+	// orderBy,
+	// groupBy,
 };
 
 const chain = (input: any) => {
@@ -27,5 +28,5 @@ const chain = (input: any) => {
 
 	return wrapper;
 };
-
-export { chain, fromPairs, capitalize, startCase, map, orderBy, groupBy, keyBy, isEmpty, get };
+*/
+export { fromPairs, startCase, map, /*orderBy, capitalize, chain, groupBy,*/ keyBy, isEmpty, get };

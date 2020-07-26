@@ -13,7 +13,6 @@ const PrivateRoute: React.FC<IProps> = ({ component: Component, ...props }) => {
 	const redirectTo = useMemo(() => (user?.verifyEmail ? `${LOGIN_PATH}/${VERIFY_EMAIL}` : !user && LOGIN_PATH), [user]);
 
 	if (redirectTo) {
-		console.log({ redirectTo });
 		return <Navigate to={`/${redirectTo}`} replace={true} />;
 	}
 
