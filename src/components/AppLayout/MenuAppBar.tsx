@@ -11,7 +11,7 @@ const TopNav = styled.div`
 	height: 60px;
 	position: sticky;
 	display: flex;
-	background-color: ${({ theme }) => theme.main};
+	background-color: ${({ theme }) => theme.dark};
 	padding: ${({ theme }) => theme.spacing.m}px;
 `;
 
