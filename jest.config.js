@@ -8,7 +8,7 @@ module.exports = {
 	preset: 'ts-jest',
 	setupTestFrameworkScriptFile: './__mocks__/firebase',
 	collectCoverageFrom: ['**/src/**/*.{js,ts,tsx}', '!**/testingUtils/**'],
-	coveragePathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/src/testingUtils/'],
+	coveragePathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/src/testingUtils/**'],
 	verbose: true,
 	notify: true,
 	notifyMode: 'failure',

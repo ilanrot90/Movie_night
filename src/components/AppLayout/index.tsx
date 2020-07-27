@@ -2,17 +2,17 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { PageContainer } from 'style/sharedStyle';
+import MenuAppBar from './MenuAppBar';
 
-const Container = styled(PageContainer)`
-	${({ theme }) => theme.utils.centerFlex};
-`;
+const Container = styled(PageContainer)``;
 
-const AppLayout = () => {
+const Index = () => {
 	return (
 		<Container>
+			<MenuAppBar />
 			<Outlet />
 		</Container>
 	);
 };
 
-export default AppLayout;
+export default Index;

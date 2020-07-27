@@ -2,6 +2,7 @@ import keyBy from 'lodash/keyBy';
 import map from 'lodash/map';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
+import debounce from 'lodash/debounce';
 import startCase from 'lodash/startCase';
 import fromPairs from 'lodash/fromPairs';
 /*
@@ -29,4 +30,4 @@ const chain = (input: any) => {
 	return wrapper;
 };
 */
-export { fromPairs, startCase, map, /*orderBy, capitalize, chain, groupBy,*/ keyBy, isEmpty, get };
+export { fromPairs, startCase, map, debounce, /*orderBy, capitalize, chain, groupBy,*/ keyBy, isEmpty, get };

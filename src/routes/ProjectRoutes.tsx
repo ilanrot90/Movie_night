@@ -9,7 +9,7 @@ import VerifyEmail from 'screens/LoginScreen/VerifyEmailForm';
 import RecoverForm from 'screens/LoginScreen/RecoverForm';
 import LoginForm from 'screens/LoginScreen/LoginForm';
 import PrivateRoute from './ProtectedRoute';
-import AppLayout from 'components/Applayout';
+import AppLayout from 'components/AppLayout';
 
 interface IRoute {
 	path: string;
