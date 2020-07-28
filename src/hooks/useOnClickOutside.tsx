@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 type Listener = EventListenerOrEventListenerObject;
 
 export default function useOnClickOutside(handler: () => void) {
-	const ref = useRef<HTMLInputElement>(null);
+	const ref = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const listener: Listener = e => {
