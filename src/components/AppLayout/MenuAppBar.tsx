@@ -120,13 +120,21 @@ export default function MenuAppBar() {
 						<Paper>
 							<ClickAwayListener onClickAway={handleToggle}>
 								<List className={classes.menu} autoFocusItem={open} id="menu-list">
-									<ListSubheader>Welcome {user?.displayName}</ListSubheader>
+									<ListSubheader>
+										<Text size={12} as={'span'}>
+											Welcome {user?.displayName}
+										</Text>
+									</ListSubheader>
 									<Divider />
 									<ListItem className={classes.item}>
 										<ListItemSecondaryAction>
 											<Switch
 												name={'theme-selector'}
-												label={'Dark theme'}
+												label={
+													<Text size={12} as={'span'}>
+														Dark theme
+													</Text>
+												}
 												onChange={changeTheme}
 												initialValue={isDarkTheme(theme)}
 											/>

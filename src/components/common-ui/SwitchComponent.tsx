@@ -67,7 +67,7 @@ const CustomSwitch = withStyles((theme: Theme) =>
 });
 
 interface IProps {
-	label: string;
+	label: React.ReactNode;
 	name: string;
 	initialValue?: boolean;
 	onChange: (value: boolean) => void;
