@@ -90,10 +90,13 @@ export default function MenuAppBar() {
 		setOpen(prevOpen => !prevOpen);
 	}, []);
 
-	const changeTheme = useCallback((isDarkTheme: boolean) => {
-		const theme = isDarkTheme ? 'dark' : 'light';
-		setTheme(theme);
-	}, []);
+	const changeTheme = useCallback(
+		(isDarkTheme: boolean) => {
+			const theme = isDarkTheme ? 'dark' : 'light';
+			setTheme(theme);
+		},
+		[setTheme]
+	);
 
 	return (
 		<>
