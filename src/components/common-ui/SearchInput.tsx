@@ -64,7 +64,7 @@ const Styled = {
 		padding: 6px 12px;
 		height: 28px;
 		border-radius: 40px;
-		background-color: ${({ theme }) => theme.background};
+		background-image: ${({ theme }) => theme.background};
 		color: ${({ theme }) => theme.contrastText};
 		outline: none;
 		border: none;
@@ -76,7 +76,7 @@ const Styled = {
 		right: 0;
 		width: 40px;
 		height: 40px;
-		background-color: ${({ theme }) => theme.background};
+		background-image: ${({ theme }) => theme.background};
 	`,
 };
 
