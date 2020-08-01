@@ -66,7 +66,7 @@ const sharedTheme = {
 
 const theme = {
 	light: {
-		background: '#f9fafa',
+		background: 'linear-gradient(to top, #a8edea 0%, #fed6e3 100%)',
 		light: '#e7cbeb',
 		main: '#e1bee7',
 		dark: '#9d85a1',
@@ -74,7 +74,9 @@ const theme = {
 		...sharedTheme,
 	},
 	dark: {
-		background: '#121212',
+		background:
+			'linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);\n' +
+			' background-blend-mode: multiply;',
 		light: '#757ce8',
 		main: '#3f50b5',
 		dark: '#222831',

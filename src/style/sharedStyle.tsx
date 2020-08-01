@@ -42,7 +42,7 @@ export const BaseContainer = styled.div`
 	width: 100%;
 	height: 100vh;
 	flex-direction: column;
-	background-color: ${({ theme }) => theme.background};
+	background-image: ${({ theme }) => theme.background};
 `;
 // text component
 interface ITextProps {
