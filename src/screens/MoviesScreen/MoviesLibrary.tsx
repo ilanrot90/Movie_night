@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Header from './components/Header';
 
 const Movies = () => {
 	return (
 		<div>
-			<Header />
+			<Suspense fallback={'loading header...'}>
+				<Header />
+			</Suspense>
 		</div>
 	);
 };
