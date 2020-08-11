@@ -5,6 +5,9 @@ executors:
   app-executor:
     docker:
       - image: circleci/node:12.14.0
+        aws_auth:
+          aws_access_key_id: ${AWS_ACCESS_KEY}
+          aws_secret_access_key: ${AWS_SECRET_KEY}
     working_directory: ~/project
 
 aliases:
@@ -34,10 +37,6 @@ aliases:
         sudo apt-get -y -qq update
         sudo apt-get install -y awscli
         sudo apt-get install -y python-pip python-dev build-essential
-  - &auth-aws-config
-    aws_auth:
-      aws_access_key_id: ${AWS_ACCESS_KEY}
-      aws_secret_access_key: ${AWS_SECRET_KEY}
   - &build-project
     run:
       name: Build Project
@@ -85,7 +84,6 @@ jobs:
       - checkout
       - *show-current-branch
       - *install-aws-cli
-      - *auth-aws-config
       - *build-project
       - run:
           name: Deploy to AWS S3
@@ -106,7 +104,6 @@ jobs:
       - checkout
       - *show-current-branch
       - *install-aws-cli
-      - *auth-aws-config
       - *build-project
       - run:
           name: Deploy to AWS cloudfronts
