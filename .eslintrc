@@ -21,6 +21,7 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],
+  "ignorePatterns": ["*.test.*"],
   "rules": {
     "no-console": 1,
     "no-mixed-spaces-and-tabs": 0
