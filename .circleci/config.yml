@@ -22,11 +22,10 @@ aliases:
         name: Install dependencies
         command: npm install
   - &save-cache
-    run:
-      save_cache:
-        paths:
-          - node_modules
-        key: app-{{ checksum "package.json" }}
+    save_cache:
+      paths:
+        - node_modules
+      key: app-{{ checksum "package.json" }}
   - &install-aws-cli
     run:
       name: Install AWS CLI
@@ -34,7 +33,7 @@ aliases:
       command: |
         sudo apt-get -y -qq update
         sudo apt-get install -y awscli
-        sudo apt-get install -y python pip python-dev build-essential
+        sudo apt-get install -y python-pip python-dev build-essential
   - &build-project
     run:
       name: Build Project
@@ -42,7 +41,7 @@ aliases:
         npm install
         npm run build
         cd build
-        zip ../build.zip -r* .[^.]*
+        zip ../build.zip -r * .[^.]*
         echo "Build successful"
 
 workflows:
