@@ -49,14 +49,14 @@ workflows:
   build_and_deploy:
     jobs:
       - build
-      - deploy_to_aws_s3
+      - deploy_to_aws_s3:
           requires:
             - build
           filters:
             branches:
                 only:
                   - master
-      - deploy_to_aws_frontcloud
+      - deploy_to_aws_frontcloud:
           requires:
               - deploy_to_aws_s3
             filters:
