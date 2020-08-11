@@ -54,6 +54,8 @@ workflows:
           filters:
             branches:
                 only:
+                  - develop
+                  - staging
                   - master
       - deploy_to_aws_frontcloud:
           requires:
