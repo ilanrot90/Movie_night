@@ -5,6 +5,14 @@ executors:
   app-executor:
     docker:
       - image: circleci/node:12.14.0
+        environment:
+          REACT_APP_API_KEY: ${REACT_APP_API_KEY}
+          REACT_APP_AUTH_DOMAIN: ${REACT_APP_AUTH_DOMAIN}
+          REACT_APP_DATABASE_URL: ${REACT_APP_DATABASE_URL}
+          REACT_APP_PROJECT_ID: ${REACT_APP_PROJECT_ID}
+          REACT_APP_APP_ID: ${REACT_APP_APP_ID}
+          REACT_APP_STORAGE_BUCKET: ${REACT_APP_STORAGE_BUCKET}
+          REACT_APP_MESSAGING_SENDER_ID: ${REACT_APP_MESSAGING_SENDER_ID}
     working_directory: ~/project
 
 aliases:
@@ -36,14 +44,6 @@ aliases:
         sudo apt-get install -y python-pip python-dev build-essential
   - &build-project
     run:
-      environment:
-        REACT_APP_API_KEY: ${REACT_APP_API_KEY}
-        REACT_APP_AUTH_DOMAIN: ${REACT_APP_AUTH_DOMAIN}
-        REACT_APP_DATABASE_URL: ${REACT_APP_DATABASE_URL}
-        REACT_APP_PROJECT_ID: ${REACT_APP_PROJECT_ID}
-        REACT_APP_APP_ID: ${REACT_APP_APP_ID}
-        REACT_APP_STORAGE_BUCKET: ${REACT_APP_STORAGE_BUCKET}
-        REACT_APP_MESSAGING_SENDER_ID: ${REACT_APP_MESSAGING_SENDER_ID}
       name: Build Project
       command: |
         npm install
@@ -75,15 +75,15 @@ workflows:
                 - staging
                 - master
       - test:
-        requires:
-          - prettier
-          - linting
-        filters:
-          branches:
-            only:
-              - develop
-              - staging
-              - master
+          requires:
+            - linting
+            - prettier
+            filters:
+              branches:
+                only:
+                  - develop
+                  - staging
+                  - master
       - deploy_to_aws_s3:
           requires:
             - test
