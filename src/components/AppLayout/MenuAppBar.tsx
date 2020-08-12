@@ -34,6 +34,7 @@ const TopNav = styled.div<{ isOnTop: boolean }>`
 	background-color: ${({ theme, isOnTop }) => (isOnTop ? 'transparent' : theme.dark)};
 	transition: background-color 0.125s ease-in;
 	padding: ${({ theme }) => theme.spacing.m}px;
+	z-index: 1;
 `;
 
 const Input = styled.div`
@@ -116,39 +117,47 @@ export default function MenuAppBar() {
 				<Input>
 					<SearchInput callBack={debounce(handleChange, 500)} />
 				</Input>
+				<Popper
+					className={'menu'}
+					open={open}
+					anchorEl={anchorRef.current}
+					transition
+					disablePortal
+					placement={'bottom-start'}
+					role="menu"
+				>
+					{({ TransitionProps }) => (
+						<Grow {...TransitionProps}>
+							<Paper>
+								<ClickAwayListener onClickAway={handleToggle}>
+									<List className={classes.menu} autoFocusItem={open} id="menu-list">
+										<ListSubheader>
+											<Text size={12} as={'span'}>
+												Welcome {user?.displayName}
+											</Text>
+										</ListSubheader>
+										<Divider />
+										<ListItem className={classes.item}>
+											<ListItemSecondaryAction>
+												<Switch
+													name={'theme-selector'}
+													label={
+														<Text size={12} as={'span'}>
+															Dark theme
+														</Text>
+													}
+													onChange={changeTheme}
+													initialValue={isDarkTheme(theme)}
+												/>
+											</ListItemSecondaryAction>
+										</ListItem>
+									</List>
+								</ClickAwayListener>
+							</Paper>
+						</Grow>
+					)}
+				</Popper>
 			</TopNav>
-			<Popper open={open} anchorEl={anchorRef.current} transition disablePortal placement={'bottom-start'}>
-				{({ TransitionProps }) => (
-					<Grow {...TransitionProps}>
-						<Paper>
-							<ClickAwayListener onClickAway={handleToggle}>
-								<List className={classes.menu} autoFocusItem={open} id="menu-list">
-									<ListSubheader>
-										<Text size={12} as={'span'}>
-											Welcome {user?.displayName}
-										</Text>
-									</ListSubheader>
-									<Divider />
-									<ListItem className={classes.item}>
-										<ListItemSecondaryAction>
-											<Switch
-												name={'theme-selector'}
-												label={
-													<Text size={12} as={'span'}>
-														Dark theme
-													</Text>
-												}
-												onChange={changeTheme}
-												initialValue={isDarkTheme(theme)}
-											/>
-										</ListItemSecondaryAction>
-									</ListItem>
-								</List>
-							</ClickAwayListener>
-						</Paper>
-					</Grow>
-				)}
-			</Popper>
 		</>
 	);
 }

@@ -74,7 +74,7 @@ export const StyledLink = styled(Link)<ILinkProps>`
 		css`
 			text-decoration: underline;
 		`};
-	transition: all 0.125s ease-in-out;
+	transition: all ${({ theme }) => theme.utils.quickTransition};
 	&:hover {
 		font-weight: 500;
 		color: ${({ theme, hoverColor }) => hoverColor || theme.light};
