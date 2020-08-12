@@ -159,7 +159,7 @@ jobs:
       - *show-current-branch
       - run:
           name: Deploy to Heroku
-          command:  git push http:$HEROKU_API_KEY@git.heroku.com/movie-night-prod.git -f
+          command:  git push https://heroku:$HEROKU_API_KEY@git.heroku.com/movie-night-prod.git -f
 
   deploy_to_aws_s3:
     executor: app-executor
