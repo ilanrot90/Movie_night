@@ -1,6 +1,6 @@
 version: 2.1
-#orbs:
-#  node: circleci/node@3.0.0
+orbs:
+  slack: circleci/slack@3.4.2
 executors:
   app-executor:
     docker:
@@ -14,6 +14,10 @@ executors:
           REACT_APP_STORAGE_BUCKET: ${REACT_APP_STORAGE_BUCKET}
           REACT_APP_MESSAGING_SENDER_ID: ${REACT_APP_MESSAGING_SENDER_ID}
     working_directory: ~/project
+  slack-executor:
+    docker:
+      - image: 'cibuilds/base:latest'
+    resource_class: small
 
 aliases:
   - &show-current-branch
@@ -112,6 +116,16 @@ workflows:
                 - develop
                 - staging
                 - master
+      - notify-via-slack:
+          requires:
+            - deploy_to_aws_frontcloud
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - master
+
 jobs:
   build:
     executor: app-executor
@@ -201,3 +215,11 @@ jobs:
             else
               aws cloudfront create-invalidation --distribution-id ${AWS_DEV_DISTRIBUTION_ID} --paths /\*
             fi
+  notify-via-slack:
+    executor: slack-executor
+    steps:
+      - slack/notify:
+          message: "${CIRCLE_BRANCH} branch deployment to aws s3 and cloudfront is complete."
+          webhook: $SLACK_WEBHOOK
+      - slack/status:
+          webhook: $SLACK_WEBHOOK
