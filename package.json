@@ -29,6 +29,7 @@
     "test:coverage": "react-scripts test --coverage --watchAll=false",
     "build": "react-scripts build",
     "format": "prettier --write src/**/*.{js,ts,tsx}",
+    "format:check": "prettier --check src/**/*.{js,ts,tsx}",
     "lint": "eslint --quiet --fix src/**/*.{js,jsx,ts,tsx}"
   },
   "devDependencies": {
