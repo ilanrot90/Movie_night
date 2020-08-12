@@ -56,9 +56,47 @@ workflows:
   build_and_deploy:
     jobs:
       - build
-      - deploy_to_aws_s3:
+      - linting:
           requires:
             - build
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - master
+      - prettier:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - master
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - master
+      - deploy_to_heroku:
+          requires:
+            - linting
+            - prettier
+            - test
+          filters:
+            branches:
+              only:
+                - master
+      - deploy_to_aws_s3:
+          requires:
+            - linting
+            - prettier
+            - test
           filters:
             branches:
                 only:
@@ -83,6 +121,46 @@ jobs:
       - *restore-cache
       - *install-dependencies
       - *save-cache
+
+  linting:
+    executor: app-executor
+    steps:
+      - checkout
+      - *show-current-branch
+      - *restore-cache
+      - run:
+          name: Run linting
+          command: npm run lint
+
+  prettier:
+    executor: app-executor
+    steps:
+      - checkout
+      - *show-current-branch
+      - *restore-cache
+      - run:
+          name: Run prettier check
+          command: npm run format:check
+
+  test:
+    executor: app-executor
+    steps:
+      - checkout
+      - *show-current-branch
+      - *restore-cache
+      - run:
+          name: Run test files
+          command: npm run test
+
+  deploy_to_heroku:
+    executor: app-executor
+    steps:
+      - checkout
+      - *show-current-branch
+      - run:
+          name: Deploy to Heroku
+          command:  git push http:$HEROKU_API_KEY@git.heroku.com/movie-night-prod.git -f
+
   deploy_to_aws_s3:
     executor: app-executor
     steps:

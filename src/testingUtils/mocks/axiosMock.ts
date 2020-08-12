@@ -13,8 +13,8 @@ type MockParams = {
 };
 
 const methodsMap = {
-	GET: 'onGet' as 'onGet',
-	POST: 'onPost' as 'onPost',
+	GET: 'onGet' as const,
+	POST: 'onPost' as const,
 };
 
 class MocksManager {
