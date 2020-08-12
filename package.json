@@ -8,6 +8,7 @@
     "@material-ui/lab": "4.0.0-alpha.56",
     "axios": "0.19.2",
     "express": "4.17.1",
+    "express-favicon": "^2.0.1",
     "firebase": "7.16.1",
     "framer-motion": "2.1.0",
     "history": "5.0.0",
