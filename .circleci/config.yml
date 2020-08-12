@@ -59,7 +59,13 @@ aliases:
 workflows:
   build_and_deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - master
       - linting:
           requires:
             - build
