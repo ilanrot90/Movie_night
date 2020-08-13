@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 
 const Slider = styled.div`
 	overflow: hidden;
@@ -101,28 +102,58 @@ const SliderArrow = styled.span<{ leftArrow?: boolean }>`
 			  `}
 `;
 
-const SliderImage = styled.div`
+const SliderImage = styled(motion.div).attrs({
+	variants: {
+		initial: (showNext: boolean) => ({
+			x: showNext ? '100%' : '-100%',
+		}),
+		in: {
+			x: 0,
+		},
+		out: (showNext: boolean) => ({
+			x: showNext ? '-100%' : '100%',
+		}),
+	},
+	transition: {
+		type: 'spring',
+		stiffness: 300,
+		damping: 200,
+	},
+	initial: 'initial',
+	animate: 'in',
+	exit: 'out',
+})<{ url: string }>`
 	background-size: cover;
+	background-image: url(${({ url }) => url});
 	background-position: center;
 	background-repeat: no-repeat;
 	height: 700px;
-	background-color: #006600;
 `;
-const slides = [1, 2, 3];
+
+const slides = [
+	'https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png',
+	'https://d33wubrfki0l68.cloudfront.net/49de349d12db851952c5556f3c637ca772745316/cfc56/static/images/wallpapers/bridge-02@2x.png',
+	'https://d33wubrfki0l68.cloudfront.net/594de66469079c21fc54c14db0591305a1198dd6/3f4b1/static/images/wallpapers/bridge-01@2x.png',
+];
 
 const ImageSlider = () => {
-	const [currentSlideIdx, setCurrentSlide] = useState<number>(0);
+	const [[currentSlideIdx, showNext], setCurrentSlide] = useState<[number, boolean]>([0, true]);
 	const timerId = useRef<number>();
 
 	const showNextSlide = useCallback(() => {
-		setCurrentSlide(prevState => (prevState + 1) % slides.length);
+		setCurrentSlide(([prevCurrentSlideIdx]) => [(prevCurrentSlideIdx + 1) % slides.length, true]);
 	}, [setCurrentSlide]);
+
 	const showPrevSlide = useCallback(() => {
-		setCurrentSlide(prevState => (prevState - 1 < 0 ? slides.length - 1 : prevState - 1));
+		setCurrentSlide(([prevCurrentSlideIdx]) => [
+			prevCurrentSlideIdx - 1 < 0 ? slides.length - 1 : prevCurrentSlideIdx - 1,
+			false,
+		]);
 	}, [setCurrentSlide]);
+
 	const showSelectedSlide = useCallback(
 		(slideIdx: number) => () => {
-			setCurrentSlide(slideIdx);
+			setCurrentSlide(([prevCurrentSlideIdx]) => [slideIdx, prevCurrentSlideIdx < slideIdx]);
 		},
 		[setCurrentSlide]
 	);
@@ -147,7 +178,7 @@ const ImageSlider = () => {
 
 	return (
 		<Slider onMouseEnter={clearTimer} onMouseLeave={startTimer}>
-			<SliderImage>{slides[currentSlideIdx]}</SliderImage>
+			<SliderImage url={slides[currentSlideIdx]} key={currentSlideIdx} custom={showNext} />
 			<SliderArrows>
 				<SliderArrow onClick={showNextSlide} />
 				<SliderArrow leftArrow onClick={showPrevSlide} />
