@@ -20,6 +20,7 @@ declare module 'styled-components' {
 		contrastText: string;
 		utils: {
 			centerFlex: FlattenSimpleInterpolation;
+			quickTransition: string;
 		};
 		spacing: {
 			s: number;
@@ -49,6 +50,7 @@ const sharedTheme = {
 	},
 	utils: {
 		centerFlex,
+		quickTransition: `0.125s ease-in-out`,
 	},
 	spacing: {
 		s: 4,
