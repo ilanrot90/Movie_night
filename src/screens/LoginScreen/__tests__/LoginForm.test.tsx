@@ -34,7 +34,7 @@ describe('Login actions', () => {
 
 		await userEvent.click(loginButton);
 
-		await waitFor(() => expect(screen.getByTestId(/logout-btn/i)).toBeInTheDocument());
+		await waitFor(() => expect(screen.getByRole('button', { name: /account of current user/i })).toBeInTheDocument());
 	});
 
 	test('Login button is Disabled when login in process', async () => {
