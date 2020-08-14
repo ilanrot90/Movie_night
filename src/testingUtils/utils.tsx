@@ -45,6 +45,11 @@ const customQueries = {
 // helper to test login screens
 export const signOutRender = async () => {
 	renderUi({ route: '/app' });
+	// open menu
+	const menuButton = screen.getByRole('button', { name: /account of current user/i });
+	expect(menuButton).toBeInTheDocument();
+	userEvent.click(menuButton);
+
 	expect(screen.getByTestId(/logout-btn/i)).toBeInTheDocument();
 	userEvent.click(screen.getByTestId(/logout-btn/i));
 	return await waitFor(() => expect(screen.getAllByRole('button', { name: /log in/i })).toBeArrayOfSize(4));
