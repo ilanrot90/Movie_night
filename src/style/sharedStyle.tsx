@@ -40,7 +40,6 @@ export const PageContainer = styled(motion.div).attrs({
 export const BaseContainer = styled.div`
 	display: flex;
 	width: 100%;
-	height: 100vh;
 	flex-direction: column;
 	background-image: ${({ theme }) => theme.background};
 `;
