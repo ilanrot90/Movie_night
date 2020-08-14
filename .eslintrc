@@ -21,7 +21,7 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],
-  "ignorePatterns": ["*.test.*"],
+  "ignorePatterns": ["*.test.*", "src/__mocks__/*"],
   "rules": {
     "no-console": 1,
     "no-mixed-spaces-and-tabs": 0
