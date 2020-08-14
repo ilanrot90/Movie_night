@@ -5,7 +5,9 @@ import { authAtom } from 'state/atoms/authAtom';
 import { themeAtom } from 'state/atoms/styleAtom';
 // utils
 import { debounce } from 'utils/lodash.utils';
+import { auth } from 'firebase-methods/Firebase';
 // components
+import Icon from 'components/common-ui/icon';
 import SearchInput from 'components/common-ui/SearchInput';
 import Switch from 'components/common-ui/SwitchComponent';
 // style
@@ -62,8 +64,19 @@ const useStyles = makeStyles((theme: any) =>
 	})
 );
 
+const LogoutIcon = styled(Icon).attrs({
+	name: 'exit',
+})`
+	margin-left: auto;
+`;
+
 type Listener = EventListenerOrEventListenerObject;
 const isDarkTheme = (theme: string) => theme === 'dark';
+const getDisplayName = (name: string | undefined) =>
+	name
+		?.split(' ')
+		.map(v => v[0])
+		.join('');
 
 export default function MenuAppBar() {
 	const classes = useStyles();
@@ -83,6 +96,11 @@ export default function MenuAppBar() {
 			document.removeEventListener('mousedown', handleScroll);
 		};
 	});
+
+	const logoutUser = useCallback(() => {
+		auth.signOut();
+	}, []);
+
 	const handleChange = useCallback((value: string) => {
 		console.log({ value });
 	}, []);
@@ -109,7 +127,11 @@ export default function MenuAppBar() {
 					aria-haspopup="true"
 					color="inherit"
 				>
-					<Avatar>IR</Avatar>
+					<Avatar>
+						<Text as={'span'} size={14}>
+							{getDisplayName(user?.displayName)}
+						</Text>
+					</Avatar>
 				</IconButton>
 				<Title as="h1" size={22}>
 					Title
@@ -150,6 +172,19 @@ export default function MenuAppBar() {
 													initialValue={isDarkTheme(theme)}
 												/>
 											</ListItemSecondaryAction>
+										</ListItem>
+										<Divider />
+										<ListItem
+											className={classes.item}
+											data-testid={'logout-btn'}
+											button
+											onClick={logoutUser}
+											aria-label="log-out-user"
+										>
+											<Text size={12} as={'span'}>
+												Logout
+											</Text>
+											<LogoutIcon />
 										</ListItem>
 									</List>
 								</ClickAwayListener>
