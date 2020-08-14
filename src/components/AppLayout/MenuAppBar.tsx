@@ -30,6 +30,7 @@ const TopNav = styled.div<{ isOnTop: boolean }>`
 	max-width: 100%;
 	height: 60px;
 	position: sticky;
+	top: 0;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -75,7 +76,7 @@ const isDarkTheme = (theme: string) => theme === 'dark';
 const getDisplayName = (name: string | undefined) =>
 	name
 		?.split(' ')
-		.map(v => v[0])
+		?.map(v => v[0])
 		.join('');
 
 export default function MenuAppBar() {

@@ -9,7 +9,6 @@ import Icon from 'components/common-ui/icon';
 
 const Container = styled(PageContainer)`
 	position: relative;
-	min-height: 100vh;
 `;
 const LogoutButton = styled(IconButton)`
 	position: fixed;
