@@ -228,5 +228,6 @@ jobs:
       - slack/notify:
           message: "${CIRCLE_BRANCH} branch deployment to aws s3 and cloudfront is complete."
           webhook: $SLACK_WEBHOOK
+          url: d8ufwol492b71.cloudfront.net
       - slack/status:
           webhook: $SLACK_WEBHOOK

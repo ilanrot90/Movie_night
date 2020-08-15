@@ -151,18 +151,22 @@ interface IProps {
 
 const MAXIMUM_SET_TIMEOUT_VALUE = 2147483647;
 
-const Slider: React.FC<IProps> = ({ slides, autoSlide = true, timeFrame = autoSlide ? 5000 : MAXIMUM_SET_TIMEOUT_VALUE }) => {
+const Slider: React.FC<IProps> = ({
+	slides = [],
+	autoSlide = true,
+	timeFrame = autoSlide ? 5000 : MAXIMUM_SET_TIMEOUT_VALUE,
+}) => {
 	const [[currentSlideIdx, showNext], setCurrentSlide] = useState<[number, boolean]>([0, true]);
 	const prevSlideIdx = usePrevious(currentSlideIdx) || 0;
 	const timerId = useRef<number>();
 
 	const showNextSlide = useCallback(() => {
 		setCurrentSlide(([prevCurrentSlideIdx]) => [(prevCurrentSlideIdx + 1) % slides.length, true]);
-	}, [setCurrentSlide]);
+	}, [setCurrentSlide, slides.length]);
 
 	const showPrevSlide = useCallback(() => {
 		setCurrentSlide(([prevCurrentSlideIdx]) => [prevCurrentSlideIdx === 0 ? slides.length - 1 : prevCurrentSlideIdx - 1, false]);
-	}, [setCurrentSlide]);
+	}, [setCurrentSlide, slides.length]);
 
 	const showSelectedSlide = useCallback(
 		(slideIdx: number) => () => {
