@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 // recoil
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { authAtom } from 'state/atoms/authAtom';
@@ -14,7 +14,7 @@ import Switch from 'components/common-ui/SwitchComponent';
 import styled from 'styled-components';
 import IconButton from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
-import { Text } from 'style/sharedStyle';
+import { Text, HEADER_HEIGHT } from 'style/sharedStyle';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -26,18 +26,18 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Divider from '@material-ui/core/Divider';
 
-const TopNav = styled.div<{ isOnTop: boolean }>`
+const TopNav = styled.div`
 	max-width: 100%;
-	height: 60px;
+	height: ${HEADER_HEIGHT};
 	position: sticky;
 	top: 0;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background-color: ${({ theme, isOnTop }) => (isOnTop ? 'transparent' : theme.dark)};
-	transition: background-color 0.125s ease-in;
-	padding: ${({ theme }) => theme.spacing.m}px;
-	z-index: 1;
+	background-color: ${({ theme }) => theme.dark};
+	transition: background-color ${({ theme }) => theme.utils.quickTransition};
+	padding: 0 ${({ theme }) => theme.spacing.m}px;
+	z-index: 10;
 `;
 
 const Input = styled.div`
@@ -71,7 +71,6 @@ const LogoutIcon = styled(Icon).attrs({
 	margin-left: auto;
 `;
 
-type Listener = EventListenerOrEventListenerObject;
 const isDarkTheme = (theme: string) => theme === 'dark';
 const getDisplayName = (name: string | undefined) =>
 	name
@@ -85,21 +84,9 @@ export default function MenuAppBar() {
 	const [theme, setTheme] = useRecoilState(themeAtom);
 	const [open, setOpen] = React.useState(false);
 	const anchorRef = React.useRef<HTMLButtonElement>(null) as React.MutableRefObject<HTMLInputElement>;
-	const [isOnTop, setPositionTop] = useState<boolean>(true);
 
-	useEffect(() => {
-		const handleScroll: Listener = () => {
-			const scrollToList = !(document.body.scrollTop > 50);
-			setPositionTop(scrollToList);
-		};
-		document.addEventListener('scroll', handleScroll);
-		return () => {
-			document.removeEventListener('mousedown', handleScroll);
-		};
-	});
-
-	const logoutUser = useCallback(() => {
-		auth.signOut();
+	const logoutUser = useCallback(async () => {
+		await auth.signOut();
 	}, []);
 
 	const handleChange = useCallback((value: string) => {
@@ -120,7 +107,7 @@ export default function MenuAppBar() {
 
 	return (
 		<>
-			<TopNav isOnTop={!isOnTop} ref={anchorRef} aria-controls={open ? 'menu-list' : undefined}>
+			<TopNav ref={anchorRef} aria-controls={open ? 'menu-list' : undefined}>
 				<IconButton
 					className={classes.menuButton}
 					onClick={handleToggle}

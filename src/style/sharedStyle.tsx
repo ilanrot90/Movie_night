@@ -103,3 +103,30 @@ export const MarginContainer = styled.div<{
 					margin-bottom: ${getCssAttribute(props.bottom)};
 			  `}
 `;
+
+export const scrollbar = css`
+	overflow: overlay;
+	&::-webkit-scrollbar-track {
+		box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+		background-color: #ffffff;
+	}
+	&::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+		background-color: rgba(166, 185, 200, 0.75);
+	}
+	&::-webkit-scrollbar-thumb {
+		border-radius: 4px;
+		background-color: rgba(166, 185, 200, 0.75);
+	}
+	&::-webkit-scrollbar-thumb:hover {
+		background-color: rgba(166, 185, 200, 1);
+	}
+
+	&:hover::-webkit-scrollbar {
+		width: 8px;
+		height: 6px;
+	}
+`;
+
+export const HEADER_HEIGHT = '76px';

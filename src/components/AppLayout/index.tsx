@@ -1,19 +1,23 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import { PageContainer } from 'style/sharedStyle';
+import { PageContainer, HEADER_HEIGHT } from 'style/sharedStyle';
 import MenuAppBar from './MenuAppBar';
 
 const Container = styled(PageContainer)`
 	position: relative;
+	height: calc(100vh - ${HEADER_HEIGHT});
+	${({ theme }) => theme.utils.scrollbar}
 `;
 
 const Index = () => {
 	return (
-		<Container>
+		<>
 			<MenuAppBar />
-			<Outlet />
-		</Container>
+			<Container>
+				<Outlet />
+			</Container>
+		</>
 	);
 };
 
