@@ -2,7 +2,7 @@ import { useEffect, useRef, RefObject } from 'react';
 
 type Listener = EventListenerOrEventListenerObject;
 
-type HTMLTypes = HTMLDivElement
+type HTMLTypes = HTMLDivElement;
 
 export default function useOnClickOutside<T extends HTMLTypes>(handler: () => void): RefObject<T> {
 	const ref = useRef<T>(null);
