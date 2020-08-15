@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import React, { useMemo } from 'react';
-import usePrevious from 'hooks/usePrevios';
+import usePrevious from 'hooks/usePrevious';
 // style
 import { MarginContainer, Text } from '../style';
 import styled from 'styled-components';

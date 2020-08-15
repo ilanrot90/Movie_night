@@ -86,7 +86,7 @@ describe('Sign up with email actions', () => {
 		await userEvent.click(signUpBtn);
 		await waitFor(() => expect(mockedHandleEmailSignUp).toHaveBeenCalledTimes(1));
 
-		const errorPopup = await screen.findByTestId(/login-screens-error-msg/i);
+		const errorPopup = await screen.findByTestId(/error-msg/i);
 		expect(errorPopup).toMatchSnapshot();
 
 		expect(errorPopup).toBeInTheDocument();

@@ -79,7 +79,7 @@ describe('Login actions', () => {
 		expect(mockedLoginWithProvider).toHaveBeenCalledTimes(1);
 		expect(mockedLoginWithProvider).toHaveBeenCalledWith('facebook');
 
-		const errorPopup = await screen.findByTestId(/login-screens-error-msg/i);
+		const errorPopup = await screen.findByTestId(/error-msg/i);
 		expect(errorPopup).toMatchSnapshot();
 
 		expect(errorPopup).toBeInTheDocument();

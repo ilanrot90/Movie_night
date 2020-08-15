@@ -13,7 +13,7 @@ interface IProps {
 const SearchInput: FC<IProps> = ({ callBack, placeholder = 'Search' }) => {
 	const [value, setValue] = useState<string>('');
 	const [open, setOpen] = useState<boolean>(false);
-	const containerRef = useOnClickOutside(
+	const containerRef = useOnClickOutside<HTMLDivElement>(
 		useCallback(() => {
 			isEmpty(value) && setOpen(false);
 		}, [value])

@@ -1,14 +1,16 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, RefObject } from 'react';
 
 type Listener = EventListenerOrEventListenerObject;
 
-export default function useOnClickOutside(handler: () => void) {
-	const ref = useRef<HTMLDivElement>(null);
+type HTMLTypes = HTMLDivElement
+
+export default function useOnClickOutside<T extends HTMLTypes>(handler: () => void): RefObject<T> {
+	const ref = useRef<T>(null);
 
 	useEffect(() => {
 		const listener: Listener = e => {
 			// Do nothing if clicking ref's element or descendent elements
-			if (ref?.current?.contains(e?.target as Node)) {
+			if (ref.current?.contains(e?.target as Node)) {
 				return;
 			}
 			handler();
@@ -21,5 +23,5 @@ export default function useOnClickOutside(handler: () => void) {
 		};
 	}, [ref, handler]);
 
-	return ref;
+	return ref as RefObject<T>;
 }
