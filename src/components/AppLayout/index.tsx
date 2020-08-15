@@ -8,6 +8,7 @@ const Container = styled(PageContainer)`
 	position: relative;
 	height: calc(100vh - ${HEADER_HEIGHT});
 	${({ theme }) => theme.utils.scrollbar}
+	overflow-x: hidden;
 `;
 
 const Index = () => {

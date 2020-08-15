@@ -124,6 +124,7 @@ workflows:
                 - master
       - notify-via-slack:
           requires:
+            - deploy_to_heroku
             - deploy_to_aws_frontcloud
           filters:
             branches:
