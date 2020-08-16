@@ -10,7 +10,7 @@ const slides = [
 const Header = () => {
 	return (
 		<div>
-			<Slider slides={slides} />
+			<Slider slides={slides} height={700} />
 		</div>
 	);
 };

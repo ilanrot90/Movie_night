@@ -5,8 +5,7 @@ const GridContainer = styled.div<{ minColumnSize?: number; rowHeight?: number }>
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(${({ minColumnSize = 320 }) => minColumnSize}px, 1fr));
 	grid-auto-rows: ${({ rowHeight = 460 }) => rowHeight}px;
-	row-gap: ${({ theme }) => theme.spacing.m}px;
-	column-gap: ${({ theme }) => theme.spacing.m}px;
+	gap: ${({ theme }) => theme.spacing.m}px;
 `;
 
 const GridItem = styled.div<{ imageUrl: string }>`

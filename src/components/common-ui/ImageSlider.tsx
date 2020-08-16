@@ -123,12 +123,12 @@ const SliderImage = styled(motion.div).attrs({
 	initial: 'initial',
 	animate: 'in',
 	exit: 'out',
-})<{ url: string; prevSlide: string; custom: boolean }>`
+})<{ url: string; prevSlide: string; custom: boolean; height: number }>`
 	background-image: url(${({ url }) => url});
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	height: 700px;
+	height: ${({ height }) => height}px;
 	position: relative;
 	&::before {
 		background-image: url(${({ prevSlide }) => prevSlide});
@@ -137,7 +137,7 @@ const SliderImage = styled(motion.div).attrs({
 		background-repeat: no-repeat;
 		content: '';
 		position: absolute;
-		height: 700px;
+		height: 100%;
 		width: 100%;
 		left: ${({ custom }) => (custom ? -100 : 100)}%;
 	}
@@ -145,6 +145,7 @@ const SliderImage = styled(motion.div).attrs({
 
 interface IProps {
 	slides: string[];
+	height: number;
 	autoSlide?: boolean;
 	timeFrame?: number;
 }
@@ -153,6 +154,7 @@ const MAXIMUM_SET_TIMEOUT_VALUE = 2147483647;
 
 const Slider: React.FC<IProps> = ({
 	slides = [],
+	height,
 	autoSlide = true,
 	timeFrame = autoSlide ? 5000 : MAXIMUM_SET_TIMEOUT_VALUE,
 }) => {
@@ -195,7 +197,13 @@ const Slider: React.FC<IProps> = ({
 
 	return (
 		<ImageSlider onMouseEnter={clearTimer} onMouseLeave={startTimer}>
-			<SliderImage prevSlide={slides[prevSlideIdx]} url={slides[currentSlideIdx]} key={currentSlideIdx} custom={showNext} />
+			<SliderImage
+				prevSlide={slides[prevSlideIdx]}
+				url={slides[currentSlideIdx]}
+				key={currentSlideIdx}
+				custom={showNext}
+				height={height}
+			/>
 			<SliderArrows>
 				<SliderArrow onClick={showNextSlide} />
 				<SliderArrow leftArrow onClick={showPrevSlide} />
