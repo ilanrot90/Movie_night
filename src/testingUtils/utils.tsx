@@ -6,42 +6,6 @@ import ThemeProvider from 'style/ThemeProvider';
 import { RecoilRoot } from 'recoil';
 import { MemoryRouter } from 'react-router-dom';
 
-/* --custom queries--
-import { fromPairs } from 'utils/lodash.utils';
-
-const GETTERS = ['Text', 'Role', 'TestId', 'LabelText', 'AltText', 'PlaceholderText'] as const;
-const gettersMap = {
-	Text: 'findByText' as const,
-	Role: 'findByRole' as const,
-	TestId: 'findByTestId' as const,
-	LabelText: 'findByLabelText' as const,
-	AltText: 'findByAltText' as const,
-	PlaceholderText: 'findByPlaceholderText' as const,
-};
-const gettersKeys = {
-	Text: 'clickByText' as 'findByText',
-	Role: 'clickByRole' as 'findByRole',
-	TestId: 'clickByTestId' as 'findByTestId',
-	LabelText: 'clickByLabelText' as 'findByLabelText',
-	AltText: 'clickByAltText' as 'findByAltText',
-	PlaceholderText: 'clickByPlaceholderText' as 'findByPlaceholderText',
-};
-const clickByFactory = (fn: Function) => async (...args: Array<any>) => {
-	const el: TargetElement = await fn(...args);
-	el && userEvent.click(el);
-	return el;
-};
-const changeByFactory = (fn: Function) => async (value: string, ...args: Array<any>) => {
-	const el: TargetElement = await fn(...args);
-	el && (await userEvent.type(el, value));
-	return el;
-};
-
-const customQueries = {
-	...fromPairs(GETTERS.map(v => [gettersKeys[v], clickByFactory(screen[gettersMap[v]])])),
-	...fromPairs(GETTERS.map(v => [gettersKeys[v], changeByFactory(screen[gettersMap[v]])])),
-};
-*/
 // helper to test login screens
 export const signOutRender = async () => {
 	renderUi({ route: '/app' });
@@ -62,11 +26,14 @@ const renderProviders = (route: string) => ({ children }: { children: ReactEleme
 		</ThemeProvider>
 	</RecoilRoot>
 );
+
 type RenderOptions = {
 	route: string;
+	app?: ReactElement;
 };
-export function renderUi({ route, ...renderOptions }: RenderOptions) {
-	return render(<App />, { wrapper: renderProviders(route) as ComponentType, ...renderOptions });
+
+export function renderUi({ app = <App />, route, ...renderOptions }: RenderOptions) {
+	return render(app, { wrapper: renderProviders(route) as ComponentType, ...renderOptions });
 }
 
 // re-export everything
