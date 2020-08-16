@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render image carousel component Change image after 3 sec 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+  <div
+    animate=\\"in\\"
+-   class=\\"sc-AxgMl iiRlev\\"
++   class=\\"sc-AxgMl lebLjy\\"
+    data-testid=\\"image-slider\\"
+    exit=\\"out\\"
+    height=\\"400\\"
+    initial=\\"initial\\"
+    prevslide=\\"https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png\\"
+    transition=\\"[object Object]\\"
+-   url=\\"https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png\\"
++   url=\\"https://d33wubrfki0l68.cloudfront.net/49de349d12db851952c5556f3c637ca772745316/cfc56/static/images/wallpapers/bridge-02@2x.png\\"
+    variants=\\"[object Object]\\"
+  />"
+`;

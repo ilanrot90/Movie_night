@@ -5,7 +5,9 @@ jest.mock('framer-motion', () => ({
 		path: () => <path />,
 		svg: () => <svg />,
 		div: ({ children, ...rest }: { children: ReactElement; 'data-testid': string }) => (
-			<div data-testid={rest['data-testid']}>{children}</div>
+			<div data-testid={rest['data-testid']} {...rest}>
+				{children}
+			</div>
 		),
 	},
 	AnimatePresence: ({ children }: { children: ReactElement }) => <div>{children}</div>,

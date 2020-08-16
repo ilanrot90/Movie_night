@@ -16,6 +16,10 @@ describe('Render image carousel component', () => {
 		jest.useFakeTimers();
 	});
 
+	afterEach(() => {
+		jest.useRealTimers();
+	});
+
 	afterAll(() => {
 		mockedConsole.mockRestore();
 		jest.useRealTimers();
