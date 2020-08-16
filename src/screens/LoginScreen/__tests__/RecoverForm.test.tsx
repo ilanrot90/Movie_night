@@ -49,7 +49,7 @@ describe('Recover email actions', () => {
 		await userEvent.type(emailInput, 'test@test.com');
 		await userEvent.click(recoverBtn);
 
-		const errorPopup = await screen.findByTestId(/login-screens-error-msg/i);
+		const errorPopup = await screen.findByTestId(/error-msg/i);
 		expect(errorPopup).toMatchSnapshot();
 
 		expect(errorPopup).toBeInTheDocument();

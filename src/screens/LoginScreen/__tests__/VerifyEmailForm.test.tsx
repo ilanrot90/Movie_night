@@ -31,7 +31,7 @@ describe('Verify Email re-send', () => {
 
 		await userEvent.click(submitBtn);
 
-		const errorPopup = await screen.findByTestId(/login-screens-error-msg/i);
+		const errorPopup = await screen.findByTestId(/error-msg/i);
 		expect(errorPopup).toMatchSnapshot();
 
 		expect(errorPopup).toBeInTheDocument();

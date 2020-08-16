@@ -1,15 +1,10 @@
 import React, { FC, ReactElement, useCallback, useEffect } from 'react';
 import { useFirebase, resetState } from 'state/context/loginContext';
 // components
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import SnackbarAlert from 'components/common-ui/SnackbarAlert';
 import Logo from './SvgLogo';
 // style
 import { Footer, Header, Content, StyledLink, Form } from '../style';
-
-const Alert = (props: AlertProps) => {
-	return <MuiAlert data-testid={'login-screens-error-msg'} elevation={6} variant="filled" {...props} />;
-};
 
 interface IProps {
 	title: string;
@@ -46,11 +41,7 @@ const AnimatedForm: FC<IProps> = ({ title, footer, link, children }) => {
 					{footer} <StyledLink to={link.to}> {link.text}</StyledLink>
 				</Footer>
 			</Form>
-			<Snackbar open={!!error} autoHideDuration={3000} onClose={handleResetError}>
-				<Alert onClose={handleResetError} severity="error">
-					{error}
-				</Alert>
-			</Snackbar>
+			<SnackbarAlert open={!!error} handleResetError={handleResetError} error={error} />
 		</>
 	);
 };

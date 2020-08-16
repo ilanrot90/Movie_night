@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
+import usePrevious from 'hooks/usePrevious';
 
-const Slider = styled.div`
+const ImageSlider = styled.div`
 	overflow: hidden;
 	position: relative;
 	display: flex;
@@ -122,34 +123,50 @@ const SliderImage = styled(motion.div).attrs({
 	initial: 'initial',
 	animate: 'in',
 	exit: 'out',
-})<{ url: string }>`
-	background-size: cover;
+})<{ url: string; prevSlide: string; custom: boolean }>`
 	background-image: url(${({ url }) => url});
+	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 	height: 700px;
+	position: relative;
+	&::before {
+		background-image: url(${({ prevSlide }) => prevSlide});
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		content: '';
+		position: absolute;
+		height: 700px;
+		width: 100%;
+		left: ${({ custom }) => (custom ? -100 : 100)}%;
+	}
 `;
 
-const slides = [
-	'https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png',
-	'https://d33wubrfki0l68.cloudfront.net/49de349d12db851952c5556f3c637ca772745316/cfc56/static/images/wallpapers/bridge-02@2x.png',
-	'https://d33wubrfki0l68.cloudfront.net/594de66469079c21fc54c14db0591305a1198dd6/3f4b1/static/images/wallpapers/bridge-01@2x.png',
-];
+interface IProps {
+	slides: string[];
+	autoSlide?: boolean;
+	timeFrame?: number;
+}
 
-const ImageSlider = () => {
+const MAXIMUM_SET_TIMEOUT_VALUE = 2147483647;
+
+const Slider: React.FC<IProps> = ({
+	slides = [],
+	autoSlide = true,
+	timeFrame = autoSlide ? 5000 : MAXIMUM_SET_TIMEOUT_VALUE,
+}) => {
 	const [[currentSlideIdx, showNext], setCurrentSlide] = useState<[number, boolean]>([0, true]);
+	const prevSlideIdx = usePrevious(currentSlideIdx) || 0;
 	const timerId = useRef<number>();
 
 	const showNextSlide = useCallback(() => {
 		setCurrentSlide(([prevCurrentSlideIdx]) => [(prevCurrentSlideIdx + 1) % slides.length, true]);
-	}, [setCurrentSlide]);
+	}, [setCurrentSlide, slides.length]);
 
 	const showPrevSlide = useCallback(() => {
-		setCurrentSlide(([prevCurrentSlideIdx]) => [
-			prevCurrentSlideIdx - 1 < 0 ? slides.length - 1 : prevCurrentSlideIdx - 1,
-			false,
-		]);
-	}, [setCurrentSlide]);
+		setCurrentSlide(([prevCurrentSlideIdx]) => [prevCurrentSlideIdx === 0 ? slides.length - 1 : prevCurrentSlideIdx - 1, false]);
+	}, [setCurrentSlide, slides.length]);
 
 	const showSelectedSlide = useCallback(
 		(slideIdx: number) => () => {
@@ -166,8 +183,8 @@ const ImageSlider = () => {
 		timerId.current && clearTimer();
 		timerId.current = setTimeout(() => {
 			showNextSlide();
-		}, 5000);
-	}, [showNextSlide, timerId, clearTimer]);
+		}, timeFrame);
+	}, [showNextSlide, timerId, clearTimer, timeFrame]);
 
 	useEffect(() => {
 		startTimer();
@@ -177,8 +194,8 @@ const ImageSlider = () => {
 	}, [currentSlideIdx, clearTimer, startTimer]);
 
 	return (
-		<Slider onMouseEnter={clearTimer} onMouseLeave={startTimer}>
-			<SliderImage url={slides[currentSlideIdx]} key={currentSlideIdx} custom={showNext} />
+		<ImageSlider onMouseEnter={clearTimer} onMouseLeave={startTimer}>
+			<SliderImage prevSlide={slides[prevSlideIdx]} url={slides[currentSlideIdx]} key={currentSlideIdx} custom={showNext} />
 			<SliderArrows>
 				<SliderArrow onClick={showNextSlide} />
 				<SliderArrow leftArrow onClick={showPrevSlide} />
@@ -188,8 +205,8 @@ const ImageSlider = () => {
 					<SliderNav key={i} isActive={i === currentSlideIdx} onClick={showSelectedSlide(i)} />
 				))}
 			</SliderIndicator>
-		</Slider>
+		</ImageSlider>
 	);
 };
 
-export default React.memo(ImageSlider);
+export default React.memo(Slider);
