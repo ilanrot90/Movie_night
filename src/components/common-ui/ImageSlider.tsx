@@ -104,6 +104,7 @@ const SliderArrow = styled.span<{ leftArrow?: boolean }>`
 `;
 
 const SliderImage = styled(motion.div).attrs({
+	'data-testid': 'image-slider',
 	variants: {
 		initial: (showNext: boolean) => ({
 			x: showNext ? '100%' : '-100%',
@@ -152,15 +153,11 @@ interface IProps {
 
 const MAXIMUM_SET_TIMEOUT_VALUE = 2147483647;
 
-const Slider: React.FC<IProps> = ({
-	slides = [],
-	height,
-	autoSlide = true,
-	timeFrame = autoSlide ? 5000 : MAXIMUM_SET_TIMEOUT_VALUE,
-}) => {
+const Slider: React.FC<IProps> = ({ slides = [], height, autoSlide = true, timeFrame = 5000 }) => {
 	const [[currentSlideIdx, showNext], setCurrentSlide] = useState<[number, boolean]>([0, true]);
 	const prevSlideIdx = usePrevious(currentSlideIdx) || 0;
 	const timerId = useRef<number>();
+	const time = autoSlide ? timeFrame : MAXIMUM_SET_TIMEOUT_VALUE;
 
 	const showNextSlide = useCallback(() => {
 		setCurrentSlide(([prevCurrentSlideIdx]) => [(prevCurrentSlideIdx + 1) % slides.length, true]);
@@ -185,8 +182,8 @@ const Slider: React.FC<IProps> = ({
 		timerId.current && clearTimer();
 		timerId.current = setTimeout(() => {
 			showNextSlide();
-		}, timeFrame);
-	}, [showNextSlide, timerId, clearTimer, timeFrame]);
+		}, time);
+	}, [showNextSlide, timerId, clearTimer, time]);
 
 	useEffect(() => {
 		startTimer();
@@ -205,8 +202,8 @@ const Slider: React.FC<IProps> = ({
 				height={height}
 			/>
 			<SliderArrows>
-				<SliderArrow onClick={showNextSlide} />
-				<SliderArrow leftArrow onClick={showPrevSlide} />
+				<SliderArrow role="button" onClick={showNextSlide} />
+				<SliderArrow role="button" leftArrow onClick={showPrevSlide} />
 			</SliderArrows>
 			<SliderIndicator>
 				{Array.from({ length: slides.length }).map((_, i) => (
