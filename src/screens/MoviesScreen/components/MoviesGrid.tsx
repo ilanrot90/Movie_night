@@ -1,7 +1,7 @@
 import React from 'react';
 import MovieCard from './MovieCard';
 import Grid from 'components/Grid';
-import { MainContainer } from '../style';
+import { MainContainer, Title } from '../style';
 
 const items = [
 	{
@@ -69,6 +69,7 @@ const items = [
 const MoviesGrid = () => {
 	return (
 		<MainContainer>
+			<Title>latest movies</Title>
 			<Grid items={items} gridCellComponent={MovieCard} />
 		</MainContainer>
 	);
