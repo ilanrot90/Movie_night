@@ -1,15 +1,5 @@
 import { DefaultTheme, FlattenSimpleInterpolation, css } from 'styled-components';
 import { centerFlex, scrollbar } from './sharedStyle';
-export interface Theme {
-	light: string;
-	background: string;
-	main: string;
-	dark: string;
-	contrastText: string;
-	utils: {
-		centerFlex: FlattenSimpleInterpolation;
-	};
-}
 
 declare module 'styled-components' {
 	export interface DefaultTheme {
@@ -22,6 +12,7 @@ declare module 'styled-components' {
 			centerFlex: FlattenSimpleInterpolation;
 			scrollbar: FlattenSimpleInterpolation;
 			quickTransition: string;
+			normalTransition: string;
 		};
 		spacing: {
 			s: number;
@@ -32,6 +23,7 @@ declare module 'styled-components' {
 		};
 		shadow: {
 			m: FlattenSimpleInterpolation;
+			l: FlattenSimpleInterpolation;
 		};
 		text: {
 			s: number;
@@ -53,6 +45,7 @@ const sharedTheme = {
 		centerFlex,
 		scrollbar,
 		quickTransition: `0.125s ease-in-out`,
+		normalTransition: `0.250s ease-in-out`,
 	},
 	spacing: {
 		s: 4,
@@ -64,6 +57,9 @@ const sharedTheme = {
 	shadow: {
 		m: css`
 			box-shadow: 0 -2px 10px rgba(0, 0, 0, 1);
+		`,
+		l: css`
+			box-shadow: rgba(3, 8, 20, 0.1) 0 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0 0.075rem 0.175rem;
 		`,
 	},
 };
