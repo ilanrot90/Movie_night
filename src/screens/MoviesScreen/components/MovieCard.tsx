@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import useLazyImage from 'hooks/useLazyImage';
+import { RatingStar } from 'components/common-ui/RatingStar';
 import Icon from 'components/common-ui/icon';
 import { Text } from 'style/sharedStyle';
-import { RatingStar } from 'components/common-ui/RatingStar';
 
 const PlayIcon = styled(Icon)`
 	position: absolute;
@@ -12,11 +13,16 @@ const PlayIcon = styled(Icon)`
 	display: none;
 `;
 
-const Card = styled.div`
+const Card = styled.div<{ imageSrc: string }>`
 	display: flex;
 	flex-direction: column;
 	position: relative;
 	cursor: pointer;
+	border-radius: 4px;
+	background-image: url(${({ imageSrc }) => imageSrc});
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 	padding: ${({ theme }) => theme.spacing.m}px;
 	&:hover ${PlayIcon} {
 		display: block;
@@ -41,8 +47,10 @@ type Props = {
 };
 
 const MovieCard: FC<Props> = ({ item }) => {
+	const { elementRef, imageSrc } = useLazyImage<HTMLDivElement>({ src: item.imageUrl });
+
 	return (
-		<Card>
+		<Card ref={elementRef} imageSrc={imageSrc}>
 			<PlayIcon size={44} name={'play'} />
 			<CardDetails>
 				<MovieTitle>{item.title}</MovieTitle>
