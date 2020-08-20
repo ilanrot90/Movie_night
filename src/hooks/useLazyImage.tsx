@@ -12,8 +12,8 @@ type R<T> = {
 };
 
 const useLazyImage = <T extends Element>({ src, placeholder = placeholderImage }: Props): R<T> => {
-	const [isLoading, setLoading] = useState(true);
-	const [imageSrc, setImageSrc] = useState(placeholder);
+	const [isLoading, setLoading] = useState<boolean>(true);
+	const [imageSrc, setImageSrc] = useState<string>(placeholder);
 	const [imageRef, elementRef] = useState<T>() as [T, (instance: T | null) => void];
 
 	useEffect(() => {
@@ -33,7 +33,7 @@ const useLazyImage = <T extends Element>({ src, placeholder = placeholderImage }
 					},
 					{
 						threshold: 0.01,
-						rootMargin: '75%',
+						rootMargin: '50%',
 					}
 				);
 				observer.observe(imageRef);
