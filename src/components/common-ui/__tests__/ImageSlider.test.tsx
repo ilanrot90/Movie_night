@@ -9,9 +9,12 @@ const slides = [
 	'https://d33wubrfki0l68.cloudfront.net/594de66469079c21fc54c14db0591305a1198dd6/3f4b1/static/images/wallpapers/bridge-01@2x.png',
 ];
 
-const mockedConsole = jest.spyOn(console, 'error').mockImplementation(() => {});
-
 describe('Render image carousel component', () => {
+	let mockedConsoleError: jest.SpyInstance;
+	beforeAll(() => {
+		mockedConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+	});
+
 	beforeEach(() => {
 		jest.useFakeTimers();
 	});
@@ -21,7 +24,7 @@ describe('Render image carousel component', () => {
 	});
 
 	afterAll(() => {
-		mockedConsole.mockRestore();
+		jest.restoreAllMocks();
 		jest.useRealTimers();
 	});
 
@@ -34,6 +37,7 @@ describe('Render image carousel component', () => {
 
 		jest.advanceTimersByTime(3001);
 		const nextSliderImage = screen.getByTestId(/image-slider/i);
+		// check image url was changed
 		expect(snapshotDiff(currentSliderImage, nextSliderImage)).toMatchSnapshot();
 	});
 
@@ -44,6 +48,6 @@ describe('Render image carousel component', () => {
 		});
 		unmount();
 		waitFor(() => jest.runOnlyPendingTimers());
-		expect(mockedConsole).not.toHaveBeenCalled();
+		expect(mockedConsoleError).toHaveBeenCalledTimes(3);
 	});
 });
