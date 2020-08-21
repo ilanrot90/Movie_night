@@ -7,16 +7,16 @@ exports[`Render image carousel component Change image after 3 sec 1`] = `
 
   <div
     animate=\\"in\\"
--   class=\\"sc-AxgMl iiRlev\\"
-+   class=\\"sc-AxgMl lebLjy\\"
+-   class=\\"sc-AxgMl dxpndP\\"
++   class=\\"sc-AxgMl lRIwE\\"
     data-testid=\\"image-slider\\"
     exit=\\"out\\"
     height=\\"400\\"
     initial=\\"initial\\"
-    prevslide=\\"https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png\\"
+    prevslide=\\"slide-image-1\\"
     transition=\\"[object Object]\\"
--   url=\\"https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png\\"
-+   url=\\"https://d33wubrfki0l68.cloudfront.net/49de349d12db851952c5556f3c637ca772745316/cfc56/static/images/wallpapers/bridge-02@2x.png\\"
+-   url=\\"slide-image-1\\"
++   url=\\"slide-image-2\\"
     variants=\\"[object Object]\\"
   />"
 `;

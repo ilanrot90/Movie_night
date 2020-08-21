@@ -15,7 +15,6 @@ const App = () => {
 	useMount(() => {
 		auth.onAuthStateChanged(user => {
 			setMount(true);
-			console.log({ user });
 			if (user) {
 				const { uid, emailVerified } = user;
 				const { email, displayName, providerId } = get(user, 'providerData[0]');
