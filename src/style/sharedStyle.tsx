@@ -9,6 +9,18 @@ export const centerFlex = css`
 	align-items: center;
 `;
 
+const size = {
+	mobileS: '320px',
+	tablet: '768px',
+	laptop: '1024px',
+};
+
+export const device = {
+	mobileS: `(min-width: ${size.mobileS})`,
+	tablet: `(min-width: ${size.tablet})`,
+	laptop: `(min-width: ${size.laptop})`,
+};
+
 export const PageContainer = styled(motion.div).attrs({
 	variants: {
 		initial: {

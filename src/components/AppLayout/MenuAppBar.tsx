@@ -122,7 +122,7 @@ export default function MenuAppBar() {
 					</Avatar>
 				</IconButton>
 				<Title as="h1" size={22}>
-					Title
+					Movie night
 				</Title>
 				<Input>
 					<SearchInput callBack={debounce(handleChange, 500)} />

@@ -38,7 +38,7 @@ const MovieTitle = styled(Text)`
 	&::before {
 		position: absolute;
 		content: '';
-		background-color: ${({ theme }) => theme.dark};
+		background-image: ${({ theme }) => theme.background};
 		top: 0;
 		left: 0;
 		width: 100%;
