@@ -17,3 +17,39 @@ export type FormValues = {
 export type Provider = 'google' | 'facebook' | 'github';
 
 export type Method = 'GET' | 'POST';
+
+export type Movie = {
+	background_image: string;
+	background_image_original: string;
+	date_uploaded: typeof Date;
+	date_uploaded_unix: number;
+	description_full: string;
+	genres: string[];
+	id: number;
+	imdb_code: string;
+	language: string;
+	large_cover_image: string;
+	medium_cover_image: string;
+	mpa_rating: '';
+	rating: 6.7;
+	runtime: 0;
+	slug: string;
+	small_cover_image: string;
+	state: 'ok';
+	summary: string;
+	synopsis: string;
+	title: string;
+	title_english: string;
+	title_long: string;
+	torrents: { url: string; hash: string; peers: number; seeds: number; size: string }[];
+	url: string;
+	year: 2010;
+	yt_trailer_code: string;
+};
+
+export type MoviesResponse = {
+	limit: number;
+	page_number: number;
+	movie_count: number;
+	movies: Movie[];
+};

@@ -4,6 +4,7 @@ import useLazyImage from 'hooks/useLazyImage';
 import { RatingStar } from 'components/common-ui/RatingStar';
 import Icon from 'components/common-ui/icon';
 import { Text } from 'style/sharedStyle';
+import { Movie } from 'types';
 
 const PlayIcon = styled(Icon)`
 	position: absolute;
@@ -31,6 +32,20 @@ const Card = styled.div<{ imageSrc: string }>`
 
 const MovieTitle = styled(Text)`
 	margin-bottom: ${({ theme }) => theme.spacing.m}px;
+	width: fit-content;
+	position: relative;
+	z-index: 1;
+	&::before {
+		position: absolute;
+		content: '';
+		background-color: ${({ theme }) => theme.dark};
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0.4;
+		z-index: -1;
+	}
 `;
 
 const CardDetails = styled(Text).attrs({
@@ -40,20 +55,17 @@ const CardDetails = styled(Text).attrs({
 `;
 
 type Props = {
-	item: {
-		title: string;
-		imageUrl: string;
-	};
+	movie: Movie;
 };
 
-const MovieCard: FC<Props> = ({ item }) => {
-	const { elementRef, imageSrc } = useLazyImage<HTMLDivElement>({ src: item.imageUrl });
+const MovieCard: FC<Props> = ({ movie }) => {
+	const { elementRef, imageSrc } = useLazyImage<HTMLDivElement>({ src: movie.medium_cover_image });
 	return (
 		<Card ref={elementRef} imageSrc={imageSrc}>
 			<PlayIcon size={44} name={'play'} />
 			<CardDetails>
-				<MovieTitle>{item.title}</MovieTitle>
-				<RatingStar size={16} rating={6.5} />
+				<MovieTitle>{movie.title}</MovieTitle>
+				<RatingStar size={16} rating={movie.rating} />
 			</CardDetails>
 		</Card>
 	);
