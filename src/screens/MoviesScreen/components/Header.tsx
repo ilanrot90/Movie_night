@@ -1,16 +1,19 @@
 import React from 'react';
 import Slider from 'components/common-ui/ImageSlider';
-
-const slides = [
-	'https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png',
-	'https://d33wubrfki0l68.cloudfront.net/49de349d12db851952c5556f3c637ca772745316/cfc56/static/images/wallpapers/bridge-02@2x.png',
-	'https://d33wubrfki0l68.cloudfront.net/594de66469079c21fc54c14db0591305a1198dd6/3f4b1/static/images/wallpapers/bridge-01@2x.png',
-];
+import { useQuery } from 'react-query';
+import { TMDBMoviesResponse } from 'types';
+import { getTopWeekMovies, TMDB_GET_MOVIE_POSTER } from 'queries/movies.queries';
 
 const Header = () => {
+	const { data } = useQuery<TMDBMoviesResponse>('top-weekly-movies-list', getTopWeekMovies, {
+		refetchOnWindowFocus: false,
+		staleTime: 1000 * 60 * 60,
+	});
+	const slides = data?.map(movie => TMDB_GET_MOVIE_POSTER(movie.backdrop_path));
+
 	return (
 		<div>
-			<Slider slides={slides} height={700} />
+			<Slider slides={slides || []} height={700} />
 		</div>
 	);
 };

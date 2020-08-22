@@ -1,28 +1,15 @@
 import React from 'react';
-import axios from 'axios';
 import MovieCard from './MovieCard';
 import { MainContainer, Title } from '../style';
 import { useQuery } from 'react-query';
 import { GridContainer, GridItem } from 'style/sharedStyle';
 import { MoviesResponse } from 'types';
+import { getMoviesList } from 'queries/movies.queries';
 
 const MoviesGrid = () => {
-	const { data } = useQuery<MoviesResponse>(
-		'movies-list',
-		async () => {
-			const source = axios.CancelToken.source();
-			const {
-				data: { data },
-			} = await axios.get('https://yts.mx/api/v2/list_movies.json?page=1', {
-				cancelToken: source.token,
-			});
-
-			return data;
-		},
-		{
-			suspense: true,
-		}
-	);
+	const { data } = useQuery<MoviesResponse>('movies-list', getMoviesList, {
+		staleTime: 1000 * 60 * 5,
+	});
 
 	return (
 		<MainContainer>
