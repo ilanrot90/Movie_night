@@ -8,7 +8,7 @@ import ThemeProvider from 'style/ThemeProvider';
 
 function PersistenceObserver() {
 	// handle persistence here
-	useRecoilTransactionObserver_UNSTABLE(({ snapshot }) => {});
+	useRecoilTransactionObserver_UNSTABLE(({ snapshot }) => null);
 	return null;
 }
 
