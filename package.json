@@ -19,6 +19,7 @@
     "react-dom": "0.0.0-experimental-7f28234f8",
     "react-hook-form": "6.4.1",
     "react-query": "2.9.0",
+    "react-query-devtools": "2.4.4",
     "react-router-dom": "6.0.0-beta.0",
     "react-scripts": "3.4.1",
     "recoil": "0.0.10",
