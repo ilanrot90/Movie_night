@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Recover email actions Show error message when recover email failed 1`] = `
+@media (min-width:768px) {
+
+}
+
 <div
   class="MuiPaper-root MuiAlert-root MuiAlert-filledError MuiPaper-elevation6"
   data-testid="error-msg"

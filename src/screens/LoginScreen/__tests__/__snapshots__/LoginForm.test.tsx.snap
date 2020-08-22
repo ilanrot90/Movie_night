@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Login actions Show error message when login failed 1`] = `
+@media (min-width:768px) {
+
+}
+
 <div
   class="MuiPaper-root MuiAlert-root MuiAlert-filledError MuiPaper-elevation6"
   data-testid="error-msg"
@@ -91,6 +95,10 @@ Array [
   fill: #f9fafa;
 }
 
+@media (min-width:768px) {
+
+}
+
 <button
     class="MuiButtonBase-root MuiButton-root MuiButton-contained c0 c1 MuiButton-containedPrimary MuiButton-fullWidth"
     data-testid="btn"
@@ -155,6 +163,10 @@ Array [
   fill: #f9fafa;
 }
 
+@media (min-width:768px) {
+
+}
+
 <button
     class="MuiButtonBase-root MuiButton-root MuiButton-contained c0 c1 MuiButton-containedPrimary MuiButton-fullWidth"
     data-testid="btn"
@@ -217,6 +229,10 @@ Array [
 
 .c2 {
   fill: #f9fafa;
+}
+
+@media (min-width:768px) {
+
 }
 
 <button
