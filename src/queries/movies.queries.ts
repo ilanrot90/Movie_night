@@ -4,9 +4,9 @@ import { TMDBMovie, MoviesResponse } from 'types';
 const TMDB_GET_MOVIES_LIST = `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.REACT_APP_TMBD_KEY}`;
 const YTS_GET_MOVIES_LIST = (page = 1) => `https://yts.mx/api/v2/list_movies.json?page=${page}`;
 
-const getRequestList = (url: string) => {
+const getRequestList = <T>(url: string) => {
 	const source = axios.CancelToken.source();
-	return axios.get(url, {
+	return axios.get<T>(url, {
 		cancelToken: source.token,
 	});
 };
@@ -17,7 +17,7 @@ export const getMoviesList = async (): Promise<MoviesResponse> => {
 	const url = YTS_GET_MOVIES_LIST();
 	const {
 		data: { data },
-	} = await getRequestList(url);
+	} = await getRequestList<{ data: MoviesResponse }>(url);
 
 	return data;
 };
@@ -25,7 +25,7 @@ export const getMoviesList = async (): Promise<MoviesResponse> => {
 export const getTopWeekMovies = async (): Promise<TMDBMovie[]> => {
 	const {
 		data: { results },
-	} = await getRequestList(TMDB_GET_MOVIES_LIST);
+	} = await getRequestList<{ results: TMDBMovie[] }>(TMDB_GET_MOVIES_LIST);
 
 	return results;
 };
