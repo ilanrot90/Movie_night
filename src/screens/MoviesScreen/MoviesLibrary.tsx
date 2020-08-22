@@ -3,6 +3,7 @@ import Header from './components/Header';
 import MoviesGrid from './components/MoviesGrid';
 import Skeleton from '@material-ui/lab/Skeleton';
 import ErrorBoundary from 'components/ErrorBoundary';
+import GridSkeleton from 'components/GridSkeleton';
 
 const Movies = () => {
 	return (
@@ -13,9 +14,11 @@ const Movies = () => {
 				</Suspense>
 			</ErrorBoundary>
 
-			<Suspense fallback={<Skeleton variant="rect" width={'100%'} height={700} animation="wave" />}>
-				<MoviesGrid />
-			</Suspense>
+			<ErrorBoundary fallback={<GridSkeleton animate={false} />}>
+				<Suspense fallback={<GridSkeleton />}>
+					<MoviesGrid />
+				</Suspense>
+			</ErrorBoundary>
 		</div>
 	);
 };
