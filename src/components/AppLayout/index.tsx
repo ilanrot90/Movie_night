@@ -3,6 +3,8 @@ import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { PageContainer, HEADER_HEIGHT } from 'style/sharedStyle';
 import MenuAppBar from './MenuAppBar';
+import { ReactQueryDevtools } from 'react-query-devtools';
+import { ReactQueryConfigProvider } from 'react-query';
 
 const Container = styled(PageContainer)`
 	position: relative;
@@ -11,14 +13,22 @@ const Container = styled(PageContainer)`
 	overflow-x: hidden;
 `;
 
+const queryConfig = {
+	queries: {
+		suspense: true,
+		useErrorBoundary: true,
+	},
+};
+
 const Index = () => {
 	return (
-		<>
+		<ReactQueryConfigProvider config={queryConfig}>
 			<MenuAppBar />
 			<Container>
 				<Outlet />
 			</Container>
-		</>
+			<ReactQueryDevtools />
+		</ReactQueryConfigProvider>
 	);
 };
 
