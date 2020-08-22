@@ -118,8 +118,9 @@ const SliderImage = styled(motion.div).attrs({
 	},
 	transition: {
 		type: 'spring',
-		stiffness: 300,
-		damping: 200,
+		stiffness: 500,
+		damping: 100,
+		duration: 0.125,
 	},
 	initial: 'initial',
 	animate: 'in',

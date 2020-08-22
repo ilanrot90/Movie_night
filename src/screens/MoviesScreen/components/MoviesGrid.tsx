@@ -1,7 +1,9 @@
 import React from 'react';
+import axios from 'axios';
 import MovieCard from './MovieCard';
 import Grid from 'components/Grid';
 import { MainContainer, Title } from '../style';
+import { useQuery } from 'react-query';
 
 const items = [
 	{
@@ -67,6 +69,20 @@ const items = [
 ];
 
 const MoviesGrid = () => {
+	const { data, isFetching } = useQuery(
+		'movies-list',
+		async () => {
+			const source = axios.CancelToken.source();
+			const { data } = await axios.get('https://yts.mx/api/v2/list_movies.json?page=1', {
+				cancelToken: source.token,
+			});
+
+			return data;
+		},
+		{
+			suspense: true,
+		}
+	);
 	return (
 		<MainContainer>
 			<Title>latest movies</Title>

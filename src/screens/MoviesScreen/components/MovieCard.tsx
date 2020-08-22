@@ -48,7 +48,6 @@ type Props = {
 
 const MovieCard: FC<Props> = ({ item }) => {
 	const { elementRef, imageSrc } = useLazyImage<HTMLDivElement>({ src: item.imageUrl });
-
 	return (
 		<Card ref={elementRef} imageSrc={imageSrc}>
 			<PlayIcon size={44} name={'play'} />

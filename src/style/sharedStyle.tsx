@@ -30,7 +30,7 @@ export const PageContainer = styled(motion.div).attrs({
 	transition: {
 		type: 'tween',
 		ease: 'anticipate',
-		duration: 0.5,
+		default: { duration: 0.5 },
 	},
 	initial: 'initial',
 	animate: 'in',
@@ -130,3 +130,22 @@ export const scrollbar = css`
 `;
 
 export const HEADER_HEIGHT = '76px';
+export const GridContainer = styled.div<{ minColumnSize?: number; rowHeight?: number }>`
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(${({ minColumnSize = 200 }) => minColumnSize}px, 1fr));
+	grid-auto-rows: ${({ rowHeight = 320 }) => rowHeight}px;
+	grid-column-gap: ${({ theme }) => theme.spacing.xl}px;
+	grid-row-gap: ${({ theme }) => theme.spacing.xxl}px;
+`;
+export const GridItem = styled.div`
+	position: relative;
+	display: grid;
+	box-shadow: ${({ theme }) => theme.shadow.l};
+	width: 100%;
+	height: 100%;
+	border-radius: 4px;
+	transition: all ${({ theme }) => theme.utils.normalTransition};
+	&:hover {
+		transform: translateY(3px) scale(1.1);
+	}
+`;
