@@ -17,6 +17,7 @@ const queryConfig = {
 	queries: {
 		suspense: true,
 		useErrorBoundary: true,
+		retry: 2,
 	},
 };
 

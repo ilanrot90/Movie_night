@@ -1,7 +1,8 @@
 import request, { axios } from 'axiosRequest';
+import { TMBD_KEY } from 'config';
 import { TMDBMovie, MoviesResponse } from 'types';
 
-export const TMDB_GET_MOVIES_LIST = `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.REACT_APP_TMBD_KEY}`;
+export const TMDB_GET_MOVIES_LIST = `https://api.themoviedb.org/3/trending/movie/week?api_key=${TMBD_KEY}`;
 export const YTS_GET_MOVIES_LIST = (page = 1) => `https://yts.mx/api/v2/list_movies.json?page=${page}`;
 
 const getRequestList = <T>(url: string) => {
