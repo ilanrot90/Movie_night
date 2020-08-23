@@ -1,7 +1,8 @@
-import { signOutRender, userEvent, waitFor, screen } from 'testingUtils/utils';
+import { userEvent, waitFor, screen, renderUi } from 'testingUtils/utils';
 import { TargetElement } from '@testing-library/user-event';
 import { emailNotValidMessage } from '../authScreens.utils';
 import * as firebaseMethods from 'firebase-methods/methods';
+import { LOGIN_PATH } from 'routes/routesPaths';
 
 const mockedHandleRecoverPassword = jest.spyOn(firebaseMethods, 'recoverPassword');
 
@@ -10,7 +11,7 @@ describe('Recover email actions', () => {
 	let recoverBtn: TargetElement;
 
 	beforeEach(async () => {
-		await signOutRender();
+		renderUi({ route: `/${LOGIN_PATH}` });
 		await userEvent.click(screen.getByRole('link', { name: /forget password/i }));
 		const resetTitle = await screen.findByText('Please Reset password to continue');
 		await waitFor(() => expect(resetTitle).toBeInTheDocument());

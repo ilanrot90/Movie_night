@@ -1,7 +1,8 @@
-import { signOutRender, userEvent, waitFor, screen } from 'testingUtils/utils';
+import { userEvent, waitFor, screen, renderUi } from 'testingUtils/utils';
 import { TargetElement } from '@testing-library/user-event';
 import { emailNotValidMessage, passwordValidation } from '../authScreens.utils';
 import * as firebaseMethods from 'firebase-methods/methods';
+import { LOGIN_PATH } from 'routes/routesPaths';
 
 const mockedLoginWithProvider = jest.spyOn(firebaseMethods, 'loginWithProvider');
 const [validEmail, unValidEmail] = ['test@test.com', 'test-test.com'];
@@ -13,7 +14,7 @@ describe('Login actions', () => {
 	let loginButton: TargetElement;
 
 	beforeEach(async () => {
-		await signOutRender();
+		renderUi({ route: `/${LOGIN_PATH}` });
 		emailInput = screen.getByRole('textbox', {
 			name: /email/i,
 		});
@@ -59,6 +60,7 @@ describe('Login actions', () => {
 
 	test('Sign in with provider', async () => {
 		const loginButtons = screen.getAllByRole('button', { name: /log in with/i });
+		expect(loginButtons).toHaveLength(3);
 		expect(loginButtons).toMatchSnapshot();
 
 		const facebookLoginBtn = loginButtons[0];

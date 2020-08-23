@@ -1,7 +1,8 @@
-import { signOutRender, userEvent, waitFor, screen } from 'testingUtils/utils';
+import { userEvent, waitFor, screen, renderUi } from 'testingUtils/utils';
 import { TargetElement } from '@testing-library/user-event';
 import { emailNotValidMessage, passwordValidation, passwordEmptyMessage } from '../authScreens.utils';
 import * as firebaseMethods from 'firebase-methods/methods';
+import { LOGIN_PATH } from 'routes/routesPaths';
 
 const mockedHandleEmailSignUp = jest.spyOn(firebaseMethods, 'handleEmailSignUp');
 
@@ -13,7 +14,7 @@ describe('Sign up with email actions', () => {
 	let signUpBtn: TargetElement;
 
 	beforeEach(async () => {
-		await signOutRender();
+		renderUi({ route: `/${LOGIN_PATH}` });
 		await userEvent.click(screen.getByRole('link', { name: /sign up/i }));
 		const signUpTitle = await screen.findByText('Please Sign up to continue');
 		await waitFor(() => expect(signUpTitle).toBeInTheDocument());
