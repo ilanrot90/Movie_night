@@ -5,7 +5,7 @@ import { Method } from 'types';
 
 type MockParams = {
 	url: string;
-	responseData: any;
+	responseData?: any;
 	method?: Method;
 	status?: number;
 	data?: any;

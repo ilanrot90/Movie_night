@@ -5,18 +5,15 @@ import App from 'App';
 import ThemeProvider from 'style/ThemeProvider';
 import { RecoilRoot } from 'recoil';
 import { MemoryRouter } from 'react-router-dom';
+import mockAxois from './mocks/axiosMock';
+import { TMDB_GET_MOVIES_LIST, YTS_GET_MOVIES_LIST } from '../queries/movies.queries';
+import mockYTSResponse from './mocks/YTSMovies.json';
+import mockTMDBResponse from './mocks/TMDBMovies.json';
 
-// helper to test login screens
-export const signOutRender = async () => {
+export const homePageRender = () => {
+	mockAxois.mockRequest({ url: YTS_GET_MOVIES_LIST(1), responseData: mockYTSResponse });
+	mockAxois.mockRequest({ url: TMDB_GET_MOVIES_LIST, responseData: mockTMDBResponse });
 	renderUi({ route: '/app' });
-	// open menu
-	const menuButton = screen.getByRole('button', { name: /account of current user/i });
-	expect(menuButton).toBeInTheDocument();
-	userEvent.click(menuButton);
-
-	expect(screen.getByTestId(/logout-btn/i)).toBeInTheDocument();
-	userEvent.click(screen.getByTestId(/logout-btn/i));
-	return await waitFor(() => expect(screen.getAllByRole('button', { name: /log in/i })).toBeArrayOfSize(4));
 };
 
 const renderProviders = (route: string) => ({ children }: { children: ReactElement }): ReactElement => (
