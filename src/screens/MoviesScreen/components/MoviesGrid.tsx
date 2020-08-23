@@ -16,7 +16,7 @@ const MoviesGrid = () => {
 			<Title>latest movies</Title>
 			<GridContainer>
 				{data?.movies?.map(movie => (
-					<GridItem key={movie.id}>
+					<GridItem key={movie.id} aria-label="grid-item">
 						<MovieCard movie={movie} />
 					</GridItem>
 				))}

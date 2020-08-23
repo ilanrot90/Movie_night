@@ -1,12 +1,12 @@
-import axios from 'axios';
+import request, { axios } from 'axiosRequest';
 import { TMDBMovie, MoviesResponse } from 'types';
 
-const TMDB_GET_MOVIES_LIST = `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.REACT_APP_TMBD_KEY}`;
-const YTS_GET_MOVIES_LIST = (page = 1) => `https://yts.mx/api/v2/list_movies.json?page=${page}`;
+export const TMDB_GET_MOVIES_LIST = `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.REACT_APP_TMBD_KEY}`;
+export const YTS_GET_MOVIES_LIST = (page = 1) => `https://yts.mx/api/v2/list_movies.json?page=${page}`;
 
 const getRequestList = <T>(url: string) => {
 	const source = axios.CancelToken.source();
-	return axios.get<T>(url, {
+	return request.get<T>(url, {
 		cancelToken: source.token,
 	});
 };
