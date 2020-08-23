@@ -196,6 +196,7 @@ const Slider: React.FC<IProps> = ({ slides = [], height, autoSlide = true, timeF
 	return (
 		<ImageSlider onMouseEnter={clearTimer} onMouseLeave={startTimer}>
 			<SliderImage
+				role={'image-slider'}
 				prevSlide={slides[prevSlideIdx]}
 				url={slides[currentSlideIdx]}
 				key={currentSlideIdx}

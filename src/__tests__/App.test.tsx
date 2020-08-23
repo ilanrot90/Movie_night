@@ -1,8 +1,8 @@
-import { renderUi, userEvent, waitFor, screen } from 'testingUtils/utils';
+import { userEvent, waitFor, screen, homePageRender } from 'testingUtils/utils';
 
 describe('Render app', () => {
 	test('Logout from app', async () => {
-		renderUi({ route: '/app' });
+		homePageRender();
 		// open menu
 		const menuButton = screen.getByRole('button', { name: /account of current user/i });
 		expect(menuButton).toBeInTheDocument();

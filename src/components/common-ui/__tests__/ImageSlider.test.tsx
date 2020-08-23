@@ -37,13 +37,13 @@ describe('Render image carousel component', () => {
 		expect(snapshotDiff(currentSliderImage, nextSliderImage)).toMatchSnapshot();
 	});
 
-	test('does not attempt to set state when unmounted (to prevent memory leaks)', () => {
+	test('does not attempt to set state when unmounted (to prevent memory leaks)', async () => {
 		const { unmount } = renderUi({
 			app: <ImageSlider slides={slides} height={400} />,
 			route: '/',
 		});
-		waitFor(() => unmount());
-		waitFor(() => jest.runOnlyPendingTimers());
+		await waitFor(() => unmount());
+		await waitFor(() => jest.runOnlyPendingTimers());
 		/*
 		 * 2 calls for html non-valid attribute, 1 call for not wrapped in act
 		 * */

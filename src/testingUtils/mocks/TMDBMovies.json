@@ -1,0 +1,89 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/qVygtf2vU15L2yKS4Ke44U4oMdD.jpg",
+      "genre_ids": [
+        28,
+        80,
+        878
+      ],
+      "id": 605116,
+      "original_language": "en",
+      "original_title": "Project Power",
+      "overview": "An ex-soldier, a teen and a cop collide in New Orleans as they hunt for the source behind a dangerous new pill that grants users temporary superpowers.",
+      "poster_path": "/bOKjzWDxiDkgEQznhzP4kdeAHNI.jpg",
+      "release_date": "2020-08-14",
+      "title": "Project Power",
+      "video": false,
+      "vote_average": 6.8,
+      "vote_count": 569,
+      "popularity": 275.148,
+      "media_type": "movie"
+    },
+    {
+      "id": 703771,
+      "video": false,
+      "vote_count": 98,
+      "vote_average": 6.9,
+      "title": "Deathstroke: Knights \u0026 Dragons - The Movie",
+      "release_date": "2020-08-04",
+      "original_language": "en",
+      "original_title": "Deathstroke: Knights \u0026 Dragons - The Movie",
+      "genre_ids": [
+        28,
+        16
+      ],
+      "backdrop_path": "/owraiceOKtSOa3t8sp3wA9K2Ox6.jpg",
+      "adult": false,
+      "overview": "Ten years ago, Slade Wilson-aka the super-assassin called Deathstroke-made a tragic mistake and his wife and son paid a terrible price. Now, a decade later, Wilson\u0027s family is threatened once again by the murderous Jackal and the terrorists of H.IV.E. Can Deathstroke atone for the sins of the past-or will his family pay the ultimate price?",
+      "poster_path": "/vFIHbiy55smzi50RmF8LQjmpGcx.jpg",
+      "popularity": 90.924,
+      "media_type": "movie"
+    },
+    {
+      "id": 539885,
+      "video": false,
+      "vote_count": 26,
+      "vote_average": 5.5,
+      "title": "Ava",
+      "release_date": "2020-08-06",
+      "original_language": "en",
+      "original_title": "Ava",
+      "genre_ids": [
+        28,
+        80,
+        18,
+        9648,
+        53
+      ],
+      "backdrop_path": "/ekkuqt9Q2ad1F7xq2ZONP0oq36P.jpg",
+      "adult": false,
+      "overview": "A black ops assassin is forced to fight for her own survival after a job goes dangerously wrong.",
+      "poster_path": "/A3z0KMLIEGL22mVrgaV7KDxKRmT.jpg",
+      "popularity": 35.662,
+      "media_type": "movie"
+    },
+    {
+      "id": 726664,
+      "video": false,
+      "vote_count": 30,
+      "vote_average": 6.8,
+      "title": "Fearless",
+      "release_date": "2020-08-14",
+      "original_language": "en",
+      "original_title": "Fearless",
+      "genre_ids": [
+        16,
+        35
+      ],
+      "backdrop_path": "/s7NC2kntiPB3WltWj9bnNTkoqUp.jpg",
+      "adult": false,
+      "overview": "A teen gamer is forced to level up to full-time babysitter when his favorite video game drops three superpowered infants from space into his backyard.",
+      "poster_path": "/5oQJ6HeNGWnEtP9Qyt5IZjuKI7j.jpg",
+      "popularity": 85.397,
+      "media_type": "movie"
+    }
+  ]
+}

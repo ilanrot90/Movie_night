@@ -28,4 +28,5 @@ export function setHeaderToken(token?: string) {
 	}
 }
 
+export { axios };
 export default request;

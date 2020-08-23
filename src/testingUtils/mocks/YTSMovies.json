@@ -1,0 +1,242 @@
+{
+  "status": "ok",
+  "status_message": "Query was successful",
+  "data": {
+    "movie_count": 19987,
+    "limit": 4,
+    "page_number": 1,
+    "movies": [
+      {
+        "id": 20456,
+        "url": "https://yts.mx/movies/superman-man-of-tomorrow-2020",
+        "imdb_code": "tt11079116",
+        "title": "Superman: Man of Tomorrow",
+        "title_english": "Superman: Man of Tomorrow",
+        "title_long": "Superman: Man of Tomorrow (2020)",
+        "slug": "superman-man-of-tomorrow-2020",
+        "year": 2020,
+        "rating": 0,
+        "runtime": 86,
+        "genres": [
+          "Animation"
+        ],
+        "summary": "Daily Planet intern Clark Kent takes learning-on-the-job to new extremes when Lobo and Parasite set their sights on Metropolis.",
+        "description_full": "Daily Planet intern Clark Kent takes learning-on-the-job to new extremes when Lobo and Parasite set their sights on Metropolis.",
+        "synopsis": "Daily Planet intern Clark Kent takes learning-on-the-job to new extremes when Lobo and Parasite set their sights on Metropolis.",
+        "yt_trailer_code": "weOF9_FGjOk",
+        "language": "English",
+        "mpa_rating": "",
+        "background_image": "https://yts.mx/assets/images/movies/superman_man_of_tomorrow_2020/background.jpg",
+        "background_image_original": "https://yts.mx/assets/images/movies/superman_man_of_tomorrow_2020/background.jpg",
+        "small_cover_image": "https://yts.mx/assets/images/movies/superman_man_of_tomorrow_2020/small-cover.jpg",
+        "medium_cover_image": "https://yts.mx/assets/images/movies/superman_man_of_tomorrow_2020/medium-cover.jpg",
+        "large_cover_image": "https://yts.mx/assets/images/movies/superman_man_of_tomorrow_2020/large-cover.jpg",
+        "state": "ok",
+        "torrents": [
+          {
+            "url": "https://yts.mx/torrent/download/F5D6E91152086DD462FA0534DCF2E3D4D7316E3F",
+            "hash": "F5D6E91152086DD462FA0534DCF2E3D4D7316E3F",
+            "quality": "720p",
+            "type": "web",
+            "seeds": 545,
+            "peers": 416,
+            "size": "793.23 MB",
+            "size_bytes": 831761940,
+            "date_uploaded": "2020-08-22 20:25:35",
+            "date_uploaded_unix": 1598120735
+          },
+          {
+            "url": "https://yts.mx/torrent/download/201F2E79F336847124E2A6FBCCFDE2C9E1BB5E52",
+            "hash": "201F2E79F336847124E2A6FBCCFDE2C9E1BB5E52",
+            "quality": "1080p",
+            "type": "web",
+            "seeds": 296,
+            "peers": 385,
+            "size": "1.59 GB",
+            "size_bytes": 1707249500,
+            "date_uploaded": "2020-08-22 22:04:42",
+            "date_uploaded_unix": 1598126682
+          }
+        ],
+        "date_uploaded": "2020-08-22 20:25:35",
+        "date_uploaded_unix": 1598120735
+      },
+      {
+        "id": 20448,
+        "url": "https://yts.mx/movies/stark-raving-mad-2002",
+        "imdb_code": "tt0286152",
+        "title": "Stark Raving Mad",
+        "title_english": "Stark Raving Mad",
+        "title_long": "Stark Raving Mad (2002)",
+        "slug": "stark-raving-mad-2002",
+        "year": 2002,
+        "rating": 6.4,
+        "runtime": 101,
+        "genres": [
+          "Action",
+          "Comedy",
+          "Crime"
+        ],
+        "summary": "Ben McGewan has a deal with Chinatown's non-Chinese gang boss, Gregory, to steal one of four mythical god statues reputed to give immense power. This theft, in exchange for wiping out his debt and a fortune to pay his team of frustrated experts. They organize a wild after hours party in a nightclub as cover to break into the vault of the bank next door. Alas, from the start things go wrong ever worse, for everyone.",
+        "description_full": "Ben McGewan has a deal with Chinatown's non-Chinese gang boss, Gregory, to steal one of four mythical god statues reputed to give immense power. This theft, in exchange for wiping out his debt and a fortune to pay his team of frustrated experts. They organize a wild after hours party in a nightclub as cover to break into the vault of the bank next door. Alas, from the start things go wrong ever worse, for everyone.",
+        "synopsis": "Ben McGewan has a deal with Chinatown's non-Chinese gang boss, Gregory, to steal one of four mythical god statues reputed to give immense power. This theft, in exchange for wiping out his debt and a fortune to pay his team of frustrated experts. They organize a wild after hours party in a nightclub as cover to break into the vault of the bank next door. Alas, from the start things go wrong ever worse, for everyone.",
+        "yt_trailer_code": "",
+        "language": "English",
+        "mpa_rating": "R",
+        "background_image": "https://yts.mx/assets/images/movies/stark_raving_mad_2002/background.jpg",
+        "background_image_original": "https://yts.mx/assets/images/movies/stark_raving_mad_2002/background.jpg",
+        "small_cover_image": "https://yts.mx/assets/images/movies/stark_raving_mad_2002/small-cover.jpg",
+        "medium_cover_image": "https://yts.mx/assets/images/movies/stark_raving_mad_2002/medium-cover.jpg",
+        "large_cover_image": "https://yts.mx/assets/images/movies/stark_raving_mad_2002/large-cover.jpg",
+        "state": "ok",
+        "torrents": [
+          {
+            "url": "https://yts.mx/torrent/download/CF23C1CFB97ADEECF03FB43E93473E91E497A43A",
+            "hash": "CF23C1CFB97ADEECF03FB43E93473E91E497A43A",
+            "quality": "720p",
+            "type": "web",
+            "seeds": 162,
+            "peers": 96,
+            "size": "926.96 MB",
+            "size_bytes": 971988009,
+            "date_uploaded": "2020-08-22 19:01:19",
+            "date_uploaded_unix": 1598115679
+          },
+          {
+            "url": "https://yts.mx/torrent/download/A4A23C879531B93BFA64E06704A75C2491686F67",
+            "hash": "A4A23C879531B93BFA64E06704A75C2491686F67",
+            "quality": "1080p",
+            "type": "web",
+            "seeds": 115,
+            "peers": 90,
+            "size": "1.68 GB",
+            "size_bytes": 1803886264,
+            "date_uploaded": "2020-08-22 21:55:45",
+            "date_uploaded_unix": 1598126145
+          }
+        ],
+        "date_uploaded": "2020-08-22 19:01:19",
+        "date_uploaded_unix": 1598115679
+      },
+      {
+        "id": 20447,
+        "url": "https://yts.mx/movies/mammal-2016",
+        "imdb_code": "tt3777860",
+        "title": "Mammal",
+        "title_english": "Mammal",
+        "title_long": "Mammal (2016)",
+        "slug": "mammal-2016",
+        "year": 2016,
+        "rating": 6.3,
+        "runtime": 96,
+        "genres": [
+          "Drama",
+          "Romance"
+        ],
+        "summary": "The compelling story of a woman who has lost her son and develops an unorthodox relationship with a homeless youth that she seems to fall in love with but doesn't realize it cause she Is stuck in the past with a older man. Their tentative trust is threatened by his involvement with a violent gang and the escalation of her ex-husband's grieving rage.",
+        "description_full": "The compelling story of a woman who has lost her son and develops an unorthodox relationship with a homeless youth that she seems to fall in love with but doesn't realize it cause she Is stuck in the past with a older man. Their tentative trust is threatened by his involvement with a violent gang and the escalation of her ex-husband's grieving rage.",
+        "synopsis": "The compelling story of a woman who has lost her son and develops an unorthodox relationship with a homeless youth that she seems to fall in love with but doesn't realize it cause she Is stuck in the past with a older man. Their tentative trust is threatened by his involvement with a violent gang and the escalation of her ex-husband's grieving rage.",
+        "yt_trailer_code": "GDgquKyfFgg",
+        "language": "English",
+        "mpa_rating": "",
+        "background_image": "https://yts.mx/assets/images/movies/mammal_2016/background.jpg",
+        "background_image_original": "https://yts.mx/assets/images/movies/mammal_2016/background.jpg",
+        "small_cover_image": "https://yts.mx/assets/images/movies/mammal_2016/small-cover.jpg",
+        "medium_cover_image": "https://yts.mx/assets/images/movies/mammal_2016/medium-cover.jpg",
+        "large_cover_image": "https://yts.mx/assets/images/movies/mammal_2016/large-cover.jpg",
+        "state": "ok",
+        "torrents": [
+          {
+            "url": "https://yts.mx/torrent/download/E18318B0446BDE12716F9A3FAD401EFB604E1FDD",
+            "hash": "E18318B0446BDE12716F9A3FAD401EFB604E1FDD",
+            "quality": "720p",
+            "type": "web",
+            "seeds": 0,
+            "peers": 0,
+            "size": "914.81 MB",
+            "size_bytes": 959247811,
+            "date_uploaded": "2020-08-23 03:04:51",
+            "date_uploaded_unix": 1598144691
+          },
+          {
+            "url": "https://yts.mx/torrent/download/14920C92710209167EDE8C8502DAB6880F4C2D0B",
+            "hash": "14920C92710209167EDE8C8502DAB6880F4C2D0B",
+            "quality": "1080p",
+            "type": "web",
+            "seeds": 0,
+            "peers": 0,
+            "size": "1.84 GB",
+            "size_bytes": 1975684956,
+            "date_uploaded": "2020-08-23 05:46:00",
+            "date_uploaded_unix": 1598154360
+          }
+        ],
+        "date_uploaded": "2020-08-23 03:04:51",
+        "date_uploaded_unix": 1598144691
+      },
+      {
+        "id": 20446,
+        "url": "https://yts.mx/movies/your-friends-and-neighbors-1998",
+        "imdb_code": "tt0119517",
+        "title": "Your Friends and Neighbors",
+        "title_english": "Your Friends and Neighbors",
+        "title_long": "Your Friends and Neighbors (1998)",
+        "slug": "your-friends-and-neighbors-1998",
+        "year": 1998,
+        "rating": 6.3,
+        "runtime": 100,
+        "genres": [
+          "Comedy",
+          "Drama",
+          "Romance"
+        ],
+        "summary": "Theater instructor Jerry starts an affair with Mary, and that starts a chain of events that affect their respective partners Terri and Barry and other characters in the film, creating a web of relationships.",
+        "description_full": "Theater instructor Jerry starts an affair with Mary, and that starts a chain of events that affect their respective partners Terri and Barry and other characters in the film, creating a web of relationships.",
+        "synopsis": "Theater instructor Jerry starts an affair with Mary, and that starts a chain of events that affect their respective partners Terri and Barry and other characters in the film, creating a web of relationships.",
+        "yt_trailer_code": "hr3Od1RrfyQ",
+        "language": "English",
+        "mpa_rating": "R",
+        "background_image": "https://yts.mx/assets/images/movies/your_friends_and_neighbors_1998/background.jpg",
+        "background_image_original": "https://yts.mx/assets/images/movies/your_friends_and_neighbors_1998/background.jpg",
+        "small_cover_image": "https://yts.mx/assets/images/movies/your_friends_and_neighbors_1998/small-cover.jpg",
+        "medium_cover_image": "https://yts.mx/assets/images/movies/your_friends_and_neighbors_1998/medium-cover.jpg",
+        "large_cover_image": "https://yts.mx/assets/images/movies/your_friends_and_neighbors_1998/large-cover.jpg",
+        "state": "ok",
+        "torrents": [
+          {
+            "url": "https://yts.mx/torrent/download/C7EAC4ABA14C68E39F11607812F5C9ED55558C16",
+            "hash": "C7EAC4ABA14C68E39F11607812F5C9ED55558C16",
+            "quality": "720p",
+            "type": "web",
+            "seeds": 56,
+            "peers": 52,
+            "size": "917.9 MB",
+            "size_bytes": 962487910,
+            "date_uploaded": "2020-08-22 23:36:42",
+            "date_uploaded_unix": 1598132202
+          },
+          {
+            "url": "https://yts.mx/torrent/download/B235C1C0329423170D887E3910C4CC61E59FB15C",
+            "hash": "B235C1C0329423170D887E3910C4CC61E59FB15C",
+            "quality": "1080p",
+            "type": "web",
+            "seeds": 0,
+            "peers": 0,
+            "size": "1.84 GB",
+            "size_bytes": 1975684956,
+            "date_uploaded": "2020-08-23 01:41:36",
+            "date_uploaded_unix": 1598139696
+          }
+        ],
+        "date_uploaded": "2020-08-22 23:36:42",
+        "date_uploaded_unix": 1598132202
+      }
+    ]
+  },
+  "@meta": {
+    "server_time": 1598165215,
+    "server_timezone": "CET",
+    "api_version": 2,
+    "execution_time": "0.03 ms"
+  }
+}

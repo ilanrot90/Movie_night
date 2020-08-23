@@ -1,8 +1,8 @@
 import React from 'react';
-import Slider from 'components/common-ui/ImageSlider';
 import { useQuery } from 'react-query';
-import { TMDBMoviesResponse } from 'types';
+import Slider from 'components/common-ui/ImageSlider';
 import { getTopWeekMovies, TMDB_GET_MOVIE_POSTER } from 'queries/movies.queries';
+import { TMDBMoviesResponse } from 'types';
 
 const Header = () => {
 	const { data } = useQuery<TMDBMoviesResponse>('top-weekly-movies-list', getTopWeekMovies, {

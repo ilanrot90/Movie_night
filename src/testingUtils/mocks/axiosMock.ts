@@ -5,17 +5,17 @@ import { Method } from 'types';
 
 type MockParams = {
 	url: string;
-	method: Method;
+	responseData?: any;
+	method?: Method;
 	status?: number;
 	data?: any;
-	responseData?: any;
 	responseHeaders?: any;
 };
 
 const methodsMap = {
-	GET: 'onGet' as const,
-	POST: 'onPost' as const,
-};
+	GET: 'onGet',
+	POST: 'onPost',
+} as const;
 
 class MocksManager {
 	private mock: MockAdapter;
@@ -26,8 +26,8 @@ class MocksManager {
 		this.mock = new MockAdapter(axiosInstance);
 	};
 
-	mockRequest = ({ url, status = 200, method = 'GET', data = {}, responseData = {}, responseHeaders = {} }: MockParams) => {
-		this.mock[methodsMap[method]](url, data).replyOnce(status, responseData, responseHeaders);
+	mockRequest = ({ url, status, method = 'GET', data = {}, responseData = {}, responseHeaders = {} }: MockParams) => {
+		this.mock[methodsMap[method]](url, data).replyOnce(status || 200, responseData, responseHeaders);
 	};
 
 	// validate = (): Promise<any> => {
