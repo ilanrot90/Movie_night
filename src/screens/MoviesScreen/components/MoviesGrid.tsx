@@ -18,6 +18,13 @@ const MoviesGrid = () => {
 		getFetchMore: getNextPage,
 	});
 
+	useIntersectionObserver({
+		target: loadMoreRef,
+		onIntersect: fetchMore,
+		enabled: canFetchMore,
+		threshold: 0.1,
+	});
+
 	return (
 		<MainContainer>
 			<Title>latest movies</Title>
