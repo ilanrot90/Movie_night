@@ -38,15 +38,14 @@ describe('Render image carousel component', () => {
 	});
 
 	test('does not attempt to set state when unmounted (to prevent memory leaks)', async () => {
+		mockedConsoleError.mockClear();
 		const { unmount } = renderUi({
 			app: <ImageSlider slides={slides} height={400} />,
 			route: '/',
 		});
 		await waitFor(() => unmount());
 		await waitFor(() => jest.runOnlyPendingTimers());
-		/*
-		 * 2 calls for html non-valid attribute, 1 call for not wrapped in act
-		 * */
-		expect(mockedConsoleError).toHaveBeenCalledTimes(3);
+
+		expect(mockedConsoleError).toHaveBeenCalledTimes(0);
 	});
 });

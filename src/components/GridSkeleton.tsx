@@ -9,7 +9,7 @@ const SkeletonContainer = styled(GridContainer)`
 
 const GridSkeleton: FC<{ animate?: false | 'pulse' | 'wave' | undefined }> = ({ animate = 'wave' }) => {
 	return (
-		<SkeletonContainer data-testid={'movie-list-skeleton'}>
+		<SkeletonContainer role={`movie-list-skeleton-${animate ? 'loader' : 'fallback'}`}>
 			{Array.from({ length: 9 }).map((_, i) => (
 				<GridItem key={i}>
 					<Skeleton variant="rect" width={'100%'} height={'100%'} animation={animate} />
