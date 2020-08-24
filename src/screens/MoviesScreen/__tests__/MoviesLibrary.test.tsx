@@ -29,7 +29,7 @@ describe('Render movies from API calls', () => {
 		jest.useFakeTimers();
 
 		renderUi({ route: '/app' });
-		expect(screen.queryByRole(/header-loader/i)).toBeInTheDocument();
+		expect(screen.queryByRole(/header-skeleton-loader/i)).toBeInTheDocument();
 		mockAxois.mockRequest({ url: YTS_GET_MOVIES_LIST(1), responseData: mockYTSResponse });
 		Array.from({ length: 2 }).forEach(() => {
 			// react query will try to re-fetch two more times
@@ -39,7 +39,7 @@ describe('Render movies from API calls', () => {
 		expect(mockedGetMoviesList).toHaveBeenCalledTimes(1);
 
 		jest.advanceTimersByTime(10000);
-		await waitFor(() => expect(screen.queryByRole(/header-error-fallback/i)).toBeInTheDocument());
+		await waitFor(() => expect(screen.queryByRole(/header-skeleton-fallback/i)).toBeInTheDocument());
 
 		jest.useRealTimers();
 	});
@@ -67,7 +67,7 @@ describe('Render movies from API calls', () => {
 	test('render movies to screen', async () => {
 		homePageRender();
 		// Show Suspense fallback component
-		expect(screen.queryByRole(/header-loader/i)).toBeInTheDocument();
+		expect(screen.queryByRole(/header-skeleton-loader/i)).toBeInTheDocument();
 		expect(screen.queryByRole(/movie-list-skeleton-loader/i)).toBeInTheDocument();
 		// return movies from YTS API
 		const MovieListQueryData = mockYTSResponse.data;
