@@ -14,13 +14,16 @@ const PlayIcon = styled(Icon)`
 	display: none;
 `;
 
-const Card = styled.div<{ imageSrc: string }>`
+const Card = styled.div.attrs(({ imageSrc }: { imageSrc: string }) => ({
+	style: {
+		backgroundImage: `url(${imageSrc})`,
+	},
+}))<{ imageSrc: string }>`
 	display: flex;
 	flex-direction: column;
 	position: relative;
 	cursor: pointer;
 	border-radius: 4px;
-	background-image: url(${({ imageSrc }) => imageSrc});
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;

@@ -143,6 +143,7 @@ export const scrollbar = css`
 
 export const HEADER_HEIGHT = '76px';
 export const GridContainer = styled.div<{ minColumnSize?: number; rowHeight?: number }>`
+	position: relative;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(${({ minColumnSize = 240 }) => minColumnSize}px, 1fr));
 	grid-auto-rows: ${({ rowHeight = 480 }) => rowHeight}px;
@@ -160,6 +161,7 @@ export const GridItem = styled.div`
 	width: 100%;
 	height: 100%;
 	border-radius: 4px;
+	z-index: 1;
 	transition: all ${({ theme }) => theme.utils.normalTransition};
 	&:hover {
 		transform: translateY(3px) scale(1.1);

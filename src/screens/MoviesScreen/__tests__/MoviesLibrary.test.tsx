@@ -17,6 +17,8 @@ describe('Render movies from API calls', () => {
 	// clear queryCache after each call
 	afterEach(() => {
 		queryCache.clear();
+		mockedGetTopWeekMovies.mockClear();
+		mockedGetMoviesList.mockClear();
 	});
 
 	afterAll(() => {
@@ -27,14 +29,37 @@ describe('Render movies from API calls', () => {
 		jest.useFakeTimers();
 
 		renderUi({ route: '/app' });
-		expect(screen.queryByRole(/header-loader/i)).toBeInTheDocument();
+		expect(screen.queryByRole(/header-skeleton-loader/i)).toBeInTheDocument();
 		mockAxois.mockRequest({ url: YTS_GET_MOVIES_LIST(1), responseData: mockYTSResponse });
 		Array.from({ length: 2 }).forEach(() => {
+			// react query will try to re-fetch two more times
 			mockAxois.mockRequest({ url: TMDB_GET_MOVIES_LIST, status: 400 });
 		});
 		expect(mockedGetTopWeekMovies).toHaveBeenCalledTimes(1);
+		expect(mockedGetMoviesList).toHaveBeenCalledTimes(1);
+
 		jest.advanceTimersByTime(10000);
-		await waitFor(() => expect(screen.queryByRole(/header-error-fallback/i)).toBeInTheDocument());
+		await waitFor(() => expect(screen.queryByRole(/header-skeleton-fallback/i)).toBeInTheDocument());
+
+		jest.useRealTimers();
+	});
+
+	test('Render ErrorBoundry when YTS API returns status 400', async () => {
+		jest.useFakeTimers();
+
+		renderUi({ route: '/app' });
+		expect(screen.queryByRole(/movie-list-skeleton-loader/i)).toBeInTheDocument();
+		Array.from({ length: 2 }).forEach(() => {
+			// react query will try to re-fetch two more times
+			mockAxois.mockRequest({ url: YTS_GET_MOVIES_LIST(1), status: 400 });
+		});
+		mockAxois.mockRequest({ url: TMDB_GET_MOVIES_LIST, responseData: mockTMDBResponse });
+		expect(mockedGetTopWeekMovies).toHaveBeenCalledTimes(1);
+		expect(mockedGetMoviesList).toHaveBeenCalledTimes(1);
+
+		jest.advanceTimersByTime(10000);
+		await waitFor(() => expect(screen.queryByRole(/movie-list-skeleton-fallback/i)).toBeInTheDocument());
+		expect(screen.queryByRole(/movie-list-skeleton-loader/i)).not.toBeInTheDocument();
 
 		jest.useRealTimers();
 	});
@@ -42,16 +67,16 @@ describe('Render movies from API calls', () => {
 	test('render movies to screen', async () => {
 		homePageRender();
 		// Show Suspense fallback component
-		expect(screen.queryByRole(/header-loader/i)).toBeInTheDocument();
-		expect(screen.queryByTestId(/movie-list-skeleton/i)).toBeInTheDocument();
+		expect(screen.queryByRole(/header-skeleton-loader/i)).toBeInTheDocument();
+		expect(screen.queryByRole(/movie-list-skeleton-loader/i)).toBeInTheDocument();
 		// return movies from YTS API
 		const MovieListQueryData = mockYTSResponse.data;
-		expect(mockedGetMoviesList).toHaveBeenCalledTimes(2);
+		expect(mockedGetMoviesList).toHaveBeenCalledTimes(1);
 		await waitFor(() => expect(mockedGetMoviesList).toHaveReturnedWith(Promise.resolve(MovieListQueryData)));
 
 		// return movies from TMDB API
 		const MovieTopWeekQueryData = mockTMDBResponse.results;
-		expect(mockedGetTopWeekMovies).toHaveBeenCalledTimes(4);
+		expect(mockedGetTopWeekMovies).toHaveBeenCalledTimes(1);
 		await waitFor(() => expect(mockedGetTopWeekMovies).toHaveReturnedWith(Promise.resolve(MovieTopWeekQueryData)));
 		// Render slider to DOM
 		expect(screen.queryByTestId(/image-slider/i)).toBeInTheDocument();

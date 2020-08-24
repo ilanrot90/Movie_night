@@ -9,9 +9,11 @@ const Movies = () => {
 	return (
 		<div>
 			<ErrorBoundary
-				fallback={<Skeleton role={'header-error-fallback'} variant="rect" width={'100%'} height={700} animation={false} />}
+				fallback={<Skeleton role={'header-skeleton-fallback'} variant="rect" width={'100%'} height={700} animation={false} />}
 			>
-				<Suspense fallback={<Skeleton role={'header-loader'} variant="rect" width={'100%'} height={700} animation="wave" />}>
+				<Suspense
+					fallback={<Skeleton role={'header-skeleton-loader'} variant="rect" width={'100%'} height={700} animation="wave" />}
+				>
 					<Header />
 				</Suspense>
 			</ErrorBoundary>
