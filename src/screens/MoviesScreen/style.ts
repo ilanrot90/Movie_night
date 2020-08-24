@@ -12,3 +12,10 @@ export const MainContainer = styled.div`
 	flex-direction: column;
 	margin: 0 ${({ theme }) => theme.spacing.xl}px ${({ theme }) => theme.spacing.xl}px;
 `;
+
+export const InfiniteLoader = styled.span`
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 320px;
+`;
