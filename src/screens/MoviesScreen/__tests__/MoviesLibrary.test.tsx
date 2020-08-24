@@ -44,6 +44,26 @@ describe('Render movies from API calls', () => {
 		jest.useRealTimers();
 	});
 
+	test('Render ErrorBoundry when YTS API returns status 400', async () => {
+		jest.useFakeTimers();
+
+		renderUi({ route: '/app' });
+		expect(screen.queryByRole(/movie-list-skeleton-loader/i)).toBeInTheDocument();
+		Array.from({ length: 2 }).forEach(() => {
+			// react query will try to re-fetch two more times
+			mockAxois.mockRequest({ url: YTS_GET_MOVIES_LIST(1), status: 400 });
+		});
+		mockAxois.mockRequest({ url: TMDB_GET_MOVIES_LIST, responseData: mockTMDBResponse });
+		expect(mockedGetTopWeekMovies).toHaveBeenCalledTimes(1);
+		expect(mockedGetMoviesList).toHaveBeenCalledTimes(1);
+
+		jest.advanceTimersByTime(10000);
+		await waitFor(() => expect(screen.queryByRole(/movie-list-skeleton-fallback/i)).toBeInTheDocument());
+		expect(screen.queryByRole(/movie-list-skeleton-loader/i)).not.toBeInTheDocument();
+
+		jest.useRealTimers();
+	});
+
 	test('render movies to screen', async () => {
 		homePageRender();
 		// Show Suspense fallback component
