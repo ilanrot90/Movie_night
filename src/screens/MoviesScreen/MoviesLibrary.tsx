@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
 import Header from './components/Header';
 import MoviesGrid from './components/MoviesGrid';
-import Skeleton from '@material-ui/lab/Skeleton';
 import ErrorBoundary from 'components/ErrorBoundary';
 import GridSkeleton from 'components/GridSkeleton';
+import { Skeleton } from 'style/sharedStyle';
 
 const Movies = () => {
 	return (
