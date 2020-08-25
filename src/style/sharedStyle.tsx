@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
+import Loader from '@material-ui/lab/Skeleton';
 
 export const centerFlex = css`
 	display: flex;
@@ -165,5 +166,17 @@ export const GridItem = styled.div`
 	transition: all ${({ theme }) => theme.utils.normalTransition};
 	&:hover {
 		transform: translateY(3px) scale(1.1);
+	}
+`;
+
+export const Skeleton = styled(Loader)`
+	background-color: ${({ theme: { utils, dark } }) => utils.hexToRgba(dark, 0.4)};
+	&::after {
+		background-image: linear-gradient(
+			90deg,
+			transparent,
+			${({ theme: { utils, dark } }) => utils.hexToRgba(dark, 0.6)},
+			transparent
+		);
 	}
 `;
