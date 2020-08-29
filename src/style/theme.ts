@@ -1,5 +1,6 @@
 import { DefaultTheme, FlattenSimpleInterpolation, css } from 'styled-components';
 import { centerFlex, scrollbar } from './sharedStyle';
+import { HexToRgba, hexToRgba } from '../utils/style.utils';
 
 declare module 'styled-components' {
 	export interface DefaultTheme {
@@ -13,6 +14,7 @@ declare module 'styled-components' {
 			scrollbar: FlattenSimpleInterpolation;
 			quickTransition: string;
 			normalTransition: string;
+			hexToRgba: HexToRgba;
 		};
 		spacing: {
 			s: number;
@@ -46,6 +48,7 @@ const sharedTheme = {
 		scrollbar,
 		quickTransition: `0.125s ease-in-out`,
 		normalTransition: `0.250s ease-in-out`,
+		hexToRgba,
 	},
 	spacing: {
 		s: 4,
