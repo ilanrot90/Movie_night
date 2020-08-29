@@ -14,7 +14,7 @@ const getRequestList = <T>(url: string) => {
 
 export const TMDB_GET_MOVIE_POSTER = (image: string) => `https://image.tmdb.org/t/p/original${image}`;
 
-export const getMoviesList = async (key: string, nextPage: number = 1): Promise<MoviesResponse> => {
+export const getMoviesList = async (key: string, nextPage = 1): Promise<MoviesResponse> => {
 	const url = YTS_GET_MOVIES_LIST(nextPage);
 	const {
 		data: { data },
