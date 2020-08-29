@@ -4,6 +4,10 @@ import placeholderImage from 'assets/lazy_loader.gif';
 type Props = {
 	src: string;
 	placeholder?: string;
+	options?: {
+		threshold?: number | number[];
+		rootMargin?: string;
+	};
 };
 type R<T> = {
 	elementRef: (instance: T | null) => void;
@@ -11,7 +15,12 @@ type R<T> = {
 	isLoading: boolean;
 };
 
-const useLazyImage = <T extends Element>({ src, placeholder = placeholderImage }: Props): R<T> => {
+const defaultOptions = {
+	threshold: 0.01,
+	rootMargin: '100%',
+};
+
+const useLazyImage = <T extends Element>({ src, placeholder = placeholderImage, options = defaultOptions }: Props): R<T> => {
 	const [isLoading, setLoading] = useState<boolean>(true);
 	const [imageSrc, setImageSrc] = useState<string>(placeholder);
 	const [imageRef, elementRef] = useState<T>() as [T, (instance: T | null) => void];
@@ -21,21 +30,15 @@ const useLazyImage = <T extends Element>({ src, placeholder = placeholderImage }
 
 		if (imageRef && isLoading) {
 			if (IntersectionObserver) {
-				observer = new IntersectionObserver(
-					entries => {
-						entries.forEach(entry => {
-							if (entry.isIntersecting) {
-								setImageSrc(src);
-								setLoading(false);
-								observer.unobserve(imageRef);
-							}
-						});
-					},
-					{
-						threshold: 0.01,
-						rootMargin: '50%',
-					}
-				);
+				observer = new IntersectionObserver(entries => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							setImageSrc(src);
+							setLoading(false);
+							observer.unobserve(imageRef);
+						}
+					});
+				}, options);
 				observer.observe(imageRef);
 			} else {
 				setImageSrc(src);
@@ -45,7 +48,7 @@ const useLazyImage = <T extends Element>({ src, placeholder = placeholderImage }
 		return () => {
 			observer?.unobserve(imageRef);
 		};
-	}, [src, imageSrc, imageRef, isLoading]);
+	}, [src, imageSrc, imageRef, isLoading, options]);
 
 	return { elementRef, imageSrc, isLoading };
 };
