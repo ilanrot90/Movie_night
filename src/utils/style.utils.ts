@@ -1,10 +1,10 @@
 import { extendHex } from './strings.utils';
 
-const isHexColor = (v: string): boolean => !/^#([A-Fa-f0-9]{3}){1,2}$/.test(v);
+const isHexColor = (v: string): boolean => /^#([A-Fa-f0-9]{3}){1,2}$/.test(v);
 
 export type HexToRgba = (hex: string, a?: number) => string;
 export const hexToRgba: HexToRgba = (hex, a = 1) => {
-	if (isHexColor(hex)) {
+	if (!isHexColor(hex)) {
 		throw new Error('Bad Hex');
 	}
 	const h = hex.length === 4 ? extendHex(hex) : hex;
