@@ -10,5 +10,5 @@ App that allows the user to watch movies and trailers on line
 * [Material-ui](https://material-ui.com/) - Design system components
 
 ## Getting Started - Go live
-[Heroku - production](https://movie-night-prod.herokuapp.com/) 
-[cloudfront - staging](d2oppv3grkj2oo.cloudfront.net) 
+* [cloudfront - develop](https://d293omqagn73nb.cloudfront.net/app) 
+* [Heroku - production](https://movie-night-prod.herokuapp.com/) 
