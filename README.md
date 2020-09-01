@@ -9,5 +9,6 @@ App that allows the user to watch movies and trailers on line
 * [styled-components](https://styled-components.com/docs) - Style with js
 * [Material-ui](https://material-ui.com/) - Design system components
 
-## Getting Started
-[github-pages](https://ilanrot90.github.io/Guardio/) - Go live
+## Getting Started - Go live
+[Heroku - production](https://movie-night-prod.herokuapp.com/) 
+[cloudfront - staging](d2oppv3grkj2oo.cloudfront.net) 
