@@ -15,7 +15,7 @@
     "lodash": "4.17.20",
     "normalize.css": "8.0.1",
     "qs": "6.9.4",
-    "react": "0.0.0-experimental-7f28234f8",
+    "react": "0.14.0",
     "react-dom": "0.0.0-experimental-7f28234f8",
     "react-hook-form": "6.4.1",
     "react-query": "2.12.1",
