@@ -12,3 +12,6 @@ App that allows the user to watch movies and trailers on line
 ## Getting Started - Go live
 * [cloudfront - develop](https://d293omqagn73nb.cloudfront.net/app) 
 * [Heroku - production](https://movie-night-prod.herokuapp.com/) 
+
+## TODO
+* Add trailer view
